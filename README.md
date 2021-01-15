@@ -6,13 +6,13 @@ This folder contains material for a half-day workshop introducing Phylogenetic G
 
 ### PGLS
 
-[Phylogenies and Statistics](https://github.com/simjoly/QCBSworkshop2017/blob/master/PGLS_presentation.pdf) | pdf presentation
+[Phylogenies and Statistics](https://github.com/simjoly/ComparativeMethods-HalfDayWorkshop/blob/master/PGLS_presentation.pdf) | pdf of the presentation
 
-[R tutorial](http://htmlpreview.github.com/?http://github.com/simjoly/QCBSworkshop2017/blob/master/StatsPhylo.html) | Tutorial with examples in R
+[R tutorial](http://htmlpreview.github.com/?http://github.com/simjoly/ComparativeMethods-HalfDayWorkshop/blob/master/StatsPhylo.html) | Tutorial with examples in R
 
-[Data](http://github.com/simjoly/QCBSworkshop2017/blob/master/data) | Files you will need to perform the examples in the tutorial
+[Data](http://github.com/simjoly/ComparativeMethods-HalfDayWorkshop/blob/master/data) | Files you will need to perform the examples in the tutorial
 
-[Solutions to the challenges in the tutorial](http://htmlpreview.github.com/?http://github.com/simjoly/QCBSworkshop2017/blob/master/StatsPhylo.html) | Tutorial in R with solutions to the challenges
+[Solutions to the challenges in the tutorial](http://htmlpreview.github.com/?http://github.com/simjoly/ComparativeMethods-HalfDayWorkshop/blob/master/StatsPhylo.html) | Tutorial in R with solutions to the challenges
 
 
 

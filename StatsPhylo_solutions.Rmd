@@ -1,7 +1,7 @@
 ---
 title: "An introduction to phylogenetic comparative methods (in R)"
 author: "Simon Joly"
-date: "Fall 2019"
+date: "Winter 2021"
 output:
   html_document:
     highlight: haddock
@@ -21,13 +21,15 @@ output:
 
 This document consist in an introduction to the comparative methods. It contains theory as well as practical examples in R on Phylogenetic Generalized Least Squares (PGLS). It was developed for a half-day workshop that consists in short presentations followed by R exercises. Note that the present document should pretty much stand by itself because most of the theory given in the presentations are incorporated into the theory sections. Therefore, this document should contain all the necessary information to understand the examples.
 
-I assume that the readers are "reasonably" familiar with R as well as with linear regression and its assumptions. There are a lot of good R introductory tutorials on the web and for linear models, Zuur et al. (2007) provide a good introduction. Good introductions to model fitting in R are Dolph Schluter's [webpage](https://www.zoology.ubc.ca/~schluter/R/fit-model/) and the [QCBS workshops](http://qcbs.ca/wiki/r_workshop4).
+I assume that the readers are "reasonably" familiar with R as well as with linear regression and its assumptions. There are a lot of good R introductory tutorials on the web and for linear models. Zuur et al. (2007) provide a good introduction to linear models, mixed-effects models and model comparison. Good introductions to model fitting in R can also be found on Dolph Schluter's [webpage](https://www.zoology.ubc.ca/~schluter/R/fit-model/) and among the [QCBS workshops](http://qcbs.ca/wiki/r_workshop4).
 
-## Getting ready for the R examples
+# Getting ready for the workshop
 
-To perform the examples of this document, you will need to have the R software installed on your computer. I also recommend that you install RStudio that facilitates interactions between scripts and the console.
+## Install R and the required packages
 
-For this specific tutorial, we will need to load the following R packages.
+To perform the examples of this document, you will need to have the [R software](https://www.r-project.org/) installed on your computer. I also recommend that you install [RStudio](https://rstudio.com/). If R Studio is not required, it facilitates interactions between scripts and the R console and provides many great tools.
+
+After installing R, you will have to install some packages. For this specific tutorial, we will need to load the following R packages.
 
 ```{r "load libraries", message=FALSE, warning=FALSE}
 library(nlme)
@@ -36,9 +38,9 @@ library(RColorBrewer)
 library(ggplot2)
 ```
 
-To execute the code in R, you can just copy and paste the code in the boxes in your R console. This will replicate the analyses presented here. 
+To execute the code of this tutorial in R, you can just copy and paste the code in the boxes in your R console. This will replicate the analyses presented in the tutorial. 
 
-If some of the packages above are not yet installed on your computer (i.e., you get error messages when trying to load them), you will have to install them using the function `install.packages()`. You only have to install them once.
+If some of the packages above are not yet installed on your computer, you get error messages when trying to load them. If this is the case, you will have to install them using the function `install.packages()`. You only have to install them only once.
 
 ```{r "install libraries", message=FALSE, warning=FALSE, eval=FALSE}
 install.packages('nlme')
@@ -47,16 +49,14 @@ install.packages('RColorBrewer')
 install.packages('ggplot2')
 ```
 
-Once this is done, you can reload the packages using the `library()` function. Also note that if you are using both the packages `nlme` and `ape`, `nlme` should be loaded first. If you don't do this, you might get errors; you could then restart R and start over.
-
-I first introduce comparative methods more generally before introducing Phylogenetic Generalized Least Squares (PGLS), and I finish with slightly more advanced topics such as model testing with PGLS.
+Once the packages are installed, you can load the packages using the `library()` function. Also note that if you are using both the packages `nlme` and `ape`, `nlme` should be loaded first. If you don't do this, you might get errors; you could then restart R and start over.
 
 
 ## Working with github
 
-All the data of the workshop are deposited in a github repository. The easiest way to access them is to go to the workshop directory and clone it on your computer. [Workshop repository](http://www.github.com/simjoly/ComparativeMethods-HalfDayWorkshop).
+All the data of the workshop are deposited in a github repository. The easiest way to access them is to go to the [Workshop repository](http://www.github.com/simjoly/ComparativeMethods-HalfDayWorkshop) and clone it on your computer. The option to clone the directory is in a green box called "code".
 
-Once you have cloned the repository, you need to open R (R studio) and set the working directory to the repository folder ("/ComparativeMethods-HalfDayWorkshop"). In RStudio, to change the working directory, you choose `>Session>Set Working directory>Choose Directory`.You are now ready to do the exercises.
+Once you have cloned the repository, you need to open R (R studio) and set the working directory to the repository folder ("/ComparativeMethods-HalfDayWorkshop"). In RStudio, to change the working directory, you choose `>Session>Set Working directory>Choose Directory`.You are now ready for the workshop.
 
 
 # An introduction to Phylogenetic Comparative Methods

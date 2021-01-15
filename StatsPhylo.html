@@ -235,14 +235,15 @@ summary {
 
 <h1 class="title toc-ignore">An introduction to phylogenetic comparative methods (in R)</h1>
 <h4 class="author">Simon Joly</h4>
-<h4 class="date">Fall 2019</h4>
+<h4 class="date">Winter 2021</h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#preface">Preface</a><ul>
-<li><a href="#getting-ready-for-the-r-examples">Getting ready for the R examples</a></li>
+<li><a href="#preface">Preface</a></li>
+<li><a href="#getting-ready-for-the-workshop">Getting ready for the workshop</a><ul>
+<li><a href="#install-r-and-the-required-packages">Install R and the required packages</a></li>
 <li><a href="#working-with-github">Working with github</a></li>
 </ul></li>
 <li><a href="#an-introduction-to-phylogenetic-comparative-methods">An introduction to Phylogenetic Comparative Methods</a></li>
@@ -284,28 +285,30 @@ summary {
 <div id="preface" class="section level1">
 <h1>Preface</h1>
 <p>This document consist in an introduction to the comparative methods. It contains theory as well as practical examples in R on Phylogenetic Generalized Least Squares (PGLS). It was developed for a half-day workshop that consists in short presentations followed by R exercises. Note that the present document should pretty much stand by itself because most of the theory given in the presentations are incorporated into the theory sections. Therefore, this document should contain all the necessary information to understand the examples.</p>
-<p>I assume that the readers are &quot;reasonably&quot; familiar with R as well as with linear regression and its assumptions. There are a lot of good R introductory tutorials on the web and for linear models, Zuur et al. (2007) provide a good introduction. Good introductions to model fitting in R are Dolph Schluter's <a href="https://www.zoology.ubc.ca/~schluter/R/fit-model/">webpage</a> and the <a href="http://qcbs.ca/wiki/r_workshop4">QCBS workshops</a>.</p>
-<div id="getting-ready-for-the-r-examples" class="section level2">
-<h2>Getting ready for the R examples</h2>
-<p>To perform the examples of this document, you will need to have the R software installed on your computer. I also recommend that you install RStudio that facilitates interactions between scripts and the console.</p>
-<p>For this specific tutorial, we will need to load the following R packages.</p>
+<p>I assume that the readers are &quot;reasonably&quot; familiar with R as well as with linear regression and its assumptions. There are a lot of good R introductory tutorials on the web and for linear models. Zuur et al. (2007) provide a good introduction to linear models, mixed-effects models and model comparison. Good introductions to model fitting in R can also be found on Dolph Schluter's <a href="https://www.zoology.ubc.ca/~schluter/R/fit-model/">webpage</a> and among the <a href="http://qcbs.ca/wiki/r_workshop4">QCBS workshops</a>.</p>
+</div>
+<div id="getting-ready-for-the-workshop" class="section level1">
+<h1>Getting ready for the workshop</h1>
+<div id="install-r-and-the-required-packages" class="section level2">
+<h2>Install R and the required packages</h2>
+<p>To perform the examples of this document, you will need to have the <a href="https://www.r-project.org/">R software</a> installed on your computer. I also recommend that you install <a href="https://rstudio.com/">RStudio</a>. If R Studio is not required, it facilitates interactions between scripts and the R console and provides many great tools.</p>
+<p>After installing R, you will have to install some packages. For this specific tutorial, we will need to load the following R packages.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(nlme)
 <span class="kw">library</span>(ape)
 <span class="kw">library</span>(RColorBrewer)
 <span class="kw">library</span>(ggplot2)</code></pre></div>
-<p>To execute the code in R, you can just copy and paste the code in the boxes in your R console. This will replicate the analyses presented here.</p>
-<p>If some of the packages above are not yet installed on your computer (i.e., you get error messages when trying to load them), you will have to install them using the function <code>install.packages()</code>. You only have to install them once.</p>
+<p>To execute the code of this tutorial in R, you can just copy and paste the code in the boxes in your R console. This will replicate the analyses presented in the tutorial.</p>
+<p>If some of the packages above are not yet installed on your computer, you get error messages when trying to load them. If this is the case, you will have to install them using the function <code>install.packages()</code>. You only have to install them only once.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'nlme'</span>)
 <span class="kw">install.packages</span>(<span class="st">'ape'</span>)
 <span class="kw">install.packages</span>(<span class="st">'RColorBrewer'</span>)
 <span class="kw">install.packages</span>(<span class="st">'ggplot2'</span>)</code></pre></div>
-<p>Once this is done, you can reload the packages using the <code>library()</code> function. Also note that if you are using both the packages <code>nlme</code> and <code>ape</code>, <code>nlme</code> should be loaded first. If you don't do this, you might get errors; you could then restart R and start over.</p>
-<p>I first introduce comparative methods more generally before introducing Phylogenetic Generalized Least Squares (PGLS), and I finish with slightly more advanced topics such as model testing with PGLS.</p>
+<p>Once the packages are installed, you can load the packages using the <code>library()</code> function. Also note that if you are using both the packages <code>nlme</code> and <code>ape</code>, <code>nlme</code> should be loaded first. If you don't do this, you might get errors; you could then restart R and start over.</p>
 </div>
 <div id="working-with-github" class="section level2">
 <h2>Working with github</h2>
-<p>All the data of the workshop are deposited in a github repository. The easiest way to access them is to go to the workshop directory and clone it on your computer. <a href="http://www.github.com/simjoly/ComparativeMethods-HalfDayWorkshop">Workshop repository</a>.</p>
-<p>Once you have cloned the repository, you need to open R (R studio) and set the working directory to the repository folder (&quot;/ComparativeMethods-HalfDayWorkshop&quot;). In RStudio, to change the working directory, you choose <code>&gt;Session&gt;Set Working directory&gt;Choose Directory</code>.You are now ready to do the exercises.</p>
+<p>All the data of the workshop are deposited in a github repository. The easiest way to access them is to go to the <a href="http://www.github.com/simjoly/ComparativeMethods-HalfDayWorkshop">Workshop repository</a> and clone it on your computer. The option to clone the directory is in a green box called &quot;code&quot;.</p>
+<p>Once you have cloned the repository, you need to open R (R studio) and set the working directory to the repository folder (&quot;/ComparativeMethods-HalfDayWorkshop&quot;). In RStudio, to change the working directory, you choose <code>&gt;Session&gt;Set Working directory&gt;Choose Directory</code>.You are now ready for the workshop.</p>
 </div>
 </div>
 <div id="an-introduction-to-phylogenetic-comparative-methods" class="section level1">
