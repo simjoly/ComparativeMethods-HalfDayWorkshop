@@ -12,7 +12,7 @@ This folder contains material for a half-day workshop introducing Phylogenetic G
 
 [Data](http://github.com/simjoly/ComparativeMethods-HalfDayWorkshop/blob/master/data) | Files you will need to perform the examples in the tutorial
 
-[Solutions to the challenges in the tutorial](http://htmlpreview.github.com/?http://github.com/simjoly/ComparativeMethods-HalfDayWorkshop/blob/master/StatsPhylo.html) | Tutorial in R with solutions to the challenges
+[Solutions to the challenges in the tutorial](http://htmlpreview.github.com/?http://github.com/simjoly/ComparativeMethods-HalfDayWorkshop/blob/master/StatsPhylo_solutions.html) | Tutorial in R with solutions to the challenges
 
 
 
