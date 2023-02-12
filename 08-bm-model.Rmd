@@ -27,9 +27,9 @@ ggplot(data,aes(x=values),y=as.factor(sigma))+geom_histogram() +
 rm(data,x,y)
 ```
 
-A more thorough introduction to the Brownian Motion model can be found in Felsenstein (2004, chapter 23).
+A more thorough introduction to the Brownian Motion model can be found in chapter 23 of Joe Felsenstein's book [@felsenstein2004inferring].
 
-The Brownian motion model is often said to model neutral drift, although a good fit to this model does not necessarily means that the data evolved via random drifts as other processes can also result in BM-like patterns (Hansen and Martins, 1996).
+The Brownian motion model is often said to model neutral drift, although a good fit to this model does not necessarily means that the data evolved via random drifts as other processes can also result in BM-like patterns [@hansen1996translating].
 
 Note also that the model is stochastic. That is, even if two closely related species are more likely to share similar character states than a distant one, this is only true on average. For any given simulated character, closely related species can sometimes be more different than to a distant species. Look at the following figure, that shows three traits simulated under the Brownian motion.
 

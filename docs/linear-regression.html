@@ -247,9 +247,9 @@ div.csl-indent {
 </div>
 <div id="practice" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Practice<a href="linear-regression.html#practice" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To provide pratical examples in this workshop, we will use a dataset of tree functional traits from the province of Quebec, published by <a href="http://onlinelibrary.wiley.com/doi/10.1002/ece3.1456/abstract">Paquette, Joly and Messier (2015)</a>. The dataset consists in a number of plant functional traits and in a molecular phylogeny built using the plant barcode markers <em>rbc</em>L and <em>mat</em>K. The dataset you need to run the examples are already in the /data/ folder of the github repository. However, you can also download them by clicking on the links below.</p>
-<p><a href="http://www.plantevolution.org/data/seedplants.tre">seedplants.tre</a></p>
-<p><a href="http://www.plantevolution.org/data/seedplants.csv">seedplants.csv</a></p>
+<p>To provide pratical examples in this workshop, we will use a dataset of tree functional traits from the province of Quebec <span class="citation">(<a href="#ref-paquette2015explaining" role="doc-biblioref">Paquette, Joly, and Messier 2015</a>)</span>. The dataset consists in a number of plant functional traits and in a molecular phylogeny built using the plant barcode markers <em>rbc</em>L and <em>mat</em>K. The dataset you need to run the examples are already in the /data/ folder of the github repository. However, you can also download them by clicking on the links below.</p>
+<p><a href="https://simjoly.github.io/ComparativeMethods-HalfDayWorkshop/data/seedplants.tre">seedplants.tre</a></p>
+<p><a href="https://simjoly.github.io/ComparativeMethods-HalfDayWorkshop/data/seedplants.csv">seedplants.csv</a></p>
 <p>Before analysing the data, we will start by opening the data and the phylogenetic tree and clean them to keep only the species present in both the tree and the trait table. This is necessary because some additional species were included in the phylogenetic tree analysis.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="linear-regression.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ape)</span>
 <span id="cb7-2"><a href="linear-regression.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Open the documents; it assumes that you are in the main directory of the workshop folder</span></span>
@@ -342,6 +342,12 @@ div.csl-indent {
 <h2><span class="header-section-number">4.3</span> Challenge 1<a href="linear-regression.html#challenge-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the <code>seedplantsdata</code> data frame, there were many different traits. Try to fit a regression of tree shade tolerance (<code>shade</code>) on the seed mass (<code>Sm</code>). In other words, test if shade tolerance can be explained by the seed mass of the trees. Then, try to see if the residuals are phylogenetically correlated.</p>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-paquette2015explaining" class="csl-entry">
+Paquette, Alain, Simon Joly, and Christian Messier. 2015. <span>“Explaining Forest Productivity Using Tree Functional Traits and Phylogenetic Information: Two Sides of the Same Coin over Evolutionary Scale?”</span> <em>Ecology and Evolution</em> 5 (9): 1774–83.
 </div>
 </div>
             </section>

@@ -14,11 +14,11 @@ You get a violation of independence when the $\textbf{y}_i$ value at $\textbf{x}
 
 ## Practice
 
-To provide pratical examples in this workshop, we will use a dataset of tree functional traits from the province of Quebec, published by [Paquette, Joly and Messier (2015)](http://onlinelibrary.wiley.com/doi/10.1002/ece3.1456/abstract). The dataset consists in a number of plant functional traits and in a molecular phylogeny built using the plant barcode markers *rbc*L and *mat*K. The dataset you need to run the examples are already in the /data/ folder of the github repository. However, you can also download them by clicking on the links below.
+To provide pratical examples in this workshop, we will use a dataset of tree functional traits from the province of Quebec [@paquette2015explaining]. The dataset consists in a number of plant functional traits and in a molecular phylogeny built using the plant barcode markers *rbc*L and *mat*K. The dataset you need to run the examples are already in the /data/ folder of the github repository. However, you can also download them by clicking on the links below.
 
-[seedplants.tre](http://www.plantevolution.org/data/seedplants.tre)
+[seedplants.tre](https://simjoly.github.io/ComparativeMethods-HalfDayWorkshop/data/seedplants.tre)
 
-[seedplants.csv](http://www.plantevolution.org/data/seedplants.csv)
+[seedplants.csv](https://simjoly.github.io/ComparativeMethods-HalfDayWorkshop/data/seedplants.csv)
 
 Before analysing the data, we will start by opening the data and the phylogenetic tree and clean them to keep only the species present in both the tree and the trait table. This is necessary because some additional species were included in the phylogenetic tree analysis.
 

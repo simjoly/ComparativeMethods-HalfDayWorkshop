@@ -25,7 +25,7 @@ You can see that the slope estimate, `4.361`, it identical to the slope estimate
 
 # Relaxing the assumption that residuals need to be perfectly phylogenetically correlated
 
-Phylogenetic Generalized Least Squares assume that the residuals are perfectly phylogenetically correlated. This is relatively constraining because it means that other sources of errors that are not phylogenetically correlated are not allowed by the model. Moreover, if these exist, they can bias the results of the PGLS (Revell, 2010).
+Phylogenetic Generalized Least Squares assume that the residuals are perfectly phylogenetically correlated. This is relatively constraining because it means that other sources of errors that are not phylogenetically correlated are not allowed by the model. Moreover, if these exist, they can bias the results of the PGLS [@revell2010phylogenetic].
 
 There are ways to relax this assumption, and one of this is to use a type of correlation structure that allows to relax this assumption.
 
@@ -34,7 +34,7 @@ There are ways to relax this assumption, and one of this is to use a type of cor
 
 When controling for phylogenetic relationships with phylogenetic generalized least squares, we assume that the residuals are perfectly correlated according to the correlation structure. In practice, it might not be always the case and it is difficult to really know how important it is to control for the phylogenetic relationship in a specific case. For instance, for a given study, the correlation in the residuals might not be highly phylogenetically correlated.
 
-This is possible to account for this using the $\lambda$ model of Pagel (1999). The idea is to multiply the off-diagonal of the correlation matrix (essentially the branch lengths of the phylogeny) by a parameter $\lambda$, but not the diagonal values. This essentially leads to a modification of branch lengths of the phylogeny. A $\lambda$ value near zero gives very shorts internal branches and long tip branches. This, in effect, reduces the phylogenetic correlations (the effect of the phylogeny is reduced). At the opposite, if $\lambda$ is close to 1, then the modified phylogeny resembles the true phylogeny. Indeed, the parameter $\lambda$ is often interpreted as a parameter of phylogenetic signal; as such, a greater $\lambda$ value implies a stronger phylogenetic signal.
+This is possible to account for this using the $\lambda$ model of Pagel [@pagel1999inferring]. The idea is to multiply the off-diagonal of the correlation matrix (essentially the branch lengths of the phylogeny) by a parameter $\lambda$, but not the diagonal values. This essentially leads to a modification of branch lengths of the phylogeny. A $\lambda$ value near zero gives very shorts internal branches and long tip branches. This, in effect, reduces the phylogenetic correlations (the effect of the phylogeny is reduced). At the opposite, if $\lambda$ is close to 1, then the modified phylogeny resembles the true phylogeny. Indeed, the parameter $\lambda$ is often interpreted as a parameter of phylogenetic signal; as such, a greater $\lambda$ value implies a stronger phylogenetic signal.
 
 The following figure shows how different lambda values affect the shape of the Quebec trees phylogeny.
 
