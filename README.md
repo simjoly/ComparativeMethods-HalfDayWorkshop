@@ -8,11 +8,11 @@ This folder contains material for a half-day workshop introducing Phylogenetic G
 
 [Phylogenies and Statistics](https://github.com/simjoly/ComparativeMethods-HalfDayWorkshop/blob/master/PGLS_presentation.pdf) | pdf of the presentation
 
-[R tutorial](http://htmlpreview.github.com/?http://github.com/simjoly/ComparativeMethods-HalfDayWorkshop/blob/master/StatsPhylo.html) | Tutorial with examples in R
+[R tutorial](http://htmlpreview.github.io/?http://github.com/simjoly/ComparativeMethods-HalfDayWorkshop/blob/master/StatsPhylo.html) | Tutorial with examples in R
 
 [Data](http://github.com/simjoly/ComparativeMethods-HalfDayWorkshop/blob/master/data) | Files you will need to perform the examples in the tutorial
 
-[Solutions to the challenges in the tutorial](http://htmlpreview.github.com/?http://github.com/simjoly/ComparativeMethods-HalfDayWorkshop/blob/master/StatsPhylo_solutions.html) | Tutorial in R with solutions to the challenges
+[Solutions to the challenges in the tutorial](http://htmlpreview.github.io/?http://github.com/simjoly/ComparativeMethods-HalfDayWorkshop/blob/master/StatsPhylo_solutions.html) | Tutorial in R with solutions to the challenges
 
 
 
@@ -24,9 +24,9 @@ The links below might provide additional information of interest.
 
 [Course on Phylogenetic Comparative Methods](http://github.com/simjoly/CourseComparativeMethods/)
 
-[Introduction to phylogenies in R](http://htmlpreview.github.com/?http://github.com/simjoly/CourseComparativeMethods/blob/master/lecture1/Introduction_phylo.html) - [pdf](http://github.com/simjoly/CourseComparativeMethods/blob/master/lecture1/Introduction_phylo.pdf)
+[Introduction to phylogenies in R](http://htmlpreview.github.io/?http://github.com/simjoly/CourseComparativeMethods/blob/master/lecture1/Introduction_phylo.html) - [pdf](http://github.com/simjoly/CourseComparativeMethods/blob/master/lecture1/Introduction_phylo.pdf)
 
-[Reading and making phylogenetic trees in R](http://htmlpreview.github.com/?http://github.com/simjoly/CourseComparativeMethods/blob/master/lecture2/PhylogeneticTree.html) - [pdf](http://github.com/simjoly/CourseComparativeMethods/blob/master/lecture2/PhylogeneticTree.pdf)
+[Reading and making phylogenetic trees in R](http://htmlpreview.github.io/?http://github.com/simjoly/CourseComparativeMethods/blob/master/lecture2/PhylogeneticTree.html) - [pdf](http://github.com/simjoly/CourseComparativeMethods/blob/master/lecture2/PhylogeneticTree.pdf)
 
 
 ----
