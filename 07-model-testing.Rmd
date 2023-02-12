@@ -3,7 +3,7 @@
 
 You might be interested in comparing different models, which is a common approach to modelisation in biology. However, there is a slight twist that you need to be aware of with PGLS.
 
-The default method for model fitting with `gls` is restricted maximum likelihood estimation (REML), obtained by `method="REML"`. This is different than standard maximum likelihood estimation (ML), which can be obtained with `method="ML"`. The difference between these is complex, but suffice to say that they differ in the way the variance parameters are estimated. REML provides less biased parameter estimates and is the prefered method to report the parameter coefficients in a publication. It is also the method of choice if you want to compare models with different correlation (or variance) structures. For example, if you want to test whether a PGLS model with an optimized Pagel's $\lambda$ fits the data better than a model with no phylogenetic correlation (that is, with Pagel $\lambda=0$):
+The default method for model fitting with `gls` is restricted maximum likelihood estimation (REML), obtained by `method="REML"`. This is different than standard maximum likelihood estimation (ML), which can be obtained with `method="ML"`. The difference between these is complex, but suffice to say that they differ in the way the variance parameters are estimated. REML provides less biased parameter estimates and is the preferred method to report the parameter coefficients in a publication. It is also the method of choice if you want to compare models with different correlation (or variance) structures [@zuur2009mixed]. For example, if you want to test whether a PGLS model with an optimized Pagel's $\lambda$ fits the data better than a model with no phylogenetic correlation (that is, with Pagel $\lambda=0$):
 
 ```{r "cor structure comparison"}
 pagel.0 <- gls(Shade ~ Wd, data = seedplantsdata, 
@@ -19,7 +19,7 @@ anova(pagel.0,pagel.fit)
 
 You can use the AIC or BIC to compare the model, or the likelihood ratio test. You can see here that the PGLS model with a fitted Pagel $\lambda$ has a better fit than the one with a $\lambda=0$ (smaller AIC). By the way, this is also a test of whether a PGLS model is better than a standard regression model as a corPagel structure with $\lambda=0$ is a standard model (= no phylogenetic correlation).
 
-Now, if you are interested in testing the fixed parameters in the model, you need to use maximum likelihood fitting. For instance, if you want to use a likelihood ratio test to test the model with wood density as independent variable versus a null model with just the intercept, you can do the following.
+Now, if you are interested in testing the fixed parameters in the model, you need to use maximum likelihood fitting [@zuur2009mixed]. For instance, if you want to use a likelihood ratio test to test the model with wood density as independent variable versus a null model with just the intercept, you can do the following.
 
 ```{r "fixed effect comparison"}
 wd <- gls(Shade ~ Wd, data = seedplantsdata,
@@ -39,6 +39,7 @@ wd.final <- gls(Shade ~ Wd, data = seedplantsdata,
                 method="REML")
 summary(wd.final)
 ```
+
 
 
 # When should we use comparative methods?

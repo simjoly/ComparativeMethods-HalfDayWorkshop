@@ -18,7 +18,7 @@ description: "This is a book that contains information on a half-day introductor
 
 This document consist in an introduction to the comparative methods. It contains theory as well as practical examples in R on Phylogenetic Generalized Least Squares (PGLS). It was developed for a half-day workshop that consists in short presentations followed by R exercises. Note that the present document should pretty much stand by itself because most of the theory given in the presentations are incorporated into the theory sections. Therefore, this document should contain all the necessary information to understand the examples.
 
-I assume that the readers are "reasonably" familiar with R as well as with linear regression and its assumptions. There are a lot of good R introductory tutorials on the web and for linear models. Zuur et al. (2007) provide a good introduction to linear models, mixed-effects models and model comparison. Good introductions to model fitting in R can also be found on Dolph Schluter's [webpage](https://www.zoology.ubc.ca/~schluter/R/fit-model/) and among the [QCBS workshops](http://qcbs.ca/wiki/r_workshop4).
+I assume that the readers are "reasonably" familiar with R as well as with linear regression and its assumptions. There are a lot of good R introductory tutorials on the web and for linear models. Zuur et al. [@zuur2007analysing] provide a good introduction to linear models, mixed-effects models and model comparison. Good introductions to model fitting in R can also be found on Dolph Schluter's [webpage](https://www.zoology.ubc.ca/~schluter/R/fit-model/) and among the [QCBS workshops](http://qcbs.ca/wiki/r_workshop4).
 
 
 ## Useful resources
