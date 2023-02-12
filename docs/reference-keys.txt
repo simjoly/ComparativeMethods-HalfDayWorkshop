@@ -1,6 +1,7 @@
 fig:AngiospermTree
 about
-other-useful-information
+useful-resources
+source
 disclaimer
 before
 install-r-and-the-required-packages

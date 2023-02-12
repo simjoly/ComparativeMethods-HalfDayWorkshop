@@ -15,7 +15,7 @@ library(RColorBrewer)
 library(ggplot2)
 ```
 
-To execute the code of this tutorial in R, I suggest that you create a new script (File>New File>R Script) where you paste the code copied from the boxes. In R Studio, you can then run this code by selecting the lines you want to execute and then press run (or associated shortcut). This will replicate the analyses presented in the tutorial. You should save the script file in a directory dedicated for the workshop where you will also place the data files required (see section \@ref(download)).
+To execute the code of this tutorial in R, I suggest that you create a new script (File>New File>R Script) where you paste the code copied from the boxes. In R Studio, you can then run this code by selecting the lines you want to execute and then press run (or associated shortcut). This will replicate the analyses presented in the tutorial. You should save the script file in a directory dedicated for the workshop where you will also place the data files required (see section \@ref(download)). Then, you should make sure that you script (and data) are in the R working directory. In R Studio, this can be set form the menu: 'Session > Set Working Directory'.
 
 If some of the packages above are not yet installed on your computer, you get error messages when trying to load them. If this is the case, you will have to install them using the function `install.packages()`. You only have to install them only once.
 
@@ -31,5 +31,8 @@ Once the packages are installed, you can load the packages using the `library()`
 
 ## Downloading the data {#download}
 
-TO FILL!
+The data you will need for this tutorial can be downloaded from this repository: [data.zip](https://simjoly.github.io/ComparativeMethods-HalfDayWorkshop/data.zip).
+
+I suggest that you download the folder, uncompress it, and place is in a dedicated folder where you will also save the script with all the commands you will use.
+
 
