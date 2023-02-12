@@ -1,0 +1,73 @@
+# Solutions to the challenges {#solutions}
+
+## Challenge 1
+
+In the `seedplantsdata` data frame, there were many different traits. Try to fit a regression of tree shade tolerance (`shade`) on the seed mass (`Sm`). In other words, test if shade tolerance can be explained by the seed mass of the trees. Then, try to see if the residuals are phylogenetically correlated.
+
+```{r "Challenge 1 - solution", warning=FALSE, echo=TRUE, eval=TRUE}
+# Fit a linear model using Ordinary Least Squares (OLS)
+Sm.lm <- lm(Shade ~ Sm, data = seedplantsdata)
+# Get the results
+summary(Sm.lm)
+# Extract the residuals
+Sm.res <- residuals(Sm.lm)
+# Plot the residuals beside the phylogeny
+op <- par(mar=c(1,1,1,1))
+plot(seedplantstree,type="p",TRUE,label.offset=0.01,cex=0.5,no.margin=FALSE)
+tiplabels(pch=21,bg=cols[ifelse(Sm.res>0,1,2)],col="black",cex=abs(Sm.res),adj=0.505)
+legend("topleft",legend=c("-2","-1","0","1","2"),pch=21,
+       pt.bg=cols[c(1,1,1,2,2)],bty="n",
+       text.col="gray32",cex=0.8,pt.cex=c(2,1,0.1,1,2))
+par(op)
+```
+
+
+## Challenge 2
+
+Can you get the covariance matrix and the correlation matrix for the seed plants phylogenetic tree from the example above (`seedplantstree`)?
+
+```{r "Challenge 2 - solution", echo=TRUE, eval=TRUE}
+# Covariance matrix
+seedplants.cov <- vcv(seedplantstree,corr=FALSE)
+# Check the first few lines of the matrix
+head(round(seedplants.cov,3))
+# Correlation matrix
+seedplants.cor <- vcv(seedplantstree,corr=TRUE)
+# Check the first few lines of the matrix
+head(round(seedplants.cor,3))
+```
+
+
+## Challenge 3
+
+Fit a PGLS model to see whether the seed mass (`Sm`) explains shade tolerance (`Shade`) with the seedplantdataset. How does it compare to the results from the standard regression.
+
+```{r "Challenge 3 - solution", warning=FALSE, echo=TRUE, eval=TRUE}
+# Fit a PGLS with the gls function
+Sm.pgls <- gls(Shade ~ Sm, data = seedplantsdata, correlation=bm.corr)
+# Get the results
+summary(Sm.pgls)
+# Extract the residuals corrected by the correlation structure
+Sm.pgls.res <- residuals(Sm.pgls,type="normalized")
+# Plot the residuals beside the phylogeny
+op <- par(mar=c(1,1,1,1))
+plot(seedplantstree,type="p",TRUE,label.offset=0.01,cex=0.5,no.margin=FALSE)
+tiplabels(pch=21,bg=cols[ifelse(Sm.pgls.res>0,1,2)],col="black",cex=abs(Sm.pgls.res),adj=0.505)
+legend("topleft",legend=c("-2","-1","0","1","2"),pch=21,
+       pt.bg=cols[c(1,1,1,2,2)],bty="n",
+       text.col="gray32",cex=0.8,pt.cex=c(2,1,0.1,1,2))
+par(op)
+```
+
+
+## Challenge 4
+
+Try to fit a PGLS with a Pagel correlation structure when regressing Shade tolerance on seed mass. Are the residuals as phylogenetically correlated than in the previous regression with wood density?
+
+```{r "Challenge 4 - solution", warning=FALSE, echo=TRUE, eval=TRUE}
+# Fit a PGLS with the gls function
+Sm.pgls2 <- gls(Shade ~ Sm, data = seedplantsdata, correlation=pagel.corr)
+# Get the results
+summary(Sm.pgls2)
+```
+

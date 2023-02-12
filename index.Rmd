@@ -1,0 +1,39 @@
+--- 
+title: "Half-day Workshop on Phylogenetic Comparative Methods"
+author: "Simon Joly"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib]
+url: http://www.plantevolution.org/PCM-workshop/
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "This is a book that contains information on a half-day introductoray workshop on Phylogenetic Comparative Methods"
+---
+
+
+# About
+
+This document consist in an introduction to the comparative methods. It contains theory as well as practical examples in R on Phylogenetic Generalized Least Squares (PGLS). It was developed for a half-day workshop that consists in short presentations followed by R exercises. Note that the present document should pretty much stand by itself because most of the theory given in the presentations are incorporated into the theory sections. Therefore, this document should contain all the necessary information to understand the examples.
+
+I assume that the readers are "reasonably" familiar with R as well as with linear regression and its assumptions. There are a lot of good R introductory tutorials on the web and for linear models. Zuur et al. (2007) provide a good introduction to linear models, mixed-effects models and model comparison. Good introductions to model fitting in R can also be found on Dolph Schluter's [webpage](https://www.zoology.ubc.ca/~schluter/R/fit-model/) and among the [QCBS workshops](http://qcbs.ca/wiki/r_workshop4).
+
+
+## Other useful information
+
+The links below might provide additional information of interest.
+
+[Luke Harmon's book - Phylogenetic Comparative Methods](https://lukejharmon.github.io/pcm/)
+
+[Course on Phylogenetic Comparative Methods](http://github.com/simjoly/CourseComparativeMethods/)
+
+[Introduction to phylogenies in R](http://htmlpreview.github.com/?http://github.com/simjoly/CourseComparativeMethods/blob/master/lecture1/Introduction_phylo.html) - [pdf](http://github.com/simjoly/CourseComparativeMethods/blob/master/lecture1/Introduction_phylo.pdf)
+
+[Reading and making phylogenetic trees in R](http://htmlpreview.github.com/?http://github.com/simjoly/CourseComparativeMethods/blob/master/lecture2/PhylogeneticTree.html) - [pdf](http://github.com/simjoly/CourseComparativeMethods/blob/master/lecture2/PhylogeneticTree.pdf)
+
+
+## Disclaimer
+
+This tutorial is provided as is, without any guaranty that it will work or that the analyses will be up to date.

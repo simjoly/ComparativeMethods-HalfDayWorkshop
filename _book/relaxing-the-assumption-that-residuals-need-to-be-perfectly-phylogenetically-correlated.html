@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Relaxing the assumption that residuals need to be perfectly phylogenetically correlated | Half-day Workshop on Phylogenetic Comparative Methods</title>
+  <meta name="description" content="This is a book that contains information on a half-day introductoray workshop on Phylogenetic Comparative Methods" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Relaxing the assumption that residuals need to be perfectly phylogenetically correlated | Half-day Workshop on Phylogenetic Comparative Methods" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a book that contains information on a half-day introductoray workshop on Phylogenetic Comparative Methods" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Relaxing the assumption that residuals need to be perfectly phylogenetically correlated | Half-day Workshop on Phylogenetic Comparative Methods" />
+  
+  <meta name="twitter:description" content="This is a book that contains information on a half-day introductoray workshop on Phylogenetic Comparative Methods" />
+  
+
+<meta name="author" content="Simon Joly" />
+
+
+<meta name="date" content="2023-02-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="pic.html"/>
+<link rel="next" href="phylogenetic-anova.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PCM workshop</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#other-useful-information"><i class="fa fa-check"></i><b>1.1</b> Other useful information</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#disclaimer"><i class="fa fa-check"></i><b>1.2</b> Disclaimer</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="before.html"><a href="before.html"><i class="fa fa-check"></i><b>2</b> Ahead of the workshop</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="before.html"><a href="before.html#install-r-and-the-required-packages"><i class="fa fa-check"></i><b>2.1</b> Install R and the required packages</a></li>
+<li class="chapter" data-level="2.2" data-path="before.html"><a href="before.html#download"><i class="fa fa-check"></i><b>2.2</b> Downloading the data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>3</b> An introduction to Phylogenetic Comparative Methods</a></li>
+<li class="chapter" data-level="4" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>4</b> The linear regression model</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="linear-regression.html"><a href="linear-regression.html#theory"><i class="fa fa-check"></i><b>4.1</b> Theory</a></li>
+<li class="chapter" data-level="4.2" data-path="linear-regression.html"><a href="linear-regression.html#practice"><i class="fa fa-check"></i><b>4.2</b> Practice</a></li>
+<li class="chapter" data-level="4.3" data-path="linear-regression.html"><a href="linear-regression.html#challenge-1"><i class="fa fa-check"></i><b>4.3</b> Challenge 1</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pgls.html"><a href="pgls.html"><i class="fa fa-check"></i><b>5</b> Phylogenetic generalized least squares (PGLS)</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="pgls.html"><a href="pgls.html#theory-1"><i class="fa fa-check"></i><b>5.1</b> Theory</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="pgls.html"><a href="pgls.html#phylogenetic-correlation-structure"><i class="fa fa-check"></i><b>5.1.1</b> Phylogenetic correlation structure</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="pgls.html"><a href="pgls.html#challenge-2"><i class="fa fa-check"></i><b>5.2</b> Challenge 2</a></li>
+<li class="chapter" data-level="5.3" data-path="pgls.html"><a href="pgls.html#practicals"><i class="fa fa-check"></i><b>5.3</b> Practicals</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="pgls.html"><a href="pgls.html#other-correlation-structures"><i class="fa fa-check"></i><b>5.3.1</b> Other correlation structures</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="pgls.html"><a href="pgls.html#challenge-3"><i class="fa fa-check"></i><b>5.4</b> Challenge 3</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="pic.html"><a href="pic.html"><i class="fa fa-check"></i><b>6</b> Phylogenetic Independent Contrasts</a></li>
+<li class="chapter" data-level="7" data-path="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><i class="fa fa-check"></i><b>7</b> Relaxing the assumption that residuals need to be perfectly phylogenetically correlated</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#theory-pagels-correlation-structure"><i class="fa fa-check"></i><b>7.1</b> Theory: Pagel’s correlation structure</a></li>
+<li class="chapter" data-level="7.2" data-path="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#practicals-1"><i class="fa fa-check"></i><b>7.2</b> Practicals</a></li>
+<li class="chapter" data-level="7.3" data-path="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#challenge-4"><i class="fa fa-check"></i><b>7.3</b> Challenge 4</a></li>
+<li class="chapter" data-level="7.4" data-path="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#other-correlation-structures-or-evolutionary-models"><i class="fa fa-check"></i><b>7.4</b> Other correlation structures (or evolutionary models)</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="phylogenetic-anova.html"><a href="phylogenetic-anova.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic ANOVA</a></li>
+<li class="chapter" data-level="9" data-path="model-testing.html"><a href="model-testing.html"><i class="fa fa-check"></i><b>9</b> Model testing</a></li>
+<li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a></li>
+<li class="chapter" data-level="11" data-path="a-final-word-the-problem-of-replication.html"><a href="a-final-word-the-problem-of-replication.html"><i class="fa fa-check"></i><b>11</b> A final word: the problem of replication</a></li>
+<li class="chapter" data-level="12" data-path="BM-model.html"><a href="BM-model.html"><i class="fa fa-check"></i><b>12</b> The Brownian Motion (BM) model</a></li>
+<li class="chapter" data-level="13" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>13</b> Further readings</a></li>
+<li class="chapter" data-level="14" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>14</b> References</a></li>
+<li class="chapter" data-level="15" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i><b>15</b> Solutions to the challenges</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="solutions.html"><a href="solutions.html#challenge-1-1"><i class="fa fa-check"></i><b>15.1</b> Challenge 1</a></li>
+<li class="chapter" data-level="15.2" data-path="solutions.html"><a href="solutions.html#challenge-2-1"><i class="fa fa-check"></i><b>15.2</b> Challenge 2</a></li>
+<li class="chapter" data-level="15.3" data-path="solutions.html"><a href="solutions.html#challenge-3-1"><i class="fa fa-check"></i><b>15.3</b> Challenge 3</a></li>
+<li class="chapter" data-level="15.4" data-path="solutions.html"><a href="solutions.html#challenge-4-1"><i class="fa fa-check"></i><b>15.4</b> Challenge 4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Half-day Workshop on Phylogenetic Comparative Methods</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Relaxing the assumption that residuals need to be perfectly phylogenetically correlated<a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Phylogenetic Generalized Least Squares assume that the residuals are perfectly phylogenetically correlated. This is relatively constraining because it means that other sources of errors that are not phylogenetically correlated are not allowed by the model. Moreover, if these exist, they can bias the results of the PGLS (Revell, 2010).</p>
+<p>There are ways to relax this assumption, and one of this is to use a type of correlation structure that allows to relax this assumption.</p>
+<div id="theory-pagels-correlation-structure" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Theory: Pagel’s correlation structure<a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#theory-pagels-correlation-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When controling for phylogenetic relationships with phylogenetic generalized least squares, we assume that the residuals are perfectly correlated according to the correlation structure. In practice, it might not be always the case and it is difficult to really know how important it is to control for the phylogenetic relationship in a specific case. For instance, for a given study, the correlation in the residuals might not be highly phylogenetically correlated.</p>
+<p>This is possible to account for this using the <span class="math inline">\(\lambda\)</span> model of Pagel (1999). The idea is to multiply the off-diagonal of the correlation matrix (essentially the branch lengths of the phylogeny) by a parameter <span class="math inline">\(\lambda\)</span>, but not the diagonal values. This essentially leads to a modification of branch lengths of the phylogeny. A <span class="math inline">\(\lambda\)</span> value near zero gives very shorts internal branches and long tip branches. This, in effect, reduces the phylogenetic correlations (the effect of the phylogeny is reduced). At the opposite, if <span class="math inline">\(\lambda\)</span> is close to 1, then the modified phylogeny resembles the true phylogeny. Indeed, the parameter <span class="math inline">\(\lambda\)</span> is often interpreted as a parameter of phylogenetic signal; as such, a greater <span class="math inline">\(\lambda\)</span> value implies a stronger phylogenetic signal.</p>
+<p>The following figure shows how different lambda values affect the shape of the Quebec trees phylogeny.</p>
+<p><img src="pcm-workshop_files/figure-html/alpha%20example-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>You can see that with small values of lambda, the weight given to the shared history (the phylogeny) are greatly reduced. The long terminal branches somewhat indicates that there could be a lot more variation in the residuals that are independent of the other species. This variation could be due to other factors that are included in the estimates of each species but that are independent of the phylogeny (such as measurement errors for instance).</p>
+</div>
+<div id="practicals-1" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Practicals<a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#practicals-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Pagel’s <span class="math inline">\(\lambda\)</span> model can be used in PGLS using the <code>corPagel</code> correlation structure. The usage of this correlation structure is similar to that of the <code>corBrownian</code> structure, except that you need to provide a starting parameter value for <span class="math inline">\(\lambda\)</span>.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the correlation structure</span></span>
+<span id="cb34-2"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#cb34-2" aria-hidden="true" tabindex="-1"></a>pagel.corr <span class="ot">&lt;-</span> <span class="fu">corPagel</span>(<span class="fl">0.3</span>, <span class="at">phy=</span>seedplantstree, <span class="at">fixed=</span><span class="cn">FALSE</span>, <span class="at">form=</span><span class="sc">~</span><span class="fu">rownames</span>())</span></code></pre></div>
+<p>The value given to <code>corPagel</code> is the starting value for the <span class="math inline">\(\lambda\)</span> parameter. Also, note that the option <code>fixed=</code> is set to <code>FALSE</code> This means that the <span class="math inline">\(\lambda\)</span> parameter will be optimized using generalized least squares. If it was set to <code>TRUE</code>, then the model would be fitted with the starting parameter, here <code>0.3</code>.</p>
+<p>Let’s now fit the PGLS with this correlation structure.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PGLS with coraPagel</span></span>
+<span id="cb35-2"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#cb35-2" aria-hidden="true" tabindex="-1"></a>shade.pgls2 <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> Wd, <span class="at">data =</span> seedplantsdata, <span class="at">correlation=</span>pagel.corr)</span>
+<span id="cb35-3"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(shade.pgls2)</span></code></pre></div>
+<pre><code>## Generalized least squares fit by REML
+##   Model: Shade ~ Wd 
+##   Data: seedplantsdata 
+##        AIC     BIC    logLik
+##   163.3967 171.426 -77.69833
+## 
+## Correlation Structure: corPagel
+##  Formula: ~rownames() 
+##  Parameter estimate(s):
+##    lambda 
+## 0.9581665 
+## 
+## Coefficients:
+##                Value Std.Error   t-value p-value
+## (Intercept) 1.254987  1.636575 0.7668377  0.4465
+## Wd          3.573527  1.497808 2.3858381  0.0205
+## 
+##  Correlation: 
+##    (Intr)
+## Wd -0.397
+## 
+## Standardized residuals:
+##         Min          Q1         Med          Q3         Max 
+## -0.75145692 -0.44908843 -0.05417524  0.25655008  0.96493685 
+## 
+## Residual standard error: 2.621947 
+## Degrees of freedom: 57 total; 55 residual</code></pre>
+<p>You can see that gls has estimated the <span class="math inline">\(\lambda\)</span> parameter, which is 0.958 here. Because the estimated <span class="math inline">\(\lambda\)</span> is very close to 1, we can conclude that residuals of the model were strongly phylogenetically correlated. This, in turns, thus confirms the importance of using a PGLS with this model. If the <span class="math inline">\(\lambda\)</span> estimated would have been close to 0, it would have suggested that the PGLS is not necessary. Note, however, that using this approach assures you to never obtained a biased statistical result. Actually, I <strong>strongly recommend</strong> that you always use this correlation structure in your statistical analyses.</p>
+</div>
+<div id="challenge-4" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Challenge 4<a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#challenge-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Try to fit a PGLS with a Pagel correlation structure when regressing Shade tolerance on seed mass. Are the residuals as phylogenetically correlated than in the previous regression with wood density?</p>
+</div>
+<div id="other-correlation-structures-or-evolutionary-models" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Other correlation structures (or evolutionary models)<a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#other-correlation-structures-or-evolutionary-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The correlation structures available in the package <code>ape</code> offer other alternatives for the assumed model of character evolution. For instance, the <code>corMartins</code> correlation structure models selection using the Ornstein-Uhlenbeck (or Hansen) model with parameter <span class="math inline">\(\alpha\)</span> that determines the strength of the selection. Also, <code>corBlomberg</code> models accelerating or decelerating Brownian evolution, that is, the evolutionary rate of the Brownian motion is either accelerating or decelerating with time with this model. It is possible to do model comparisons to decide which model best fit the residual variation.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="pic.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="phylogenetic-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/05-pic.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["pcm-workshop.pdf", "pcm-workshop.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

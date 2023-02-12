@@ -1,0 +1,35 @@
+# Ahead of the workshop {#before}
+
+Here are a few things you should know and you should do ahead of the workshop.
+
+## Install R and the required packages
+
+To perform the examples of this document, you will need to have the [R software](https://www.r-project.org/) installed on your computer. I strongly recommend that you install [RStudio](https://rstudio.com/). Although R Studio is not required, it facilitates interactions between scripts and the R console and provides many great tools.
+
+After installing R, you will have to install some packages. For this specific tutorial, we will need to load the following R packages.
+
+```{r "load libraries", message=FALSE, warning=FALSE}
+library(nlme)
+library(ape)
+library(RColorBrewer)
+library(ggplot2)
+```
+
+To execute the code of this tutorial in R, I suggest that you create a new script (File>New File>R Script) where you paste the code copied from the boxes. In R Studio, you can then run this code by selecting the lines you want to execute and then press run (or associated shortcut). This will replicate the analyses presented in the tutorial. You should save the script file in a directory dedicated for the workshop where you will also place the data files required (see section \@ref(download)).
+
+If some of the packages above are not yet installed on your computer, you get error messages when trying to load them. If this is the case, you will have to install them using the function `install.packages()`. You only have to install them only once.
+
+```{r "install libraries", message=FALSE, warning=FALSE, eval=FALSE}
+install.packages('nlme')
+install.packages('ape')
+install.packages('RColorBrewer')
+install.packages('ggplot2')
+```
+
+Once the packages are installed, you can load the packages using the `library()` function. Also note that if you are using both the packages `nlme` and `ape`, `nlme` should be loaded first. If you don't do this, you might get errors; you could then restart R and start over.
+
+
+## Downloading the data {#download}
+
+TO FILL!
+

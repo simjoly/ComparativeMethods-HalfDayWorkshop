@@ -1,0 +1,105 @@
+# Model testing
+
+
+You might be interested in comparing different models, which is a common approach to modelisation in biology. However, there is a slight twist that you need to be aware of with PGLS.
+
+The default method for model fitting with `gls` is restricted maximum likelihood estimation (REML), obtained by `method="REML"`. This is different than standard maximum likelihood estimation (ML), which can be obtained with `method="ML"`. The difference between these is complex, but suffice to say that they differ in the way the variance parameters are estimated. REML provides less biased parameter estimates and is the prefered method to report the parameter coefficients in a publication. It is also the method of choice if you want to compare models with different correlation (or variance) structures. For example, if you want to test whether a PGLS model with an optimized Pagel's $\lambda$ fits the data better than a model with no phylogenetic correlation (that is, with Pagel $\lambda=0$):
+
+```{r "cor structure comparison"}
+pagel.0 <- gls(Shade ~ Wd, data = seedplantsdata, 
+               correlation=corPagel(0,phy=seedplantstree, 
+                                    fixed=TRUE, form=~rownames()), 
+               method="REML")
+pagel.fit <- gls(Shade ~ Wd, data = seedplantsdata, 
+                 correlation=corPagel(0.8,phy=seedplantstree, 
+                                      fixed=FALSE, form=~rownames()),
+                 method="REML")
+anova(pagel.0,pagel.fit)
+```
+
+You can use the AIC or BIC to compare the model, or the likelihood ratio test. You can see here that the PGLS model with a fitted Pagel $\lambda$ has a better fit than the one with a $\lambda=0$ (smaller AIC). By the way, this is also a test of whether a PGLS model is better than a standard regression model as a corPagel structure with $\lambda=0$ is a standard model (= no phylogenetic correlation).
+
+Now, if you are interested in testing the fixed parameters in the model, you need to use maximum likelihood fitting. For instance, if you want to use a likelihood ratio test to test the model with wood density as independent variable versus a null model with just the intercept, you can do the following.
+
+```{r "fixed effect comparison"}
+wd <- gls(Shade ~ Wd, data = seedplantsdata,
+          correlation=corBrownian(phy=seedplantstree, form=~rownames()), 
+          method="ML")
+null <- gls(Shade ~ 1, data = seedplantsdata,
+            correlation=corBrownian(phy=seedplantstree, form=~rownames()), 
+            method="ML")
+anova(wd,null)
+```
+
+You can see the model with the wood density variable is better than the model with only the intercept. However, as mentioned above, because the REML fitting provides better parameter estimates, you would have to refit the model using REML to present the results.
+
+```{r "Final fitting"}
+wd.final <- gls(Shade ~ Wd, data = seedplantsdata,
+                correlation=corBrownian(phy=seedplantstree, form=~rownames()), 
+                method="REML")
+summary(wd.final)
+```
+
+
+# When should we use comparative methods?
+
+Comparative methods should always be used when working with datasets that comprise multiple species. A good advice though is to use a method that allows the residuals of the model not to be all phylogenetically correlated, as when using the PGLS with the corPagel structure or using the Phylogenetic Mixed Model. Previous studies have shown that using such comparative methods results in more precise and accurate fixed effect estimation, lower type I error, and greater statistical power [@revell2010phylogenetic]. Therefore, it is always advantageous to use these methods.
+
+A common mistake is to use PGLS is to test for phylogenetic signal in $Y$ or $X$ using either Pagel's $\lambda$ or Blomberg's $K$, and if there is phylogenetic signal use a PGLS to analyse the data and if not use a standard regression. This is a **big mistake**. As we saw earlier, PGLS corrects for phylogenetic correlation in the residuals and not in the variables. Therefore, the presence of phylogenetic signal in the variables does not necessarily mean that the residuals are phylogenetically correlated. And the opposite is also true: the variables may not be phylogenetically correlated but the residuals could be!
+
+Another common misconception of comparative methods is that it removes all variation in the data related to the phylogeny and that this could affect the interpretation of the variable of interest. This was true of old methods like phylogenetic autoregression that first removed the phylogenetic signal from the data before analysing them. These approaches were indeed problematic. But the methods presented here to not suffer from these problems. They account for the phylogenetic structure and quantify it, but it does not removes variation from the model.
+
+
+# A final word: the problem of replication
+
+Every biologist is well aware of the importance of replicating their experiments in order to be confident in their conclusions. This is a lot more tricky when we consider evolution. To test our hypotheses on evolution, the ideal approach would be to rewind the "tape of evolution" (S. J. Gould) and let the story repeats itself several times to see what happens. This is unfortunately not possible, although some experimental evolution studies do manage to replicate evolutionary experiments.
+
+The phylogenetic comparative method introduced in this tutorial is one appropriate approach to protect ourselves from reaching conclusions that are not strongly supported when considered in an evolutionary context. However, even these approach can sometimes fail. This is why extra care is needed in such studies.
+
+When interpreting their results, biologists should first ask whether they have sufficient replication in their data to allow strong conclusions to be made. And by replication, I mean evolutionary replication. Consider the seed plant example introduced above.
+
+```{r "AngiospermsWithCharacters2", echo=FALSE, warning=FALSE, message=FALSE, fig.height=4, fig.width=5.5, fig.align='center'}
+require(RColorBrewer)
+ColorPalette1 <- brewer.pal(n = 4, name = "Dark2")
+names(ColorPalette1) <- c("no","yes","no","yes")
+
+enclosed.ovules <- as.factor(c("no","no","no","no","no","no","yes","yes","yes","yes","yes"))
+names(enclosed.ovules) <- reduced.landplants.chronos$tip.label
+double.fertilization <- as.factor(c("no","no","no","no","no","no","yes","yes","yes","yes","yes"))
+names(double.fertilization) <- reduced.landplants.chronos$tip.label
+```
+
+```{r "AngiospermsWithCharacters3", echo=FALSE, warning=FALSE, message=FALSE, include=FALSE, fig.height=4, fig.width=5.5, fig.align='center'}
+# SIMMAP
+library(phytools)
+set.seed(10)
+ov<-make.simmap(reduced.landplants.chronos,enclosed.ovules,model="SYM")
+fert<-make.simmap(reduced.landplants.chronos,double.fertilization,model="SYM")
+```
+
+```{r "AngiospermsWithCharacters4", echo=FALSE, warning=FALSE, message=FALSE, fig.height=4, fig.width=5.5, fig.align='center'}
+layout(matrix(1:3,1,3),widths=c(0.41,0.18,0.41))
+plotSimmap(ov, colors=ColorPalette1[1:2], lwd=8, outline=TRUE, mar=c(0,0,1.2,0), offset=10,
+           xlim=c(0,1*max(nodeHeights(reduced.landplants.chronos))))
+title("Ovules enclosed", cex.main=1.5)
+add.simmap.legend(colors=ColorPalette1[1:2],x=0.01*max(nodeHeights(reduced.landplants.chronos)),
+                  y=Ntip(reduced.landplants.chronos),vertical=TRUE,prompt=FALSE)
+
+plot.new()
+plot.window(xlim=c(-0.1,0.1),
+            ylim=get("last_plot.phylo",envir=.PlotPhyloEnv)$y.lim)
+text(rep(0,length(reduced.landplants.chronos$tip.label)),1:Ntip(reduced.landplants.chronos),
+     gsub("_"," ",reduced.landplants.chronos$tip.label),font=3, cex=1.5)
+
+plotSimmap(fert, colors=ColorPalette1[3:4], direction="leftwards", lwd=8, outline=TRUE, 
+           mar=c(0,0,1.2,0), offset=10, xlim=c(0,1*max(nodeHeights(reduced.landplants.chronos))))
+title("Double fertilization", cex.main=1.5)
+add.simmap.legend(colors=ColorPalette1[3:4],x=0.75*max(nodeHeights(reduced.landplants.chronos)),
+                  y=Ntip(reduced.landplants.chronos),vertical=TRUE,prompt=FALSE)
+```
+
+If there are multiple species with ovules enclosed or not and that perform double fertilization or not, the most parsimonious scenario for both characters is that each evolved once along the branch of the tree that leads to the flowering plants. In other words, there has been only one transition between the states of each character in the evolution of this group.
+
+So even if there seems to be replication when we look at the species (several species with each character state was sampled), there is no evolutionary replication! So even if the likelihood that those two events occurred on the same branch is very small and even if a contingency test to calculate the likelihood of such an event is significant, this is a little bit like an experiment with one replicate. Therefore, even when a test that accounts for the phylogeny is significant, a lot of caution is needed when interpreting these results. Ideally, a study should have a decent number of evolutionary replications for the results to be biologically meaningful. I encourage you to read the very nice paper of Maddison and Fitzjohn on the subject [@maddison2015unsolved].
+
+Ideally, before planning an experiment, one should make sure that there is sufficient replication in the evolution of the traits under study among the species considered to have greater confidence in the results. For instance, it would be much better if each character would have evolved 5-6 times each in the previous example, especially if the two characters were always evolving simultaneously!

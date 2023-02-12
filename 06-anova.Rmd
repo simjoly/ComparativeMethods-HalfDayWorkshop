@@ -1,0 +1,25 @@
+# Phylogenetic ANOVA
+
+
+So far, we have only analysed continuous quantitative characters. But it is also possible to perform an ANOVA with PGLS.
+
+The great thing with PGLS as implemented with the `gls` function is that it can easily be adapted to testing many different types of models. To give just one example here, it is easy to implement a phylogenetic ANOVA in R. Indeed, you just need to give `gls` a categorical trait as independent variable.
+
+Because there is no categorical variable in the plant functional trait dataset, we will create one by dividing the wood density category in two categories, light and dense wood.
+
+```{r "make categorical variable"}
+# Make categorical variable
+seedplantsdata$Wd.cat<-cut(seedplantsdata$Wd,breaks=2,labels=c("light","dense"))
+# Look at the result
+seedplantsdata$Wd.cat
+```
+
+We can now fit a phylogenetic ANOVA.
+
+```{r "Phylogenetic ANOVA"}
+# Phylogenetic ANOVA
+shade.pgls3 <- gls(Shade ~ Wd.cat, data = seedplantsdata, correlation=pagel.corr)
+summary(shade.pgls3)
+```
+
+You can see that the wood density, even when transformed in a categorical variable, has a significant effect on shade tolerance.

@@ -1,0 +1,68 @@
+# An introduction to Phylogenetic Comparative Methods {#intro}
+
+Phylogenetic comparative methods were introduced by Joseph Felsenstein in 1985. The idea of phylogenetic comparative methods was to correct for the non-independence of species in statistical tests because of their shared evolutionary histories. Indeed, two species may look similar not because they live in the same environment but because they are closely related. Consider the following angiosperm phylogeny.
+
+```{r "AngiospermTree", echo=FALSE, fig.height=3, fig.width=4, fig.align='center', fig.cap='land plant phylogeny'}
+require(ape)
+landplants.newick <- "(Marchantia:0.033817,(Lycopodium:0.040281,((Equisetum:0.048533,Osmunda:0.033640,Asplenium:0.036526):0.011806,(((Cycas:0.009460,Zamia:0.018847):0.005021,Ginkgo:0.014702,((Pinus:0.021500,(Podocarpac:0.015649,Taxus:0.021081):0.006473):0.002448,(Ephedra:0.029965,(Welwitsch:0.011298,Gnetum:0.014165):0.006883):0.016663):0.006309):0.010855,(Nymphaea:0.016835,(Saururus:0.019902,Chloranth:0.020151,((Araceae:0.020003,(Palmae:0.006005,Oryza:0.031555):0.002933):0.007654,Acorus:0.038488):0.007844,(Calycanth:0.013524,Lauraceae:0.035902):0.004656,((Magnolia:0.015119,Drimys:0.010172):0.005117,(Ranunculus:0.029027,(Nelumbo:0.006180,Platanus:0.002347):0.003958,(Buxaceae:0.013294,(Pisum:0.035675,(Fagus:0.009848,Carya:0.008236):0.001459):0.001994,(Ericaceae:0.019136,Solanaceae:0.041396):0.002619):0.004803):0.006457):0.002918):0.007348,Austrobail:0.019265,Amborella:0.019263):0.013527):0.011625):0.012469):0.019372);"
+landplants.tree <- read.tree(text=landplants.newick)
+species.to.keep <- c("Lycopodium","Asplenium","Cycas","Ginkgo","Pinus",
+                     "Taxus","Amborella","Oryza","Platanus","Pisum","Fagus")
+species.to.exclude <- landplants.tree$tip.label[!(landplants.tree$tip.label %in% 
+                                                    species.to.keep)]
+reduced.landplants.tree <- drop.tip(landplants.tree,species.to.exclude)
+reduced.landplants.chronos <- chronos(reduced.landplants.tree,quiet=TRUE)
+op <- par(mar=c(1,1,1,1))
+plot(reduced.landplants.chronos, label.offset=0.02, cex=0.9)
+par(op)
+```
+
+It is clear that *Fagus* (beech) and *Pisum* (pea) are more likely to share similar characteristics compared to *Asplenium* (a fern), because they share a more recent common ancestor. In other words, their evolutionary histories are shared over a longer period than with *Asplenium*. As such, they have more chance to have more similar traits (and in fact they do). For instance, take two characters, ovule and fertilization type, within this group.
+
+```{r "AngiospermsWithCharacters", echo=FALSE, warning=FALSE, fig.height=4, fig.width=4, fig.align='center'}
+require(RColorBrewer)
+enclosed.ovules <- as.factor(c("no","no","no","no","no","no","yes","yes","yes","yes","yes"))
+double.fertilization <- as.factor(c("no","no","no","no","no","no","yes","yes","yes","yes","yes"))
+ColorPalette1 <- brewer.pal(n = 4, name = "Dark2")
+op <- par(mar=c(5,1,1,1))
+plot(reduced.landplants.chronos, label.offset=0.15, cex=0.9)
+tiplabels(pch=21,bg=ColorPalette1[1:2][enclosed.ovules],col="black",cex=1,adj=0.55)
+tiplabels(pch=21,bg=ColorPalette1[3:4][double.fertilization],col="black",cex=1,adj=0.6)
+par(xpd=TRUE)
+legend(0,0,legend=c("Ovules:nude","Ovules:enclosed","Simple fertilization","Double fertilization"),col=ColorPalette1,pch=20,bty="n",cex=1,pt.cex=1.5,ncol=2)
+par(op) #reset graphical parameters to defaults
+```
+
+Ignoring the phylogeny, we might be tempted to see a strong correlation between these two characters. Indeed, the states between the two characters show a perfect correspondence. Using standard contingency table statistics, we could do a Fisher exact test:
+
+```{r "Fisher test", warning=FALSE}
+fisher.test(matrix(c(5,0,0,6),ncol=2))
+```
+
+The test suggests that the assotiation is highly significant. However, we know that the comparisons made are not completely independent. Actually, both characters evolved only once, and this along the same branch.
+
+A more appropriate way to frame the question would be "what is the probability that two characters evolved along the same branch?". This can also be calculated using a contingency table, but this time taking the branches of the phylogeny as the units of observation.
+
+In the example, there are 18 branches and the two characters evolved only once and on the same branch. The contingency table when considering the changes along the branches looks like this:
+
+```{r contingency_table, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+library(kableExtra)
+tabl <- matrix(c(1,0,0,17),nrow=2)
+rownames(tabl) <- c("Change in trait 1","No change in trait 1")
+colnames(tabl) <- c("Change in trait 2","No change in trait 2")
+tabl %>%
+  kable() %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left") %>%
+  column_spec(1, bold = TRUE)
+```
+
+With this table, Fisher's exact test will give the following result:
+
+```{r "Fisher test phylogenetic", warning=FALSE}
+fisher.test(matrix(c(1,0,0,17),ncol=2))
+```
+
+You can see that the result is no longer significant.
+
+While this approach for taking into account the phylogenetic relationships is correct, more powerful comparative methods have been developed. One useful and powerful approach is the Phylogenetic Generalized Least Squares (PGLS). But before we introduce PGLS, we do some revision and look briefly at the standard regression.
+

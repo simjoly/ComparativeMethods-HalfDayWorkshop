@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 15 Solutions to the challenges | Half-day Workshop on Phylogenetic Comparative Methods</title>
+  <meta name="description" content="This is a book that contains information on a half-day introductoray workshop on Phylogenetic Comparative Methods" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 15 Solutions to the challenges | Half-day Workshop on Phylogenetic Comparative Methods" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a book that contains information on a half-day introductoray workshop on Phylogenetic Comparative Methods" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 15 Solutions to the challenges | Half-day Workshop on Phylogenetic Comparative Methods" />
+  
+  <meta name="twitter:description" content="This is a book that contains information on a half-day introductoray workshop on Phylogenetic Comparative Methods" />
+  
+
+<meta name="author" content="Simon Joly" />
+
+
+<meta name="date" content="2023-02-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="references.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#other-useful-information"><i class="fa fa-check"></i><b>1.1</b> Other useful information</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#disclaimer"><i class="fa fa-check"></i><b>1.2</b> Disclaimer</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="before.html"><a href="before.html"><i class="fa fa-check"></i><b>2</b> Ahead of the workshop</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="before.html"><a href="before.html#install-r-and-the-required-packages"><i class="fa fa-check"></i><b>2.1</b> Install R and the required packages</a></li>
+<li class="chapter" data-level="2.2" data-path="before.html"><a href="before.html#working-with-github"><i class="fa fa-check"></i><b>2.2</b> Working with github</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>3</b> An introduction to Phylogenetic Comparative Methods</a></li>
+<li class="chapter" data-level="4" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>4</b> The linear regression model</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="linear-regression.html"><a href="linear-regression.html#theory"><i class="fa fa-check"></i><b>4.1</b> Theory</a></li>
+<li class="chapter" data-level="4.2" data-path="linear-regression.html"><a href="linear-regression.html#practice"><i class="fa fa-check"></i><b>4.2</b> Practice</a></li>
+<li class="chapter" data-level="4.3" data-path="linear-regression.html"><a href="linear-regression.html#challenge-1"><i class="fa fa-check"></i><b>4.3</b> Challenge 1</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pgls.html"><a href="pgls.html"><i class="fa fa-check"></i><b>5</b> Phylogenetic generalized least squares (PGLS)</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="pgls.html"><a href="pgls.html#theory-1"><i class="fa fa-check"></i><b>5.1</b> Theory</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="pgls.html"><a href="pgls.html#phylogenetic-correlation-structure"><i class="fa fa-check"></i><b>5.1.1</b> Phylogenetic correlation structure</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="pgls.html"><a href="pgls.html#challenge-2"><i class="fa fa-check"></i><b>5.2</b> Challenge 2</a></li>
+<li class="chapter" data-level="5.3" data-path="pgls.html"><a href="pgls.html#practicals"><i class="fa fa-check"></i><b>5.3</b> Practicals</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="pgls.html"><a href="pgls.html#other-correlation-structures"><i class="fa fa-check"></i><b>5.3.1</b> Other correlation structures</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="pgls.html"><a href="pgls.html#challenge-3"><i class="fa fa-check"></i><b>5.4</b> Challenge 3</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="pic.html"><a href="pic.html"><i class="fa fa-check"></i><b>6</b> Phylogenetic Independent Contrasts</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="pic.html"><a href="pic.html#practicals-1"><i class="fa fa-check"></i><b>6.1</b> Practicals</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html"><i class="fa fa-check"></i><b>7</b> Relaxing the assumption that all residuals need to be phylogenetically correlated</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html#theory-pagels-correlation-structure"><i class="fa fa-check"></i><b>7.1</b> Theory: Pagel’s correlation structure</a></li>
+<li class="chapter" data-level="7.2" data-path="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html#practicals-2"><i class="fa fa-check"></i><b>7.2</b> Practicals</a></li>
+<li class="chapter" data-level="7.3" data-path="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html#challenge-4"><i class="fa fa-check"></i><b>7.3</b> Challenge 4</a></li>
+<li class="chapter" data-level="7.4" data-path="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html#other-correlation-structures-or-evolutionary-models"><i class="fa fa-check"></i><b>7.4</b> Other correlation structures (or evolutionary models)</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="phylogenetic-anova.html"><a href="phylogenetic-anova.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic ANOVA</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="phylogenetic-anova.html"><a href="phylogenetic-anova.html#practicals-3"><i class="fa fa-check"></i><b>8.1</b> Practicals</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="model-testing.html"><a href="model-testing.html"><i class="fa fa-check"></i><b>9</b> Model testing</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="model-testing.html"><a href="model-testing.html#practicals-4"><i class="fa fa-check"></i><b>9.1</b> Practicals</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a></li>
+<li class="chapter" data-level="11" data-path="a-final-word-the-problem-of-replication.html"><a href="a-final-word-the-problem-of-replication.html"><i class="fa fa-check"></i><b>11</b> A final word: the problem of replication</a></li>
+<li class="chapter" data-level="12" data-path="the-brownian-motion-bm-model.html"><a href="the-brownian-motion-bm-model.html"><i class="fa fa-check"></i><b>12</b> The Brownian Motion (BM) model</a></li>
+<li class="chapter" data-level="13" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>13</b> Further readings</a></li>
+<li class="chapter" data-level="14" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>14</b> References</a></li>
+<li class="chapter" data-level="15" data-path="solutions-to-the-challenges.html"><a href="solutions-to-the-challenges.html"><i class="fa fa-check"></i><b>15</b> Solutions to the challenges</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="solutions-to-the-challenges.html"><a href="solutions-to-the-challenges.html#challenge-1-1"><i class="fa fa-check"></i><b>15.1</b> Challenge 1</a></li>
+<li class="chapter" data-level="15.2" data-path="solutions-to-the-challenges.html"><a href="solutions-to-the-challenges.html#challenge-2-1"><i class="fa fa-check"></i><b>15.2</b> Challenge 2</a></li>
+<li class="chapter" data-level="15.3" data-path="solutions-to-the-challenges.html"><a href="solutions-to-the-challenges.html#challenge-3-1"><i class="fa fa-check"></i><b>15.3</b> Challenge 3</a></li>
+<li class="chapter" data-level="15.4" data-path="solutions-to-the-challenges.html"><a href="solutions-to-the-challenges.html#challenge-4-1"><i class="fa fa-check"></i><b>15.4</b> Challenge 4</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Half-day Workshop on Phylogenetic Comparative Methods</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="solutions-to-the-challenges" class="section level1 hasAnchor" number="15">
+<h1><span class="header-section-number">Chapter 15</span> Solutions to the challenges<a href="solutions-to-the-challenges.html#solutions-to-the-challenges" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="challenge-1-1" class="section level2 hasAnchor" number="15.1">
+<h2><span class="header-section-number">15.1</span> Challenge 1<a href="solutions-to-the-challenges.html#challenge-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="solutions-to-the-challenges.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a linear model using Ordinary Least Squares (OLS)</span></span>
+<span id="cb62-2"><a href="solutions-to-the-challenges.html#cb62-2" aria-hidden="true" tabindex="-1"></a>Sm.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(Shade <span class="sc">~</span> Sm, <span class="at">data =</span> seedplantsdata)</span>
+<span id="cb62-3"><a href="solutions-to-the-challenges.html#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the results</span></span>
+<span id="cb62-4"><a href="solutions-to-the-challenges.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Sm.lm)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Shade ~ Sm, data = seedplantsdata)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.9042 -0.9009  0.1481  0.5982  2.0962 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  2.904e+00  1.608e-01  18.064   &lt;2e-16 ***
+## Sm          -5.824e-05  5.640e-05  -1.033    0.306    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.149 on 55 degrees of freedom
+## Multiple R-squared:  0.01902,    Adjusted R-squared:  0.001184 
+## F-statistic: 1.066 on 1 and 55 DF,  p-value: 0.3063</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="solutions-to-the-challenges.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the residuals</span></span>
+<span id="cb64-2"><a href="solutions-to-the-challenges.html#cb64-2" aria-hidden="true" tabindex="-1"></a>Sm.res <span class="ot">&lt;-</span> <span class="fu">residuals</span>(Sm.lm)</span>
+<span id="cb64-3"><a href="solutions-to-the-challenges.html#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the residuals beside the phylogeny</span></span>
+<span id="cb64-4"><a href="solutions-to-the-challenges.html#cb64-4" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb64-5"><a href="solutions-to-the-challenges.html#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(seedplantstree,<span class="at">type=</span><span class="st">&quot;p&quot;</span>,<span class="cn">TRUE</span>,<span class="at">label.offset=</span><span class="fl">0.01</span>,<span class="at">cex=</span><span class="fl">0.5</span>,<span class="at">no.margin=</span><span class="cn">FALSE</span>)</span>
+<span id="cb64-6"><a href="solutions-to-the-challenges.html#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tiplabels</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">bg=</span>cols[<span class="fu">ifelse</span>(Sm.res<span class="sc">&gt;</span><span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)],<span class="at">col=</span><span class="st">&quot;black&quot;</span>,<span class="at">cex=</span><span class="fu">abs</span>(Sm.res),<span class="at">adj=</span><span class="fl">0.505</span>)</span>
+<span id="cb64-7"><a href="solutions-to-the-challenges.html#cb64-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>,<span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;-2&quot;</span>,<span class="st">&quot;-1&quot;</span>,<span class="st">&quot;0&quot;</span>,<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>),<span class="at">pch=</span><span class="dv">21</span>,</span>
+<span id="cb64-8"><a href="solutions-to-the-challenges.html#cb64-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.bg=</span>cols[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)],<span class="at">bty=</span><span class="st">&quot;n&quot;</span>,</span>
+<span id="cb64-9"><a href="solutions-to-the-challenges.html#cb64-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">text.col=</span><span class="st">&quot;gray32&quot;</span>,<span class="at">cex=</span><span class="fl">0.8</span>,<span class="at">pt.cex=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="fl">0.1</span>,<span class="dv">1</span>,<span class="dv">2</span>))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/Challenge%201%20-%20solution-1.png" width="672" /></p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="solutions-to-the-challenges.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span></code></pre></div>
+</div>
+<div id="challenge-2-1" class="section level2 hasAnchor" number="15.2">
+<h2><span class="header-section-number">15.2</span> Challenge 2<a href="solutions-to-the-challenges.html#challenge-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="solutions-to-the-challenges.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Covariance matrix</span></span>
+<span id="cb66-2"><a href="solutions-to-the-challenges.html#cb66-2" aria-hidden="true" tabindex="-1"></a>seedplants.cov <span class="ot">&lt;-</span> <span class="fu">vcv</span>(seedplantstree,<span class="at">corr=</span><span class="cn">FALSE</span>)</span>
+<span id="cb66-3"><a href="solutions-to-the-challenges.html#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(seedplants.cov,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##       ABBA  ACNE  ACNI  ACPE  ACPL  ACRU  ACSA  ACSI  ACSP  ALCR  ALRU  AMSP
+## ABBA 0.151 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## ACNE 0.000 0.151 0.146 0.146 0.146 0.146 0.146 0.146 0.146 0.099 0.099 0.099
+## ACNI 0.000 0.146 0.151 0.147 0.148 0.147 0.150 0.147 0.147 0.099 0.099 0.099
+## ACPE 0.000 0.146 0.147 0.151 0.147 0.147 0.147 0.147 0.148 0.099 0.099 0.099
+## ACPL 0.000 0.146 0.148 0.147 0.151 0.147 0.148 0.147 0.147 0.099 0.099 0.099
+## ACRU 0.000 0.146 0.147 0.147 0.147 0.151 0.147 0.150 0.147 0.099 0.099 0.099
+## ACSA 0.000 0.146 0.150 0.147 0.148 0.147 0.151 0.147 0.147 0.099 0.099 0.099
+## ACSI 0.000 0.146 0.147 0.147 0.147 0.150 0.147 0.151 0.147 0.099 0.099 0.099
+## ACSP 0.000 0.146 0.147 0.148 0.147 0.147 0.147 0.147 0.151 0.099 0.099 0.099
+## ALCR 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.151 0.148 0.109
+## ALRU 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.148 0.151 0.109
+## AMSP 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.109 0.109 0.151
+## BEAL 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.143 0.143 0.109
+## BEPA 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.143 0.143 0.109
+## BEPO 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.143 0.143 0.109
+## CACA 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.142 0.142 0.109
+## CACO 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.132 0.132 0.109
+## CAOV 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.132 0.132 0.109
+## COAL 0.000 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090
+## CRSP 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.109 0.109 0.149
+## FAGR 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.126 0.126 0.109
+## FRAM 0.000 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090
+## FRNI 0.000 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090
+## FRPE 0.000 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090
+## JUCI 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.132 0.132 0.109
+## JUNI 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.132 0.132 0.109
+## JUVI 0.080 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## LALA 0.127 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## MASP 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.109 0.109 0.148
+## OSVI 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.142 0.142 0.109
+## PIAB 0.130 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIBA 0.130 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIGL 0.130 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIMA 0.130 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIRE 0.130 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIRU 0.130 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIST 0.130 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PLOC 0.000 0.079 0.079 0.079 0.079 0.079 0.079 0.079 0.079 0.079 0.079 0.079
+## POBA 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.102 0.102 0.102
+## PODE 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.102 0.102 0.102
+## POGR 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.102 0.102 0.102
+## POTR 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.102 0.102 0.102
+## PRPE 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.109 0.109 0.135
+## PRSE 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.109 0.109 0.135
+## PRVI 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.109 0.109 0.135
+## QUAL 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.126 0.126 0.109
+## QUBI 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.126 0.126 0.109
+## QUMA 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.126 0.126 0.109
+## QURU 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.126 0.126 0.109
+## SASP 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.102 0.102 0.102
+## SOAM 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.109 0.109 0.148
+## THOC 0.080 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## TIAM 0.000 0.109 0.109 0.109 0.109 0.109 0.109 0.109 0.109 0.099 0.099 0.099
+## TSCA 0.137 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## ULAM 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.109 0.109 0.121
+## ULRU 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.109 0.109 0.121
+## ULTH 0.000 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.109 0.109 0.121
+##       BEAL  BEPA  BEPO  CACA  CACO  CAOV  COAL  CRSP  FAGR  FRAM  FRNI  FRPE
+## ABBA 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## ACNE 0.099 0.099 0.099 0.099 0.099 0.099 0.090 0.099 0.099 0.090 0.090 0.090
+## ACNI 0.099 0.099 0.099 0.099 0.099 0.099 0.090 0.099 0.099 0.090 0.090 0.090
+## ACPE 0.099 0.099 0.099 0.099 0.099 0.099 0.090 0.099 0.099 0.090 0.090 0.090
+## ACPL 0.099 0.099 0.099 0.099 0.099 0.099 0.090 0.099 0.099 0.090 0.090 0.090
+## ACRU 0.099 0.099 0.099 0.099 0.099 0.099 0.090 0.099 0.099 0.090 0.090 0.090
+## ACSA 0.099 0.099 0.099 0.099 0.099 0.099 0.090 0.099 0.099 0.090 0.090 0.090
+## ACSI 0.099 0.099 0.099 0.099 0.099 0.099 0.090 0.099 0.099 0.090 0.090 0.090
+## ACSP 0.099 0.099 0.099 0.099 0.099 0.099 0.090 0.099 0.099 0.090 0.090 0.090
+## ALCR 0.143 0.143 0.143 0.142 0.132 0.132 0.090 0.109 0.126 0.090 0.090 0.090
+## ALRU 0.143 0.143 0.143 0.142 0.132 0.132 0.090 0.109 0.126 0.090 0.090 0.090
+## AMSP 0.109 0.109 0.109 0.109 0.109 0.109 0.090 0.149 0.109 0.090 0.090 0.090
+## BEAL 0.151 0.150 0.150 0.142 0.132 0.132 0.090 0.109 0.126 0.090 0.090 0.090
+## BEPA 0.150 0.151 0.150 0.142 0.132 0.132 0.090 0.109 0.126 0.090 0.090 0.090
+## BEPO 0.150 0.150 0.151 0.142 0.132 0.132 0.090 0.109 0.126 0.090 0.090 0.090
+## CACA 0.142 0.142 0.142 0.151 0.132 0.132 0.090 0.109 0.126 0.090 0.090 0.090
+## CACO 0.132 0.132 0.132 0.132 0.151 0.150 0.090 0.109 0.126 0.090 0.090 0.090
+## CAOV 0.132 0.132 0.132 0.132 0.150 0.151 0.090 0.109 0.126 0.090 0.090 0.090
+## COAL 0.090 0.090 0.090 0.090 0.090 0.090 0.151 0.090 0.090 0.108 0.108 0.108
+## CRSP 0.109 0.109 0.109 0.109 0.109 0.109 0.090 0.151 0.109 0.090 0.090 0.090
+## FAGR 0.126 0.126 0.126 0.126 0.126 0.126 0.090 0.109 0.151 0.090 0.090 0.090
+## FRAM 0.090 0.090 0.090 0.090 0.090 0.090 0.108 0.090 0.090 0.151 0.150 0.151
+## FRNI 0.090 0.090 0.090 0.090 0.090 0.090 0.108 0.090 0.090 0.150 0.151 0.150
+## FRPE 0.090 0.090 0.090 0.090 0.090 0.090 0.108 0.090 0.090 0.151 0.150 0.151
+## JUCI 0.132 0.132 0.132 0.132 0.148 0.148 0.090 0.109 0.126 0.090 0.090 0.090
+## JUNI 0.132 0.132 0.132 0.132 0.148 0.148 0.090 0.109 0.126 0.090 0.090 0.090
+## JUVI 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## LALA 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## MASP 0.109 0.109 0.109 0.109 0.109 0.109 0.090 0.148 0.109 0.090 0.090 0.090
+## OSVI 0.142 0.142 0.142 0.149 0.132 0.132 0.090 0.109 0.126 0.090 0.090 0.090
+## PIAB 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIBA 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIGL 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIMA 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIRE 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIRU 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIST 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PLOC 0.079 0.079 0.079 0.079 0.079 0.079 0.079 0.079 0.079 0.079 0.079 0.079
+## POBA 0.102 0.102 0.102 0.102 0.102 0.102 0.090 0.102 0.102 0.090 0.090 0.090
+## PODE 0.102 0.102 0.102 0.102 0.102 0.102 0.090 0.102 0.102 0.090 0.090 0.090
+## POGR 0.102 0.102 0.102 0.102 0.102 0.102 0.090 0.102 0.102 0.090 0.090 0.090
+## POTR 0.102 0.102 0.102 0.102 0.102 0.102 0.090 0.102 0.102 0.090 0.090 0.090
+## PRPE 0.109 0.109 0.109 0.109 0.109 0.109 0.090 0.135 0.109 0.090 0.090 0.090
+## PRSE 0.109 0.109 0.109 0.109 0.109 0.109 0.090 0.135 0.109 0.090 0.090 0.090
+## PRVI 0.109 0.109 0.109 0.109 0.109 0.109 0.090 0.135 0.109 0.090 0.090 0.090
+## QUAL 0.126 0.126 0.126 0.126 0.126 0.126 0.090 0.109 0.133 0.090 0.090 0.090
+## QUBI 0.126 0.126 0.126 0.126 0.126 0.126 0.090 0.109 0.133 0.090 0.090 0.090
+## QUMA 0.126 0.126 0.126 0.126 0.126 0.126 0.090 0.109 0.133 0.090 0.090 0.090
+## QURU 0.126 0.126 0.126 0.126 0.126 0.126 0.090 0.109 0.133 0.090 0.090 0.090
+## SASP 0.102 0.102 0.102 0.102 0.102 0.102 0.090 0.102 0.102 0.090 0.090 0.090
+## SOAM 0.109 0.109 0.109 0.109 0.109 0.109 0.090 0.148 0.109 0.090 0.090 0.090
+## THOC 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## TIAM 0.099 0.099 0.099 0.099 0.099 0.099 0.090 0.099 0.099 0.090 0.090 0.090
+## TSCA 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## ULAM 0.109 0.109 0.109 0.109 0.109 0.109 0.090 0.121 0.109 0.090 0.090 0.090
+## ULRU 0.109 0.109 0.109 0.109 0.109 0.109 0.090 0.121 0.109 0.090 0.090 0.090
+## ULTH 0.109 0.109 0.109 0.109 0.109 0.109 0.090 0.121 0.109 0.090 0.090 0.090
+##       JUCI  JUNI  JUVI  LALA  MASP  OSVI  PIAB  PIBA  PIGL  PIMA  PIRE  PIRU
+## ABBA 0.000 0.000 0.080 0.127 0.000 0.000 0.130 0.130 0.130 0.130 0.130 0.130
+## ACNE 0.099 0.099 0.000 0.000 0.099 0.099 0.000 0.000 0.000 0.000 0.000 0.000
+## ACNI 0.099 0.099 0.000 0.000 0.099 0.099 0.000 0.000 0.000 0.000 0.000 0.000
+## ACPE 0.099 0.099 0.000 0.000 0.099 0.099 0.000 0.000 0.000 0.000 0.000 0.000
+## ACPL 0.099 0.099 0.000 0.000 0.099 0.099 0.000 0.000 0.000 0.000 0.000 0.000
+## ACRU 0.099 0.099 0.000 0.000 0.099 0.099 0.000 0.000 0.000 0.000 0.000 0.000
+## ACSA 0.099 0.099 0.000 0.000 0.099 0.099 0.000 0.000 0.000 0.000 0.000 0.000
+## ACSI 0.099 0.099 0.000 0.000 0.099 0.099 0.000 0.000 0.000 0.000 0.000 0.000
+## ACSP 0.099 0.099 0.000 0.000 0.099 0.099 0.000 0.000 0.000 0.000 0.000 0.000
+## ALCR 0.132 0.132 0.000 0.000 0.109 0.142 0.000 0.000 0.000 0.000 0.000 0.000
+## ALRU 0.132 0.132 0.000 0.000 0.109 0.142 0.000 0.000 0.000 0.000 0.000 0.000
+## AMSP 0.109 0.109 0.000 0.000 0.148 0.109 0.000 0.000 0.000 0.000 0.000 0.000
+## BEAL 0.132 0.132 0.000 0.000 0.109 0.142 0.000 0.000 0.000 0.000 0.000 0.000
+## BEPA 0.132 0.132 0.000 0.000 0.109 0.142 0.000 0.000 0.000 0.000 0.000 0.000
+## BEPO 0.132 0.132 0.000 0.000 0.109 0.142 0.000 0.000 0.000 0.000 0.000 0.000
+## CACA 0.132 0.132 0.000 0.000 0.109 0.149 0.000 0.000 0.000 0.000 0.000 0.000
+## CACO 0.148 0.148 0.000 0.000 0.109 0.132 0.000 0.000 0.000 0.000 0.000 0.000
+## CAOV 0.148 0.148 0.000 0.000 0.109 0.132 0.000 0.000 0.000 0.000 0.000 0.000
+## COAL 0.090 0.090 0.000 0.000 0.090 0.090 0.000 0.000 0.000 0.000 0.000 0.000
+## CRSP 0.109 0.109 0.000 0.000 0.148 0.109 0.000 0.000 0.000 0.000 0.000 0.000
+## FAGR 0.126 0.126 0.000 0.000 0.109 0.126 0.000 0.000 0.000 0.000 0.000 0.000
+## FRAM 0.090 0.090 0.000 0.000 0.090 0.090 0.000 0.000 0.000 0.000 0.000 0.000
+## FRNI 0.090 0.090 0.000 0.000 0.090 0.090 0.000 0.000 0.000 0.000 0.000 0.000
+## FRPE 0.090 0.090 0.000 0.000 0.090 0.090 0.000 0.000 0.000 0.000 0.000 0.000
+## JUCI 0.151 0.149 0.000 0.000 0.109 0.132 0.000 0.000 0.000 0.000 0.000 0.000
+## JUNI 0.149 0.151 0.000 0.000 0.109 0.132 0.000 0.000 0.000 0.000 0.000 0.000
+## JUVI 0.000 0.000 0.151 0.080 0.000 0.000 0.080 0.080 0.080 0.080 0.080 0.080
+## LALA 0.000 0.000 0.080 0.151 0.000 0.000 0.127 0.127 0.127 0.127 0.127 0.127
+## MASP 0.109 0.109 0.000 0.000 0.151 0.109 0.000 0.000 0.000 0.000 0.000 0.000
+## OSVI 0.132 0.132 0.000 0.000 0.109 0.151 0.000 0.000 0.000 0.000 0.000 0.000
+## PIAB 0.000 0.000 0.080 0.127 0.000 0.000 0.151 0.132 0.148 0.150 0.132 0.151
+## PIBA 0.000 0.000 0.080 0.127 0.000 0.000 0.132 0.151 0.132 0.132 0.145 0.132
+## PIGL 0.000 0.000 0.080 0.127 0.000 0.000 0.148 0.132 0.151 0.148 0.132 0.148
+## PIMA 0.000 0.000 0.080 0.127 0.000 0.000 0.150 0.132 0.148 0.151 0.132 0.150
+## PIRE 0.000 0.000 0.080 0.127 0.000 0.000 0.132 0.145 0.132 0.132 0.151 0.132
+## PIRU 0.000 0.000 0.080 0.127 0.000 0.000 0.151 0.132 0.148 0.150 0.132 0.151
+## PIST 0.000 0.000 0.080 0.127 0.000 0.000 0.132 0.140 0.132 0.132 0.140 0.132
+## PLOC 0.079 0.079 0.000 0.000 0.079 0.079 0.000 0.000 0.000 0.000 0.000 0.000
+## POBA 0.102 0.102 0.000 0.000 0.102 0.102 0.000 0.000 0.000 0.000 0.000 0.000
+## PODE 0.102 0.102 0.000 0.000 0.102 0.102 0.000 0.000 0.000 0.000 0.000 0.000
+## POGR 0.102 0.102 0.000 0.000 0.102 0.102 0.000 0.000 0.000 0.000 0.000 0.000
+## POTR 0.102 0.102 0.000 0.000 0.102 0.102 0.000 0.000 0.000 0.000 0.000 0.000
+## PRPE 0.109 0.109 0.000 0.000 0.135 0.109 0.000 0.000 0.000 0.000 0.000 0.000
+## PRSE 0.109 0.109 0.000 0.000 0.135 0.109 0.000 0.000 0.000 0.000 0.000 0.000
+## PRVI 0.109 0.109 0.000 0.000 0.135 0.109 0.000 0.000 0.000 0.000 0.000 0.000
+## QUAL 0.126 0.126 0.000 0.000 0.109 0.126 0.000 0.000 0.000 0.000 0.000 0.000
+## QUBI 0.126 0.126 0.000 0.000 0.109 0.126 0.000 0.000 0.000 0.000 0.000 0.000
+## QUMA 0.126 0.126 0.000 0.000 0.109 0.126 0.000 0.000 0.000 0.000 0.000 0.000
+## QURU 0.126 0.126 0.000 0.000 0.109 0.126 0.000 0.000 0.000 0.000 0.000 0.000
+## SASP 0.102 0.102 0.000 0.000 0.102 0.102 0.000 0.000 0.000 0.000 0.000 0.000
+## SOAM 0.109 0.109 0.000 0.000 0.148 0.109 0.000 0.000 0.000 0.000 0.000 0.000
+## THOC 0.000 0.000 0.138 0.080 0.000 0.000 0.080 0.080 0.080 0.080 0.080 0.080
+## TIAM 0.099 0.099 0.000 0.000 0.099 0.099 0.000 0.000 0.000 0.000 0.000 0.000
+## TSCA 0.000 0.000 0.080 0.127 0.000 0.000 0.130 0.130 0.130 0.130 0.130 0.130
+## ULAM 0.109 0.109 0.000 0.000 0.121 0.109 0.000 0.000 0.000 0.000 0.000 0.000
+## ULRU 0.109 0.109 0.000 0.000 0.121 0.109 0.000 0.000 0.000 0.000 0.000 0.000
+## ULTH 0.109 0.109 0.000 0.000 0.121 0.109 0.000 0.000 0.000 0.000 0.000 0.000
+##       PIST  PLOC  POBA  PODE  POGR  POTR  PRPE  PRSE  PRVI  QUAL  QUBI  QUMA
+## ABBA 0.130 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## ACNE 0.000 0.079 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099
+## ACNI 0.000 0.079 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099
+## ACPE 0.000 0.079 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099
+## ACPL 0.000 0.079 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099
+## ACRU 0.000 0.079 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099
+## ACSA 0.000 0.079 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099
+## ACSI 0.000 0.079 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099
+## ACSP 0.000 0.079 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099
+## ALCR 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.126 0.126 0.126
+## ALRU 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.126 0.126 0.126
+## AMSP 0.000 0.079 0.102 0.102 0.102 0.102 0.135 0.135 0.135 0.109 0.109 0.109
+## BEAL 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.126 0.126 0.126
+## BEPA 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.126 0.126 0.126
+## BEPO 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.126 0.126 0.126
+## CACA 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.126 0.126 0.126
+## CACO 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.126 0.126 0.126
+## CAOV 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.126 0.126 0.126
+## COAL 0.000 0.079 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090
+## CRSP 0.000 0.079 0.102 0.102 0.102 0.102 0.135 0.135 0.135 0.109 0.109 0.109
+## FAGR 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.133 0.133 0.133
+## FRAM 0.000 0.079 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090
+## FRNI 0.000 0.079 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090
+## FRPE 0.000 0.079 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090 0.090
+## JUCI 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.126 0.126 0.126
+## JUNI 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.126 0.126 0.126
+## JUVI 0.080 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## LALA 0.127 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## MASP 0.000 0.079 0.102 0.102 0.102 0.102 0.135 0.135 0.135 0.109 0.109 0.109
+## OSVI 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.126 0.126 0.126
+## PIAB 0.132 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIBA 0.140 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIGL 0.132 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIMA 0.132 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIRE 0.140 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIRU 0.132 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIST 0.151 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PLOC 0.000 0.151 0.079 0.079 0.079 0.079 0.079 0.079 0.079 0.079 0.079 0.079
+## POBA 0.000 0.079 0.151 0.145 0.145 0.145 0.102 0.102 0.102 0.102 0.102 0.102
+## PODE 0.000 0.079 0.145 0.151 0.145 0.145 0.102 0.102 0.102 0.102 0.102 0.102
+## POGR 0.000 0.079 0.145 0.145 0.151 0.148 0.102 0.102 0.102 0.102 0.102 0.102
+## POTR 0.000 0.079 0.145 0.145 0.148 0.151 0.102 0.102 0.102 0.102 0.102 0.102
+## PRPE 0.000 0.079 0.102 0.102 0.102 0.102 0.151 0.149 0.150 0.109 0.109 0.109
+## PRSE 0.000 0.079 0.102 0.102 0.102 0.102 0.149 0.151 0.149 0.109 0.109 0.109
+## PRVI 0.000 0.079 0.102 0.102 0.102 0.102 0.150 0.149 0.151 0.109 0.109 0.109
+## QUAL 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.151 0.150 0.150
+## QUBI 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.150 0.151 0.151
+## QUMA 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.150 0.151 0.151
+## QURU 0.000 0.079 0.102 0.102 0.102 0.102 0.109 0.109 0.109 0.148 0.148 0.148
+## SASP 0.000 0.079 0.141 0.141 0.141 0.141 0.102 0.102 0.102 0.102 0.102 0.102
+## SOAM 0.000 0.079 0.102 0.102 0.102 0.102 0.135 0.135 0.135 0.109 0.109 0.109
+## THOC 0.080 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## TIAM 0.000 0.079 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099 0.099
+## TSCA 0.130 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## ULAM 0.000 0.079 0.102 0.102 0.102 0.102 0.121 0.121 0.121 0.109 0.109 0.109
+## ULRU 0.000 0.079 0.102 0.102 0.102 0.102 0.121 0.121 0.121 0.109 0.109 0.109
+## ULTH 0.000 0.079 0.102 0.102 0.102 0.102 0.121 0.121 0.121 0.109 0.109 0.109
+##       QURU  SASP  SOAM  THOC  TIAM  TSCA  ULAM  ULRU  ULTH
+## ABBA 0.000 0.000 0.000 0.080 0.000 0.137 0.000 0.000 0.000
+## ACNE 0.099 0.099 0.099 0.000 0.109 0.000 0.099 0.099 0.099
+## ACNI 0.099 0.099 0.099 0.000 0.109 0.000 0.099 0.099 0.099
+## ACPE 0.099 0.099 0.099 0.000 0.109 0.000 0.099 0.099 0.099
+## ACPL 0.099 0.099 0.099 0.000 0.109 0.000 0.099 0.099 0.099
+## ACRU 0.099 0.099 0.099 0.000 0.109 0.000 0.099 0.099 0.099
+## ACSA 0.099 0.099 0.099 0.000 0.109 0.000 0.099 0.099 0.099
+## ACSI 0.099 0.099 0.099 0.000 0.109 0.000 0.099 0.099 0.099
+## ACSP 0.099 0.099 0.099 0.000 0.109 0.000 0.099 0.099 0.099
+## ALCR 0.126 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## ALRU 0.126 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## AMSP 0.109 0.102 0.148 0.000 0.099 0.000 0.121 0.121 0.121
+## BEAL 0.126 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## BEPA 0.126 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## BEPO 0.126 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## CACA 0.126 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## CACO 0.126 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## CAOV 0.126 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## COAL 0.090 0.090 0.090 0.000 0.090 0.000 0.090 0.090 0.090
+## CRSP 0.109 0.102 0.148 0.000 0.099 0.000 0.121 0.121 0.121
+## FAGR 0.133 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## FRAM 0.090 0.090 0.090 0.000 0.090 0.000 0.090 0.090 0.090
+## FRNI 0.090 0.090 0.090 0.000 0.090 0.000 0.090 0.090 0.090
+## FRPE 0.090 0.090 0.090 0.000 0.090 0.000 0.090 0.090 0.090
+## JUCI 0.126 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## JUNI 0.126 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## JUVI 0.000 0.000 0.000 0.138 0.000 0.080 0.000 0.000 0.000
+## LALA 0.000 0.000 0.000 0.080 0.000 0.127 0.000 0.000 0.000
+## MASP 0.109 0.102 0.148 0.000 0.099 0.000 0.121 0.121 0.121
+## OSVI 0.126 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## PIAB 0.000 0.000 0.000 0.080 0.000 0.130 0.000 0.000 0.000
+## PIBA 0.000 0.000 0.000 0.080 0.000 0.130 0.000 0.000 0.000
+## PIGL 0.000 0.000 0.000 0.080 0.000 0.130 0.000 0.000 0.000
+## PIMA 0.000 0.000 0.000 0.080 0.000 0.130 0.000 0.000 0.000
+## PIRE 0.000 0.000 0.000 0.080 0.000 0.130 0.000 0.000 0.000
+## PIRU 0.000 0.000 0.000 0.080 0.000 0.130 0.000 0.000 0.000
+## PIST 0.000 0.000 0.000 0.080 0.000 0.130 0.000 0.000 0.000
+## PLOC 0.079 0.079 0.079 0.000 0.079 0.000 0.079 0.079 0.079
+## POBA 0.102 0.141 0.102 0.000 0.099 0.000 0.102 0.102 0.102
+## PODE 0.102 0.141 0.102 0.000 0.099 0.000 0.102 0.102 0.102
+## POGR 0.102 0.141 0.102 0.000 0.099 0.000 0.102 0.102 0.102
+## POTR 0.102 0.141 0.102 0.000 0.099 0.000 0.102 0.102 0.102
+## PRPE 0.109 0.102 0.135 0.000 0.099 0.000 0.121 0.121 0.121
+## PRSE 0.109 0.102 0.135 0.000 0.099 0.000 0.121 0.121 0.121
+## PRVI 0.109 0.102 0.135 0.000 0.099 0.000 0.121 0.121 0.121
+## QUAL 0.148 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## QUBI 0.148 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## QUMA 0.148 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## QURU 0.151 0.102 0.109 0.000 0.099 0.000 0.109 0.109 0.109
+## SASP 0.102 0.151 0.102 0.000 0.099 0.000 0.102 0.102 0.102
+## SOAM 0.109 0.102 0.151 0.000 0.099 0.000 0.121 0.121 0.121
+## THOC 0.000 0.000 0.000 0.151 0.000 0.080 0.000 0.000 0.000
+## TIAM 0.099 0.099 0.099 0.000 0.151 0.000 0.099 0.099 0.099
+## TSCA 0.000 0.000 0.000 0.080 0.000 0.151 0.000 0.000 0.000
+## ULAM 0.109 0.102 0.121 0.000 0.099 0.000 0.151 0.148 0.150
+## ULRU 0.109 0.102 0.121 0.000 0.099 0.000 0.148 0.151 0.148
+## ULTH 0.109 0.102 0.121 0.000 0.099 0.000 0.150 0.148 0.151</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="solutions-to-the-challenges.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation matrix</span></span>
+<span id="cb68-2"><a href="solutions-to-the-challenges.html#cb68-2" aria-hidden="true" tabindex="-1"></a>seedplants.cor <span class="ot">&lt;-</span> <span class="fu">vcv</span>(seedplantstree,<span class="at">corr=</span><span class="cn">TRUE</span>)</span>
+<span id="cb68-3"><a href="solutions-to-the-challenges.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(seedplants.cor,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##       ABBA  ACNE  ACNI  ACPE  ACPL  ACRU  ACSA  ACSI  ACSP  ALCR  ALRU  AMSP
+## ABBA 1.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## ACNE 0.000 1.000 0.967 0.967 0.967 0.967 0.967 0.967 0.967 0.654 0.654 0.654
+## ACNI 0.000 0.967 1.000 0.976 0.981 0.974 0.997 0.974 0.976 0.654 0.654 0.654
+## ACPE 0.000 0.967 0.976 1.000 0.976 0.974 0.976 0.974 0.983 0.654 0.654 0.654
+## ACPL 0.000 0.967 0.981 0.976 1.000 0.974 0.981 0.974 0.976 0.654 0.654 0.654
+## ACRU 0.000 0.967 0.974 0.974 0.974 1.000 0.974 0.997 0.974 0.654 0.654 0.654
+## ACSA 0.000 0.967 0.997 0.976 0.981 0.974 1.000 0.974 0.976 0.654 0.654 0.654
+## ACSI 0.000 0.967 0.974 0.974 0.974 0.997 0.974 1.000 0.974 0.654 0.654 0.654
+## ACSP 0.000 0.967 0.976 0.983 0.976 0.974 0.976 0.974 1.000 0.654 0.654 0.654
+## ALCR 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 1.000 0.984 0.726
+## ALRU 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.984 1.000 0.726
+## AMSP 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.726 0.726 1.000
+## BEAL 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.952 0.952 0.726
+## BEPA 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.952 0.952 0.726
+## BEPO 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.952 0.952 0.726
+## CACA 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.945 0.945 0.726
+## CACO 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.876 0.876 0.726
+## CAOV 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.876 0.876 0.726
+## COAL 0.000 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596
+## CRSP 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.726 0.726 0.989
+## FAGR 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.835 0.835 0.726
+## FRAM 0.000 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596
+## FRNI 0.000 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596
+## FRPE 0.000 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596
+## JUCI 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.876 0.876 0.726
+## JUNI 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.876 0.876 0.726
+## JUVI 0.528 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## LALA 0.843 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## MASP 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.726 0.726 0.983
+## OSVI 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.945 0.945 0.726
+## PIAB 0.860 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIBA 0.860 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIGL 0.860 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIMA 0.860 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIRE 0.860 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIRU 0.860 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIST 0.860 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PLOC 0.000 0.523 0.523 0.523 0.523 0.523 0.523 0.523 0.523 0.523 0.523 0.523
+## POBA 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.675 0.675 0.675
+## PODE 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.675 0.675 0.675
+## POGR 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.675 0.675 0.675
+## POTR 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.675 0.675 0.675
+## PRPE 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.726 0.726 0.898
+## PRSE 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.726 0.726 0.898
+## PRVI 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.726 0.726 0.898
+## QUAL 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.835 0.835 0.726
+## QUBI 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.835 0.835 0.726
+## QUMA 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.835 0.835 0.726
+## QURU 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.835 0.835 0.726
+## SASP 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.675 0.675 0.675
+## SOAM 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.726 0.726 0.980
+## THOC 0.528 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## TIAM 0.000 0.720 0.720 0.720 0.720 0.720 0.720 0.720 0.720 0.654 0.654 0.654
+## TSCA 0.906 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## ULAM 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.726 0.726 0.800
+## ULRU 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.726 0.726 0.800
+## ULTH 0.000 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.726 0.726 0.800
+##       BEAL  BEPA  BEPO  CACA  CACO  CAOV  COAL  CRSP  FAGR  FRAM  FRNI  FRPE
+## ABBA 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## ACNE 0.654 0.654 0.654 0.654 0.654 0.654 0.596 0.654 0.654 0.596 0.596 0.596
+## ACNI 0.654 0.654 0.654 0.654 0.654 0.654 0.596 0.654 0.654 0.596 0.596 0.596
+## ACPE 0.654 0.654 0.654 0.654 0.654 0.654 0.596 0.654 0.654 0.596 0.596 0.596
+## ACPL 0.654 0.654 0.654 0.654 0.654 0.654 0.596 0.654 0.654 0.596 0.596 0.596
+## ACRU 0.654 0.654 0.654 0.654 0.654 0.654 0.596 0.654 0.654 0.596 0.596 0.596
+## ACSA 0.654 0.654 0.654 0.654 0.654 0.654 0.596 0.654 0.654 0.596 0.596 0.596
+## ACSI 0.654 0.654 0.654 0.654 0.654 0.654 0.596 0.654 0.654 0.596 0.596 0.596
+## ACSP 0.654 0.654 0.654 0.654 0.654 0.654 0.596 0.654 0.654 0.596 0.596 0.596
+## ALCR 0.952 0.952 0.952 0.945 0.876 0.876 0.596 0.726 0.835 0.596 0.596 0.596
+## ALRU 0.952 0.952 0.952 0.945 0.876 0.876 0.596 0.726 0.835 0.596 0.596 0.596
+## AMSP 0.726 0.726 0.726 0.726 0.726 0.726 0.596 0.989 0.726 0.596 0.596 0.596
+## BEAL 1.000 0.998 0.994 0.945 0.876 0.876 0.596 0.726 0.835 0.596 0.596 0.596
+## BEPA 0.998 1.000 0.994 0.945 0.876 0.876 0.596 0.726 0.835 0.596 0.596 0.596
+## BEPO 0.994 0.994 1.000 0.945 0.876 0.876 0.596 0.726 0.835 0.596 0.596 0.596
+## CACA 0.945 0.945 0.945 1.000 0.876 0.876 0.596 0.726 0.835 0.596 0.596 0.596
+## CACO 0.876 0.876 0.876 0.876 1.000 0.998 0.596 0.726 0.835 0.596 0.596 0.596
+## CAOV 0.876 0.876 0.876 0.876 0.998 1.000 0.596 0.726 0.835 0.596 0.596 0.596
+## COAL 0.596 0.596 0.596 0.596 0.596 0.596 1.000 0.596 0.596 0.715 0.715 0.715
+## CRSP 0.726 0.726 0.726 0.726 0.726 0.726 0.596 1.000 0.726 0.596 0.596 0.596
+## FAGR 0.835 0.835 0.835 0.835 0.835 0.835 0.596 0.726 1.000 0.596 0.596 0.596
+## FRAM 0.596 0.596 0.596 0.596 0.596 0.596 0.715 0.596 0.596 1.000 0.997 0.999
+## FRNI 0.596 0.596 0.596 0.596 0.596 0.596 0.715 0.596 0.596 0.997 1.000 0.997
+## FRPE 0.596 0.596 0.596 0.596 0.596 0.596 0.715 0.596 0.596 0.999 0.997 1.000
+## JUCI 0.876 0.876 0.876 0.876 0.984 0.984 0.596 0.726 0.835 0.596 0.596 0.596
+## JUNI 0.876 0.876 0.876 0.876 0.984 0.984 0.596 0.726 0.835 0.596 0.596 0.596
+## JUVI 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## LALA 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## MASP 0.726 0.726 0.726 0.726 0.726 0.726 0.596 0.983 0.726 0.596 0.596 0.596
+## OSVI 0.945 0.945 0.945 0.988 0.876 0.876 0.596 0.726 0.835 0.596 0.596 0.596
+## PIAB 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIBA 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIGL 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIMA 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIRE 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIRU 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIST 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PLOC 0.523 0.523 0.523 0.523 0.523 0.523 0.523 0.523 0.523 0.523 0.523 0.523
+## POBA 0.675 0.675 0.675 0.675 0.675 0.675 0.596 0.675 0.675 0.596 0.596 0.596
+## PODE 0.675 0.675 0.675 0.675 0.675 0.675 0.596 0.675 0.675 0.596 0.596 0.596
+## POGR 0.675 0.675 0.675 0.675 0.675 0.675 0.596 0.675 0.675 0.596 0.596 0.596
+## POTR 0.675 0.675 0.675 0.675 0.675 0.675 0.596 0.675 0.675 0.596 0.596 0.596
+## PRPE 0.726 0.726 0.726 0.726 0.726 0.726 0.596 0.898 0.726 0.596 0.596 0.596
+## PRSE 0.726 0.726 0.726 0.726 0.726 0.726 0.596 0.898 0.726 0.596 0.596 0.596
+## PRVI 0.726 0.726 0.726 0.726 0.726 0.726 0.596 0.898 0.726 0.596 0.596 0.596
+## QUAL 0.835 0.835 0.835 0.835 0.835 0.835 0.596 0.726 0.881 0.596 0.596 0.596
+## QUBI 0.835 0.835 0.835 0.835 0.835 0.835 0.596 0.726 0.881 0.596 0.596 0.596
+## QUMA 0.835 0.835 0.835 0.835 0.835 0.835 0.596 0.726 0.881 0.596 0.596 0.596
+## QURU 0.835 0.835 0.835 0.835 0.835 0.835 0.596 0.726 0.881 0.596 0.596 0.596
+## SASP 0.675 0.675 0.675 0.675 0.675 0.675 0.596 0.675 0.675 0.596 0.596 0.596
+## SOAM 0.726 0.726 0.726 0.726 0.726 0.726 0.596 0.980 0.726 0.596 0.596 0.596
+## THOC 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## TIAM 0.654 0.654 0.654 0.654 0.654 0.654 0.596 0.654 0.654 0.596 0.596 0.596
+## TSCA 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## ULAM 0.726 0.726 0.726 0.726 0.726 0.726 0.596 0.800 0.726 0.596 0.596 0.596
+## ULRU 0.726 0.726 0.726 0.726 0.726 0.726 0.596 0.800 0.726 0.596 0.596 0.596
+## ULTH 0.726 0.726 0.726 0.726 0.726 0.726 0.596 0.800 0.726 0.596 0.596 0.596
+##       JUCI  JUNI  JUVI  LALA  MASP  OSVI  PIAB  PIBA  PIGL  PIMA  PIRE  PIRU
+## ABBA 0.000 0.000 0.528 0.843 0.000 0.000 0.860 0.860 0.860 0.860 0.860 0.860
+## ACNE 0.654 0.654 0.000 0.000 0.654 0.654 0.000 0.000 0.000 0.000 0.000 0.000
+## ACNI 0.654 0.654 0.000 0.000 0.654 0.654 0.000 0.000 0.000 0.000 0.000 0.000
+## ACPE 0.654 0.654 0.000 0.000 0.654 0.654 0.000 0.000 0.000 0.000 0.000 0.000
+## ACPL 0.654 0.654 0.000 0.000 0.654 0.654 0.000 0.000 0.000 0.000 0.000 0.000
+## ACRU 0.654 0.654 0.000 0.000 0.654 0.654 0.000 0.000 0.000 0.000 0.000 0.000
+## ACSA 0.654 0.654 0.000 0.000 0.654 0.654 0.000 0.000 0.000 0.000 0.000 0.000
+## ACSI 0.654 0.654 0.000 0.000 0.654 0.654 0.000 0.000 0.000 0.000 0.000 0.000
+## ACSP 0.654 0.654 0.000 0.000 0.654 0.654 0.000 0.000 0.000 0.000 0.000 0.000
+## ALCR 0.876 0.876 0.000 0.000 0.726 0.945 0.000 0.000 0.000 0.000 0.000 0.000
+## ALRU 0.876 0.876 0.000 0.000 0.726 0.945 0.000 0.000 0.000 0.000 0.000 0.000
+## AMSP 0.726 0.726 0.000 0.000 0.983 0.726 0.000 0.000 0.000 0.000 0.000 0.000
+## BEAL 0.876 0.876 0.000 0.000 0.726 0.945 0.000 0.000 0.000 0.000 0.000 0.000
+## BEPA 0.876 0.876 0.000 0.000 0.726 0.945 0.000 0.000 0.000 0.000 0.000 0.000
+## BEPO 0.876 0.876 0.000 0.000 0.726 0.945 0.000 0.000 0.000 0.000 0.000 0.000
+## CACA 0.876 0.876 0.000 0.000 0.726 0.988 0.000 0.000 0.000 0.000 0.000 0.000
+## CACO 0.984 0.984 0.000 0.000 0.726 0.876 0.000 0.000 0.000 0.000 0.000 0.000
+## CAOV 0.984 0.984 0.000 0.000 0.726 0.876 0.000 0.000 0.000 0.000 0.000 0.000
+## COAL 0.596 0.596 0.000 0.000 0.596 0.596 0.000 0.000 0.000 0.000 0.000 0.000
+## CRSP 0.726 0.726 0.000 0.000 0.983 0.726 0.000 0.000 0.000 0.000 0.000 0.000
+## FAGR 0.835 0.835 0.000 0.000 0.726 0.835 0.000 0.000 0.000 0.000 0.000 0.000
+## FRAM 0.596 0.596 0.000 0.000 0.596 0.596 0.000 0.000 0.000 0.000 0.000 0.000
+## FRNI 0.596 0.596 0.000 0.000 0.596 0.596 0.000 0.000 0.000 0.000 0.000 0.000
+## FRPE 0.596 0.596 0.000 0.000 0.596 0.596 0.000 0.000 0.000 0.000 0.000 0.000
+## JUCI 1.000 0.992 0.000 0.000 0.726 0.876 0.000 0.000 0.000 0.000 0.000 0.000
+## JUNI 0.992 1.000 0.000 0.000 0.726 0.876 0.000 0.000 0.000 0.000 0.000 0.000
+## JUVI 0.000 0.000 1.000 0.528 0.000 0.000 0.528 0.528 0.528 0.528 0.528 0.528
+## LALA 0.000 0.000 0.528 1.000 0.000 0.000 0.843 0.843 0.843 0.843 0.843 0.843
+## MASP 0.726 0.726 0.000 0.000 1.000 0.726 0.000 0.000 0.000 0.000 0.000 0.000
+## OSVI 0.876 0.876 0.000 0.000 0.726 1.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIAB 0.000 0.000 0.528 0.843 0.000 0.000 1.000 0.874 0.985 0.997 0.874 0.999
+## PIBA 0.000 0.000 0.528 0.843 0.000 0.000 0.874 1.000 0.874 0.874 0.965 0.874
+## PIGL 0.000 0.000 0.528 0.843 0.000 0.000 0.985 0.874 1.000 0.985 0.874 0.985
+## PIMA 0.000 0.000 0.528 0.843 0.000 0.000 0.997 0.874 0.985 1.000 0.874 0.997
+## PIRE 0.000 0.000 0.528 0.843 0.000 0.000 0.874 0.965 0.874 0.874 1.000 0.874
+## PIRU 0.000 0.000 0.528 0.843 0.000 0.000 0.999 0.874 0.985 0.997 0.874 1.000
+## PIST 0.000 0.000 0.528 0.843 0.000 0.000 0.874 0.926 0.874 0.874 0.926 0.874
+## PLOC 0.523 0.523 0.000 0.000 0.523 0.523 0.000 0.000 0.000 0.000 0.000 0.000
+## POBA 0.675 0.675 0.000 0.000 0.675 0.675 0.000 0.000 0.000 0.000 0.000 0.000
+## PODE 0.675 0.675 0.000 0.000 0.675 0.675 0.000 0.000 0.000 0.000 0.000 0.000
+## POGR 0.675 0.675 0.000 0.000 0.675 0.675 0.000 0.000 0.000 0.000 0.000 0.000
+## POTR 0.675 0.675 0.000 0.000 0.675 0.675 0.000 0.000 0.000 0.000 0.000 0.000
+## PRPE 0.726 0.726 0.000 0.000 0.898 0.726 0.000 0.000 0.000 0.000 0.000 0.000
+## PRSE 0.726 0.726 0.000 0.000 0.898 0.726 0.000 0.000 0.000 0.000 0.000 0.000
+## PRVI 0.726 0.726 0.000 0.000 0.898 0.726 0.000 0.000 0.000 0.000 0.000 0.000
+## QUAL 0.835 0.835 0.000 0.000 0.726 0.835 0.000 0.000 0.000 0.000 0.000 0.000
+## QUBI 0.835 0.835 0.000 0.000 0.726 0.835 0.000 0.000 0.000 0.000 0.000 0.000
+## QUMA 0.835 0.835 0.000 0.000 0.726 0.835 0.000 0.000 0.000 0.000 0.000 0.000
+## QURU 0.835 0.835 0.000 0.000 0.726 0.835 0.000 0.000 0.000 0.000 0.000 0.000
+## SASP 0.675 0.675 0.000 0.000 0.675 0.675 0.000 0.000 0.000 0.000 0.000 0.000
+## SOAM 0.726 0.726 0.000 0.000 0.980 0.726 0.000 0.000 0.000 0.000 0.000 0.000
+## THOC 0.000 0.000 0.918 0.528 0.000 0.000 0.528 0.528 0.528 0.528 0.528 0.528
+## TIAM 0.654 0.654 0.000 0.000 0.654 0.654 0.000 0.000 0.000 0.000 0.000 0.000
+## TSCA 0.000 0.000 0.528 0.843 0.000 0.000 0.860 0.860 0.860 0.860 0.860 0.860
+## ULAM 0.726 0.726 0.000 0.000 0.800 0.726 0.000 0.000 0.000 0.000 0.000 0.000
+## ULRU 0.726 0.726 0.000 0.000 0.800 0.726 0.000 0.000 0.000 0.000 0.000 0.000
+## ULTH 0.726 0.726 0.000 0.000 0.800 0.726 0.000 0.000 0.000 0.000 0.000 0.000
+##       PIST  PLOC  POBA  PODE  POGR  POTR  PRPE  PRSE  PRVI  QUAL  QUBI  QUMA
+## ABBA 0.860 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## ACNE 0.000 0.523 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654
+## ACNI 0.000 0.523 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654
+## ACPE 0.000 0.523 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654
+## ACPL 0.000 0.523 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654
+## ACRU 0.000 0.523 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654
+## ACSA 0.000 0.523 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654
+## ACSI 0.000 0.523 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654
+## ACSP 0.000 0.523 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654
+## ALCR 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.835 0.835 0.835
+## ALRU 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.835 0.835 0.835
+## AMSP 0.000 0.523 0.675 0.675 0.675 0.675 0.898 0.898 0.898 0.726 0.726 0.726
+## BEAL 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.835 0.835 0.835
+## BEPA 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.835 0.835 0.835
+## BEPO 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.835 0.835 0.835
+## CACA 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.835 0.835 0.835
+## CACO 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.835 0.835 0.835
+## CAOV 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.835 0.835 0.835
+## COAL 0.000 0.523 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596
+## CRSP 0.000 0.523 0.675 0.675 0.675 0.675 0.898 0.898 0.898 0.726 0.726 0.726
+## FAGR 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.881 0.881 0.881
+## FRAM 0.000 0.523 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596
+## FRNI 0.000 0.523 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596
+## FRPE 0.000 0.523 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596 0.596
+## JUCI 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.835 0.835 0.835
+## JUNI 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.835 0.835 0.835
+## JUVI 0.528 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## LALA 0.843 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## MASP 0.000 0.523 0.675 0.675 0.675 0.675 0.898 0.898 0.898 0.726 0.726 0.726
+## OSVI 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.835 0.835 0.835
+## PIAB 0.874 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIBA 0.926 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIGL 0.874 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIMA 0.874 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIRE 0.926 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIRU 0.874 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PIST 1.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## PLOC 0.000 1.000 0.523 0.523 0.523 0.523 0.523 0.523 0.523 0.523 0.523 0.523
+## POBA 0.000 0.523 1.000 0.959 0.964 0.964 0.675 0.675 0.675 0.675 0.675 0.675
+## PODE 0.000 0.523 0.959 1.000 0.959 0.959 0.675 0.675 0.675 0.675 0.675 0.675
+## POGR 0.000 0.523 0.964 0.959 1.000 0.982 0.675 0.675 0.675 0.675 0.675 0.675
+## POTR 0.000 0.523 0.964 0.959 0.982 1.000 0.675 0.675 0.675 0.675 0.675 0.675
+## PRPE 0.000 0.523 0.675 0.675 0.675 0.675 1.000 0.986 0.998 0.726 0.726 0.726
+## PRSE 0.000 0.523 0.675 0.675 0.675 0.675 0.986 1.000 0.986 0.726 0.726 0.726
+## PRVI 0.000 0.523 0.675 0.675 0.675 0.675 0.998 0.986 1.000 0.726 0.726 0.726
+## QUAL 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 1.000 0.997 0.997
+## QUBI 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.997 1.000 0.999
+## QUMA 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.997 0.999 1.000
+## QURU 0.000 0.523 0.675 0.675 0.675 0.675 0.726 0.726 0.726 0.984 0.984 0.984
+## SASP 0.000 0.523 0.936 0.936 0.936 0.936 0.675 0.675 0.675 0.675 0.675 0.675
+## SOAM 0.000 0.523 0.675 0.675 0.675 0.675 0.898 0.898 0.898 0.726 0.726 0.726
+## THOC 0.528 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## TIAM 0.000 0.523 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654 0.654
+## TSCA 0.860 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## ULAM 0.000 0.523 0.675 0.675 0.675 0.675 0.800 0.800 0.800 0.726 0.726 0.726
+## ULRU 0.000 0.523 0.675 0.675 0.675 0.675 0.800 0.800 0.800 0.726 0.726 0.726
+## ULTH 0.000 0.523 0.675 0.675 0.675 0.675 0.800 0.800 0.800 0.726 0.726 0.726
+##       QURU  SASP  SOAM  THOC  TIAM  TSCA  ULAM  ULRU  ULTH
+## ABBA 0.000 0.000 0.000 0.528 0.000 0.906 0.000 0.000 0.000
+## ACNE 0.654 0.654 0.654 0.000 0.720 0.000 0.654 0.654 0.654
+## ACNI 0.654 0.654 0.654 0.000 0.720 0.000 0.654 0.654 0.654
+## ACPE 0.654 0.654 0.654 0.000 0.720 0.000 0.654 0.654 0.654
+## ACPL 0.654 0.654 0.654 0.000 0.720 0.000 0.654 0.654 0.654
+## ACRU 0.654 0.654 0.654 0.000 0.720 0.000 0.654 0.654 0.654
+## ACSA 0.654 0.654 0.654 0.000 0.720 0.000 0.654 0.654 0.654
+## ACSI 0.654 0.654 0.654 0.000 0.720 0.000 0.654 0.654 0.654
+## ACSP 0.654 0.654 0.654 0.000 0.720 0.000 0.654 0.654 0.654
+## ALCR 0.835 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## ALRU 0.835 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## AMSP 0.726 0.675 0.980 0.000 0.654 0.000 0.800 0.800 0.800
+## BEAL 0.835 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## BEPA 0.835 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## BEPO 0.835 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## CACA 0.835 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## CACO 0.835 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## CAOV 0.835 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## COAL 0.596 0.596 0.596 0.000 0.596 0.000 0.596 0.596 0.596
+## CRSP 0.726 0.675 0.980 0.000 0.654 0.000 0.800 0.800 0.800
+## FAGR 0.881 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## FRAM 0.596 0.596 0.596 0.000 0.596 0.000 0.596 0.596 0.596
+## FRNI 0.596 0.596 0.596 0.000 0.596 0.000 0.596 0.596 0.596
+## FRPE 0.596 0.596 0.596 0.000 0.596 0.000 0.596 0.596 0.596
+## JUCI 0.835 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## JUNI 0.835 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## JUVI 0.000 0.000 0.000 0.918 0.000 0.528 0.000 0.000 0.000
+## LALA 0.000 0.000 0.000 0.528 0.000 0.843 0.000 0.000 0.000
+## MASP 0.726 0.675 0.980 0.000 0.654 0.000 0.800 0.800 0.800
+## OSVI 0.835 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## PIAB 0.000 0.000 0.000 0.528 0.000 0.860 0.000 0.000 0.000
+## PIBA 0.000 0.000 0.000 0.528 0.000 0.860 0.000 0.000 0.000
+## PIGL 0.000 0.000 0.000 0.528 0.000 0.860 0.000 0.000 0.000
+## PIMA 0.000 0.000 0.000 0.528 0.000 0.860 0.000 0.000 0.000
+## PIRE 0.000 0.000 0.000 0.528 0.000 0.860 0.000 0.000 0.000
+## PIRU 0.000 0.000 0.000 0.528 0.000 0.860 0.000 0.000 0.000
+## PIST 0.000 0.000 0.000 0.528 0.000 0.860 0.000 0.000 0.000
+## PLOC 0.523 0.523 0.523 0.000 0.523 0.000 0.523 0.523 0.523
+## POBA 0.675 0.936 0.675 0.000 0.654 0.000 0.675 0.675 0.675
+## PODE 0.675 0.936 0.675 0.000 0.654 0.000 0.675 0.675 0.675
+## POGR 0.675 0.936 0.675 0.000 0.654 0.000 0.675 0.675 0.675
+## POTR 0.675 0.936 0.675 0.000 0.654 0.000 0.675 0.675 0.675
+## PRPE 0.726 0.675 0.898 0.000 0.654 0.000 0.800 0.800 0.800
+## PRSE 0.726 0.675 0.898 0.000 0.654 0.000 0.800 0.800 0.800
+## PRVI 0.726 0.675 0.898 0.000 0.654 0.000 0.800 0.800 0.800
+## QUAL 0.984 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## QUBI 0.984 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## QUMA 0.984 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## QURU 1.000 0.675 0.726 0.000 0.654 0.000 0.726 0.726 0.726
+## SASP 0.675 1.000 0.675 0.000 0.654 0.000 0.675 0.675 0.675
+## SOAM 0.726 0.675 1.000 0.000 0.654 0.000 0.800 0.800 0.800
+## THOC 0.000 0.000 0.000 1.000 0.000 0.528 0.000 0.000 0.000
+## TIAM 0.654 0.654 0.654 0.000 1.000 0.000 0.654 0.654 0.654
+## TSCA 0.000 0.000 0.000 0.528 0.000 1.000 0.000 0.000 0.000
+## ULAM 0.726 0.675 0.800 0.000 0.654 0.000 1.000 0.983 0.999
+## ULRU 0.726 0.675 0.800 0.000 0.654 0.000 0.983 1.000 0.983
+## ULTH 0.726 0.675 0.800 0.000 0.654 0.000 0.999 0.983 1.000</code></pre>
+</div>
+<div id="challenge-3-1" class="section level2 hasAnchor" number="15.3">
+<h2><span class="header-section-number">15.3</span> Challenge 3<a href="solutions-to-the-challenges.html#challenge-3-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="solutions-to-the-challenges.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a PGLS with the gls function</span></span>
+<span id="cb70-2"><a href="solutions-to-the-challenges.html#cb70-2" aria-hidden="true" tabindex="-1"></a>Sm.pgls <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> Sm, <span class="at">data =</span> seedplantsdata, <span class="at">correlation=</span>bm.corr)</span>
+<span id="cb70-3"><a href="solutions-to-the-challenges.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the results</span></span>
+<span id="cb70-4"><a href="solutions-to-the-challenges.html#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Sm.pgls)</span></code></pre></div>
+<pre><code>## Generalized least squares fit by REML
+##   Model: Shade ~ Sm 
+##   Data: seedplantsdata 
+##        AIC      BIC    logLik
+##   240.3701 246.3921 -117.1851
+## 
+## Correlation Structure: corBrownian
+##  Formula: ~1 
+##  Parameter estimate(s):
+## numeric(0)
+## 
+## Coefficients:
+##                  Value Std.Error    t-value p-value
+## (Intercept)  2.8031105  4.591805  0.6104594  0.5441
+## Sm          -0.0000417  0.000081 -0.5117076  0.6109
+## 
+##  Correlation: 
+##    (Intr)
+## Sm -0.004
+## 
+## Standardized residuals:
+##         Min          Q1         Med          Q3         Max 
+## -0.22901901 -0.10170487  0.02535202  0.08873220  0.27907713 
+## 
+## Residual standard error: 7.873115 
+## Degrees of freedom: 57 total; 55 residual</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="solutions-to-the-challenges.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the residuals corrected by the correlation structure</span></span>
+<span id="cb72-2"><a href="solutions-to-the-challenges.html#cb72-2" aria-hidden="true" tabindex="-1"></a>Sm.pgls.res <span class="ot">&lt;-</span> <span class="fu">residuals</span>(Sm.pgls,<span class="at">type=</span><span class="st">&quot;normalized&quot;</span>)</span>
+<span id="cb72-3"><a href="solutions-to-the-challenges.html#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the residuals beside the phylogeny</span></span>
+<span id="cb72-4"><a href="solutions-to-the-challenges.html#cb72-4" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb72-5"><a href="solutions-to-the-challenges.html#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(seedplantstree,<span class="at">type=</span><span class="st">&quot;p&quot;</span>,<span class="cn">TRUE</span>,<span class="at">label.offset=</span><span class="fl">0.01</span>,<span class="at">cex=</span><span class="fl">0.5</span>,<span class="at">no.margin=</span><span class="cn">FALSE</span>)</span>
+<span id="cb72-6"><a href="solutions-to-the-challenges.html#cb72-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tiplabels</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">bg=</span>cols[<span class="fu">ifelse</span>(Sm.pgls.res<span class="sc">&gt;</span><span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)],<span class="at">col=</span><span class="st">&quot;black&quot;</span>,<span class="at">cex=</span><span class="fu">abs</span>(Sm.pgls.res),<span class="at">adj=</span><span class="fl">0.505</span>)</span>
+<span id="cb72-7"><a href="solutions-to-the-challenges.html#cb72-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>,<span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;-2&quot;</span>,<span class="st">&quot;-1&quot;</span>,<span class="st">&quot;0&quot;</span>,<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>),<span class="at">pch=</span><span class="dv">21</span>,</span>
+<span id="cb72-8"><a href="solutions-to-the-challenges.html#cb72-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.bg=</span>cols[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)],<span class="at">bty=</span><span class="st">&quot;n&quot;</span>,</span>
+<span id="cb72-9"><a href="solutions-to-the-challenges.html#cb72-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">text.col=</span><span class="st">&quot;gray32&quot;</span>,<span class="at">cex=</span><span class="fl">0.8</span>,<span class="at">pt.cex=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="fl">0.1</span>,<span class="dv">1</span>,<span class="dv">2</span>))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/Challenge%203%20-%20solution-1.png" width="672" /></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="solutions-to-the-challenges.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span></code></pre></div>
+</div>
+<div id="challenge-4-1" class="section level2 hasAnchor" number="15.4">
+<h2><span class="header-section-number">15.4</span> Challenge 4<a href="solutions-to-the-challenges.html#challenge-4-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="solutions-to-the-challenges.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a PGLS with the gls function</span></span>
+<span id="cb74-2"><a href="solutions-to-the-challenges.html#cb74-2" aria-hidden="true" tabindex="-1"></a>Sm.pgls2 <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> Sm, <span class="at">data =</span> seedplantsdata, <span class="at">correlation=</span>pagel.corr)</span>
+<span id="cb74-3"><a href="solutions-to-the-challenges.html#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the results</span></span>
+<span id="cb74-4"><a href="solutions-to-the-challenges.html#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Sm.pgls2)</span></code></pre></div>
+<pre><code>## Generalized least squares fit by REML
+##   Model: Shade ~ Sm 
+##   Data: seedplantsdata 
+##        AIC      BIC    logLik
+##   187.6889 195.7183 -89.84447
+## 
+## Correlation Structure: corPagel
+##  Formula: ~1 
+##  Parameter estimate(s):
+##   lambda 
+## 0.951553 
+## 
+## Coefficients:
+##                  Value Std.Error   t-value p-value
+## (Intercept)  2.8204268  1.497276  1.883705  0.0649
+## Sm          -0.0000716  0.000060 -1.193604  0.2378
+## 
+##  Correlation: 
+##    (Intr)
+## Sm -0.009
+## 
+## Standardized residuals:
+##        Min         Q1        Med         Q3        Max 
+## -0.6946682 -0.3115198  0.1068607  0.2604470  0.8319385 
+## 
+## Residual standard error: 2.620527 
+## Degrees of freedom: 57 total; 55 residual</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="references.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-solutions.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

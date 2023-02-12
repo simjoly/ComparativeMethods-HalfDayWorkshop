@@ -1,0 +1,91 @@
+# The Brownian Motion (BM) model {#BM-model}
+
+When we want to account for the non-independence of species due to their evolutionary histories in statistical analyses, a model of evolution is necessarily implied. Indeed, we assume that traits evolved through time (along the phylogeny) and that closely related species are more likely to be more similar on average at a given trait than distantly related species. In evolutionary biologogy, the more basic model (often used as a null model in many analyses) is the Brownian motion model. This model of evolution is named after Robert Brown, a celeb botanist that published an important Flora of Australia in 1810. He was also the first to distinguish gymnosperms from angiosperms. His discovery of the Brownian motion is due to the observation that small particules in solution have the tendency to move in any direction, an observation first made while observing *Clarkia* pollen under a microscope. The explanation would come later, in terms of random molecular impacts.
+
+Mathematicians have constructed a stochastic process that is intended to approximate the Brownian motion. In this model, each step is independent from the others and can go in any direction. The mean displacement is zero and the variance is uniform across the parameter space. The displacements can be summed, which means that the variances of the independent displacements can be added up. If $\sigma^2$ is the variance of a single displacement, the variance after time $t$ will be $\sigma^2t$. When the number of steps is large, as in a phylogenetic context, the result is normally distributed.
+
+When applied to phylogenies, the Brownian motion model is kind of applied indepenpenty to each branch of the phylogeny. That allows to model the amount of change that occured along a given branch. If the variance of the Brownian motion model is $\sigma^2$ per unit of time $t$, then the net change along a branch of time $t$ is drawn from a normal distribution with mean $0$ and variance $\sigma^2t$. This model can also be represented mathematically the following way, such as the amount of change for character $X$ over the infinitesimal time in the interval between time $t$ and $t+dt$ is:
+
+$$dX(t)=\sigma^2 dB(t),$$
+
+where $dB(t)$ is the gaussian distribution. Importantly, this model assumes that:
+
+1. Evolution occuring in each branch of the phylogeny is independent of that occuring in other branches.
+2. Evolution is completely random (i.e., no selection).
+
+The parameter $\sigma^2$ in the model gives the variance, or in other word the speed of evolution. The higher the variance, the faster the character will evolve. Here are two examples of simulated characters on a tree of 200 species with $\sigma^2=0.5$ and $\sigma^2=4$.
+
+```{r "BM_Model_SigmaExample", echo=FALSE, fig.height=3, fig.width=5, message=FALSE, warning=FALSE, fig.align='center'}
+library(phytools)
+library(ggplot2)
+tree<-pbtree(n=200)
+x<-fastBM(tree,sig2=0.5) # sigma = 0.5
+y<-fastBM(tree,sig2=4) # with a trend
+data<-data.frame(sigma=rep(c(0.5,4),each=200),values=c(x,y))
+ggplot(data,aes(x=values),y=as.factor(sigma))+geom_histogram() +
+  facet_wrap(~sigma)
+rm(data,x,y)
+```
+
+A more thorough introduction to the Brownian Motion model can be found in Felsenstein (2004, chapter 23).
+
+The Brownian motion model is often said to model neutral drift, although a good fit to this model does not necessarily means that the data evolved via random drifts as other processes can also result in BM-like patterns (Hansen and Martins, 1996).
+
+Note also that the model is stochastic. That is, even if two closely related species are more likely to share similar character states than a distant one, this is only true on average. For any given simulated character, closely related species can sometimes be more different than to a distant species. Look at the following figure, that shows three traits simulated under the Brownian motion.
+
+```{r "PlotContinuousParameter_tablephylo4d", echo=FALSE, warning=FALSE, message=FALSE, fig.align='center'}
+require(phytools)
+set.seed(667)
+tree <- pbtree(n=30,nsim=1)
+trait1 <- fastBM(tree, sig2=0.15, nsim=1, internal=FALSE)
+trait2 <- fastBM(tree, sig2=0.1, nsim=1, internal=FALSE)
+trait3 <- fastBM(tree, sig2=0.15, nsim=1, internal=FALSE)
+op <- par(mar=c(1,1,1,1))
+plot(tree,type="p",TRUE,label.offset=1,cex=0.5,no.margin=FALSE)
+tiplabels(pch=21,bg=cols[ifelse(trait1>0,1,2)],col="black",cex=abs(trait1)*2,adj=0.75)
+tiplabels(pch=21,bg=cols[ifelse(trait2>0,1,2)],col="black",cex=abs(trait2)*2,adj=1)
+tiplabels(pch=21,bg=cols[ifelse(trait3>0,1,2)],col="black",cex=abs(trait3)*2,adj=1.25)
+legend("bottomleft",legend=c("-4","-2","0","2","4"),pch=21,
+       pt.bg=cols[c(1,1,1,2,2)],bty="n",
+       text.col="gray32",cex=0.8,pt.cex=c(2,1,0.1,1,2))
+par(op) 
+```
+
+
+# Further readings
+
+To undertand well a new research field, it is always advisable to read a lot on it. Here are some references that you might find useful. The different sources also sometimes explain the theory in different ways or use different examples, which might help you understand better.
+
+- Felsenstein, J. (1985) Phylogenies and the comparative method. *The American Naturalist* 125, 1-15. **The classic initial paper that launched the field of comparative analyses. The phylogenetic independent contrasts are introduced here**
+- Felsenstein, J. (2004) *Inferring phylogenies*. Sinauer Associates, Inc. Sunderland, MA. **A thorough reference on phylogenies, from reconstruction to phylogenetic methods**
+- Hadfield, J. D., S. Nakagawa. 2010. General quantitative genetic methods for comparative biology: phylogenies, taxonomies and multi-trait models for continuous and categorical characters. *Journal of Evolutionary Biology* 23:494–508. **This paper describes the phylogenetic mixed model and its implementation in MCMCglmm. It is a very important paper**
+- Housworth, E.A., E.P. Martins, M. Lynch. 2004. The phylogenetic mixed model. *The American Naturalist* 163:84–96. **Excellent paper on the Phylogenetic Mixed Model**
+- Paradis, E. (2012). *Analysis of phylogenetics and evolution with R*. New York, USA: Springer. **This is the book that explains the analyses available in the R package APE. It is also a great reference on many phylogenetic analyses, including the comparative method. This is a classic and a must for users of phylogenies in R.**
+- Revell, L J. (2010). Phylogenetic signal and linear regression on species data. *Methods in Ecology and Evolution* 1: 319-329. **A great paper on PGLS. It uses simulations to show when it is important to use PGLS.**
+- Villemereuil, P., S. Nakagawa. 2014. General quantitative genetic methods for comparative biology. Pp. 287–303 in L. Z. Garamszegi, ed. *Modern phylogenetic comparative methods and their application in evolutionary biology*. Springer-Verlag, Berlin, Heidelberg. **Nice book chapter explaining the phylogenetic mixed model**
+- Zuur, A.F., E.N. Ieno, N. Walker, A. A. Saveliev, G.M. Smith. (2009). *Mixed effects models and extensions in ecology with R*. New York, NY: Springer New York. **This is not a book on phylogenetic methods, but it is a great book on the analysis of ecological data with examples in R. Its chapter 6 and 7 discuss correlation structures and although they are not about phylogenies, they are very instructive on how to deal with them and how to compare models and analyse complex data. It also has tons of information on how to deal with more complex data, along with correlation structure. A very good read!**
+
+
+# References
+
+Felsenstein, J. (1985) Phylogenies and the comparative method. *The American Naturalist* 125: 1-15.
+
+Felsenstein, J. (2004) *Inferring phylogenies*. Sinauer Associates, Inc. Sunderland, MA. 
+
+Hadfield, J. D., S. Nakagawa. 2010. General quantitative genetic methods for comparative biology: phylogenies, taxonomies and multi-trait models for continuous and categorical characters. *Journal of Evolutionary Biology* 23:494–508.
+
+Hansen, T. F., E. P. Martins. (1996). Translating between microevolutionary process and macroevolutionary patterns: the correlation structure of interspecific data. *Evolution*. 50: 1404–1417.
+
+Housworth, E.A., E.P. Martins, M. Lynch. 2004. The phylogenetic mixed model. *The American Naturalist* 163:84–96.
+
+Paradis, E. (2012). *Analysis of phylogenetics and evolution with R*. New York, USA: Springer.
+
+Revell, L J. (2010). Phylogenetic signal and linear regression on species data. *Methods in Ecology and Evolution* 1: 319-329.
+
+Rohlf, F.J. (2001). Comparative Methods for the Analysis of Continuous Variables: Geometric Interpretations. *Evolution* 55: 2143-2160
+
+Villemereuil, P., S. Nakagawa. 2014. General quantitative genetic methods for comparative biology. Pp. 287–303 in L. Z. Garamszegi, ed. *Modern phylogenetic comparative methods and their application in evolutionary biology*. Springer-Verlag, Berlin, Heidelberg.
+
+Zuur, A.F., E.N. Ieno, G.M. Smith. (2007) *Analysing Ecological Data*. Springer. 680 p.
+
+Zuur, A.F., E.N. Ieno, N. Walker, A. A. Saveliev, G.M. Smith. (2009). *Mixed effects models and extensions in ecology with R*. New York, NY: Springer New York.

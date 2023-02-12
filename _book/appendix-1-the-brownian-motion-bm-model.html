@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 12 Appendix 1: The Brownian Motion (BM) model | Half-day Workshop on Phylogenetic Comparative Methods</title>
+  <meta name="description" content="This is a book that contains information on a half-day introductoray workshop on Phylogenetic Comparative Methods" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 12 Appendix 1: The Brownian Motion (BM) model | Half-day Workshop on Phylogenetic Comparative Methods" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a book that contains information on a half-day introductoray workshop on Phylogenetic Comparative Methods" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 12 Appendix 1: The Brownian Motion (BM) model | Half-day Workshop on Phylogenetic Comparative Methods" />
+  
+  <meta name="twitter:description" content="This is a book that contains information on a half-day introductoray workshop on Phylogenetic Comparative Methods" />
+  
+
+<meta name="author" content="Simon Joly" />
+
+
+<meta name="date" content="2023-02-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="a-final-word-the-problem-of-replication.html"/>
+<link rel="next" href="further-readings.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#other-useful-information"><i class="fa fa-check"></i><b>1.1</b> Other useful information</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#disclaimer"><i class="fa fa-check"></i><b>1.2</b> Disclaimer</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="before.html"><a href="before.html"><i class="fa fa-check"></i><b>2</b> Ahead of the workshop</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="before.html"><a href="before.html#install-r-and-the-required-packages"><i class="fa fa-check"></i><b>2.1</b> Install R and the required packages</a></li>
+<li class="chapter" data-level="2.2" data-path="before.html"><a href="before.html#working-with-github"><i class="fa fa-check"></i><b>2.2</b> Working with github</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>3</b> An introduction to Phylogenetic Comparative Methods</a></li>
+<li class="chapter" data-level="4" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>4</b> The linear regression model</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="linear-regression.html"><a href="linear-regression.html#theory"><i class="fa fa-check"></i><b>4.1</b> Theory</a></li>
+<li class="chapter" data-level="4.2" data-path="linear-regression.html"><a href="linear-regression.html#practice"><i class="fa fa-check"></i><b>4.2</b> Practice</a></li>
+<li class="chapter" data-level="4.3" data-path="linear-regression.html"><a href="linear-regression.html#challenge-1"><i class="fa fa-check"></i><b>4.3</b> Challenge 1</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pgls.html"><a href="pgls.html"><i class="fa fa-check"></i><b>5</b> Phylogenetic generalized least squares (PGLS)</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="pgls.html"><a href="pgls.html#theory-1"><i class="fa fa-check"></i><b>5.1</b> Theory</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="pgls.html"><a href="pgls.html#phylogenetic-correlation-structure"><i class="fa fa-check"></i><b>5.1.1</b> Phylogenetic correlation structure</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="pgls.html"><a href="pgls.html#challenge-2"><i class="fa fa-check"></i><b>5.2</b> Challenge 2</a></li>
+<li class="chapter" data-level="5.3" data-path="pgls.html"><a href="pgls.html#practicals"><i class="fa fa-check"></i><b>5.3</b> Practicals</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="pgls.html"><a href="pgls.html#other-correlation-structures"><i class="fa fa-check"></i><b>5.3.1</b> Other correlation structures</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="pgls.html"><a href="pgls.html#challenge-3"><i class="fa fa-check"></i><b>5.4</b> Challenge 3</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="pic.html"><a href="pic.html"><i class="fa fa-check"></i><b>6</b> Phylogenetic Independent Contrasts</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="pic.html"><a href="pic.html#practicals-1"><i class="fa fa-check"></i><b>6.1</b> Practicals</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html"><i class="fa fa-check"></i><b>7</b> Relaxing the assumption that all residuals need to be phylogenetically correlated</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html#theory-pagels-correlation-structure"><i class="fa fa-check"></i><b>7.1</b> Theory: Pagel’s correlation structure</a></li>
+<li class="chapter" data-level="7.2" data-path="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html#practicals-2"><i class="fa fa-check"></i><b>7.2</b> Practicals</a></li>
+<li class="chapter" data-level="7.3" data-path="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html#challenge-4"><i class="fa fa-check"></i><b>7.3</b> Challenge 4</a></li>
+<li class="chapter" data-level="7.4" data-path="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-all-residuals-need-to-be-phylogenetically-correlated.html#other-correlation-structures-or-evolutionary-models"><i class="fa fa-check"></i><b>7.4</b> Other correlation structures (or evolutionary models)</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="phylogenetic-anova.html"><a href="phylogenetic-anova.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic ANOVA</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="phylogenetic-anova.html"><a href="phylogenetic-anova.html#practicals-3"><i class="fa fa-check"></i><b>8.1</b> Practicals</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="model-testing.html"><a href="model-testing.html"><i class="fa fa-check"></i><b>9</b> Model testing</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="model-testing.html"><a href="model-testing.html#practicals-4"><i class="fa fa-check"></i><b>9.1</b> Practicals</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a></li>
+<li class="chapter" data-level="11" data-path="a-final-word-the-problem-of-replication.html"><a href="a-final-word-the-problem-of-replication.html"><i class="fa fa-check"></i><b>11</b> A final word: the problem of replication</a></li>
+<li class="chapter" data-level="12" data-path="appendix-1-the-brownian-motion-bm-model.html"><a href="appendix-1-the-brownian-motion-bm-model.html"><i class="fa fa-check"></i><b>12</b> Appendix 1: The Brownian Motion (BM) model</a></li>
+<li class="chapter" data-level="13" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>13</b> Further readings</a></li>
+<li class="chapter" data-level="14" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>14</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Half-day Workshop on Phylogenetic Comparative Methods</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="appendix-1-the-brownian-motion-bm-model" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Appendix 1: The Brownian Motion (BM) model<a href="appendix-1-the-brownian-motion-bm-model.html#appendix-1-the-brownian-motion-bm-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>When we want to account for the non-independence of species due to their evolutionary histories in statistical analyses, a model of evolution is necessarily implied. Indeed, we assume that traits evolved through time (along the phylogeny) and that closely related species are more likely to be more similar on average at a given trait than distantly related species. In evolutionary biologogy, the more basic model (often used as a null model in many analyses) is the Brownian motion model. This model of evolution is named after Robert Brown, a celeb botanist that published an important Flora of Australia in 1810. He was also the first to distinguish gymnosperms from angiosperms. His discovery of the Brownian motion is due to the observation that small particules in solution have the tendency to move in any direction, an observation first made while observing <em>Clarkia</em> pollen under a microscope. The explanation would come later, in terms of random molecular impacts.</p>
+<p>Mathematicians have constructed a stochastic process that is intended to approximate the Brownian motion. In this model, each step is independent from the others and can go in any direction. The mean displacement is zero and the variance is uniform across the parameter space. The displacements can be summed, which means that the variances of the independent displacements can be added up. If <span class="math inline">\(\sigma^2\)</span> is the variance of a single displacement, the variance after time <span class="math inline">\(t\)</span> will be <span class="math inline">\(\sigma^2t\)</span>. When the number of steps is large, as in a phylogenetic context, the result is normally distributed.</p>
+<p>When applied to phylogenies, the Brownian motion model is kind of applied indepenpenty to each branch of the phylogeny. That allows to model the amount of change that occured along a given branch. If the variance of the Brownian motion model is <span class="math inline">\(\sigma^2\)</span> per unit of time <span class="math inline">\(t\)</span>, then the net change along a branch of time <span class="math inline">\(t\)</span> is drawn from a normal distribution with mean <span class="math inline">\(0\)</span> and variance <span class="math inline">\(\sigma^2t\)</span>. This model can also be represented mathematically the following way, such as the amount of change for character <span class="math inline">\(X\)</span> over the infinitesimal time in the interval between time <span class="math inline">\(t\)</span> and <span class="math inline">\(t+dt\)</span> is:</p>
+<p><span class="math display">\[dX(t)=\sigma^2 dB(t),\]</span></p>
+<p>where <span class="math inline">\(dB(t)\)</span> is the gaussian distribution. Importantly, this model assumes that:</p>
+<ol style="list-style-type: decimal">
+<li>Evolution occuring in each branch of the phylogeny is independent of that occuring in other branches.</li>
+<li>Evolution is completely random (i.e., no selection).</li>
+</ol>
+<p>The parameter <span class="math inline">\(\sigma^2\)</span> in the model gives the variance, or in other word the speed of evolution. The higher the variance, the faster the character will evolve. Here are two examples of simulated characters on a tree of 200 species with <span class="math inline">\(\sigma^2=0.5\)</span> and <span class="math inline">\(\sigma^2=4\)</span>.</p>
+<p><img src="bookdown-demo_files/figure-html/BM_Model_SigmaExample-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>A more thorough introduction to the Brownian Motion model can be found in Felsenstein (2004, chapter 23).</p>
+<p>The Brownian motion model is often said to model neutral drift, although a good fit to this model does not necessarily means that the data evolved via random drifts as other processes can also result in BM-like patterns (Hansen and Martins, 1996).</p>
+<p>Note also that the model is stochastic. That is, even if two closely related species are more likely to share similar character states than a distant one, this is only true on average. For any given simulated character, closely related species can sometimes be more different than to a distant species. Look at the following figure, that shows three traits simulated under the Brownian motion.</p>
+<p><img src="bookdown-demo_files/figure-html/PlotContinuousParameter_tablephylo4d-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="a-final-word-the-problem-of-replication.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="further-readings.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/08-bm-model.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
