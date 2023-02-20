@@ -36,3 +36,6 @@ The data you will need for this tutorial can be downloaded from this repository:
 I suggest that you download the folder, uncompress it, and place is in a dedicated folder where you will also save the script with all the commands you will use.
 
 
+## Get acquainted with phylogenetic trees in R
+
+I you never used phylogenetic trees in R, you can learn some basic techniques on how to handle them and simulate trees and characters by reading chapter \@ref(trees).

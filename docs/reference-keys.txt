@@ -6,6 +6,7 @@ disclaimer
 before
 install-r-and-the-required-packages
 download
+get-acquainted-with-phylogenetic-trees-in-r
 intro
 linear-regression
 theory
@@ -30,7 +31,17 @@ when-should-we-use-comparative-methods
 a-final-word-the-problem-of-replication
 BM-model
 further-readings
-references
+trees
+importing-and-plotting-trees
+simulate-a-tree
+simulating-characters
+import-data-into-r
+plot-trees
+handling-multiple-trees
+manipulating-trees
+drop-tips
+reroot-trees
+get-cophenetic-distances
 solutions
 challenge-1-1
 challenge-2-1

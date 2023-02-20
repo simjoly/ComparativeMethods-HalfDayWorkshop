@@ -22,7 +22,7 @@ To provide pratical examples in this workshop, we will use a dataset of tree fun
 
 Before analysing the data, we will start by opening the data and the phylogenetic tree and clean them to keep only the species present in both the tree and the trait table. This is necessary because some additional species were included in the phylogenetic tree analysis.
 
-```{r "Open_seed_plant_data", warning=FALSE}
+```{r "Open_seed_plant_data", warning=FALSE, fig.align='center', fig.height=5}
 require(ape)
 # Open the documents; it assumes that you are in the main directory of the workshop folder
 seedplantstree <- read.nexus("./data/seedplants.tre")
@@ -34,6 +34,10 @@ species.to.exclude <- seedplantstree$tip.label[!(seedplantstree$tip.label %in% s
 seedplantstree <- drop.tip(seedplantstree,species.to.exclude)
 # Remove unnecessary object
 rm(species.to.exclude)
+# Order the tree to make it nicer when plotting
+seedplantstree <- ladderize(seedplantstree, right = FALSE)
+# Now let's look at the tree
+plot(seedplantstree,cex=0.4)
 ```
 
 Now, we can have a look at the data, and then order the plant trait to be in the same order as the species in the tree.
@@ -41,8 +45,6 @@ Now, we can have a look at the data, and then order the plant trait to be in the
 ```{r "data ordering"}
 # Here is what the loaded data looks like
 head(seedplantsdata)
-# Order the tree to make it nicer when plotting
-seedplantstree <- ladderize(seedplantstree, right = FALSE)
 # Name the rows of the data.frame with the species codes used as tree labels 
 #  and remove the obsolete column with species codes.
 rownames(seedplantsdata) <- seedplantsdata$Code

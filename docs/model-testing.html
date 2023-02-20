@@ -23,7 +23,7 @@
 <meta name="author" content="Simon Joly" />
 
 
-<meta name="date" content="2023-02-12" />
+<meta name="date" content="2023-02-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -172,6 +172,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="2.1" data-path="before.html"><a href="before.html#install-r-and-the-required-packages"><i class="fa fa-check"></i><b>2.1</b> Install R and the required packages</a></li>
 <li class="chapter" data-level="2.2" data-path="before.html"><a href="before.html#download"><i class="fa fa-check"></i><b>2.2</b> Downloading the data</a></li>
+<li class="chapter" data-level="2.3" data-path="before.html"><a href="before.html#get-acquainted-with-phylogenetic-trees-in-r"><i class="fa fa-check"></i><b>2.3</b> Get acquainted with phylogenetic trees in R</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>3</b> An introduction to Phylogenetic Comparative Methods</a></li>
 <li class="chapter" data-level="4" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>4</b> The linear regression model</a>
@@ -207,7 +208,23 @@ div.csl-indent {
 <li class="chapter" data-level="11" data-path="a-final-word-the-problem-of-replication.html"><a href="a-final-word-the-problem-of-replication.html"><i class="fa fa-check"></i><b>11</b> A final word: the problem of replication</a></li>
 <li class="chapter" data-level="12" data-path="BM-model.html"><a href="BM-model.html"><i class="fa fa-check"></i><b>12</b> The Brownian Motion (BM) model</a></li>
 <li class="chapter" data-level="13" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>13</b> Further readings</a></li>
-<li class="chapter" data-level="14" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>14</b> References</a></li>
+<li class="chapter" data-level="14" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>14</b> Introduction to phylogenies in R</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="trees.html"><a href="trees.html#importing-and-plotting-trees"><i class="fa fa-check"></i><b>14.1</b> Importing and plotting trees</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="trees.html"><a href="trees.html#simulate-a-tree"><i class="fa fa-check"></i><b>14.1.1</b> Simulate a tree</a></li>
+<li class="chapter" data-level="14.1.2" data-path="trees.html"><a href="trees.html#simulating-characters"><i class="fa fa-check"></i><b>14.1.2</b> Simulating characters</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="trees.html"><a href="trees.html#import-data-into-r"><i class="fa fa-check"></i><b>14.2</b> Import data into R</a></li>
+<li class="chapter" data-level="14.3" data-path="trees.html"><a href="trees.html#plot-trees"><i class="fa fa-check"></i><b>14.3</b> Plot trees</a></li>
+<li class="chapter" data-level="14.4" data-path="trees.html"><a href="trees.html#handling-multiple-trees"><i class="fa fa-check"></i><b>14.4</b> Handling multiple trees</a></li>
+<li class="chapter" data-level="14.5" data-path="trees.html"><a href="trees.html#manipulating-trees"><i class="fa fa-check"></i><b>14.5</b> Manipulating trees</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="trees.html"><a href="trees.html#drop-tips"><i class="fa fa-check"></i><b>14.5.1</b> Drop tips</a></li>
+<li class="chapter" data-level="14.5.2" data-path="trees.html"><a href="trees.html#reroot-trees"><i class="fa fa-check"></i><b>14.5.2</b> Reroot trees</a></li>
+<li class="chapter" data-level="14.5.3" data-path="trees.html"><a href="trees.html#get-cophenetic-distances"><i class="fa fa-check"></i><b>14.5.3</b> Get cophenetic distances</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="15" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i><b>15</b> Solutions to the challenges</a>
 <ul>
 <li class="chapter" data-level="15.1" data-path="solutions.html"><a href="solutions.html#challenge-1-1"><i class="fa fa-check"></i><b>15.1</b> Challenge 1</a></li>
@@ -215,6 +232,7 @@ div.csl-indent {
 <li class="chapter" data-level="15.3" data-path="solutions.html"><a href="solutions.html#challenge-3-1"><i class="fa fa-check"></i><b>15.3</b> Challenge 3</a></li>
 <li class="chapter" data-level="15.4" data-path="solutions.html"><a href="solutions.html#challenge-4-1"><i class="fa fa-check"></i><b>15.4</b> Challenge 4</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -295,7 +313,7 @@ div.csl-indent {
 ## Residual standard error: 7.455109 
 ## Degrees of freedom: 57 total; 55 residual</code></pre>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-zuur2009mixed" class="csl-entry">
 Zuur, Alain F, Elena N Ieno, Neil J Walker, Anatoly A Saveliev, Graham M Smith, et al. 2009. <em>Mixed Effects Models and Extensions in Ecology with r</em>. Vol. 574. Springer.

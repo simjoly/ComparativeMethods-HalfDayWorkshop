@@ -23,7 +23,7 @@
 <meta name="author" content="Simon Joly" />
 
 
-<meta name="date" content="2023-02-12" />
+<meta name="date" content="2023-02-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -172,6 +172,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="2.1" data-path="before.html"><a href="before.html#install-r-and-the-required-packages"><i class="fa fa-check"></i><b>2.1</b> Install R and the required packages</a></li>
 <li class="chapter" data-level="2.2" data-path="before.html"><a href="before.html#download"><i class="fa fa-check"></i><b>2.2</b> Downloading the data</a></li>
+<li class="chapter" data-level="2.3" data-path="before.html"><a href="before.html#get-acquainted-with-phylogenetic-trees-in-r"><i class="fa fa-check"></i><b>2.3</b> Get acquainted with phylogenetic trees in R</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>3</b> An introduction to Phylogenetic Comparative Methods</a></li>
 <li class="chapter" data-level="4" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>4</b> The linear regression model</a>
@@ -207,7 +208,23 @@ div.csl-indent {
 <li class="chapter" data-level="11" data-path="a-final-word-the-problem-of-replication.html"><a href="a-final-word-the-problem-of-replication.html"><i class="fa fa-check"></i><b>11</b> A final word: the problem of replication</a></li>
 <li class="chapter" data-level="12" data-path="BM-model.html"><a href="BM-model.html"><i class="fa fa-check"></i><b>12</b> The Brownian Motion (BM) model</a></li>
 <li class="chapter" data-level="13" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>13</b> Further readings</a></li>
-<li class="chapter" data-level="14" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>14</b> References</a></li>
+<li class="chapter" data-level="14" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>14</b> Introduction to phylogenies in R</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="trees.html"><a href="trees.html#importing-and-plotting-trees"><i class="fa fa-check"></i><b>14.1</b> Importing and plotting trees</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="trees.html"><a href="trees.html#simulate-a-tree"><i class="fa fa-check"></i><b>14.1.1</b> Simulate a tree</a></li>
+<li class="chapter" data-level="14.1.2" data-path="trees.html"><a href="trees.html#simulating-characters"><i class="fa fa-check"></i><b>14.1.2</b> Simulating characters</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="trees.html"><a href="trees.html#import-data-into-r"><i class="fa fa-check"></i><b>14.2</b> Import data into R</a></li>
+<li class="chapter" data-level="14.3" data-path="trees.html"><a href="trees.html#plot-trees"><i class="fa fa-check"></i><b>14.3</b> Plot trees</a></li>
+<li class="chapter" data-level="14.4" data-path="trees.html"><a href="trees.html#handling-multiple-trees"><i class="fa fa-check"></i><b>14.4</b> Handling multiple trees</a></li>
+<li class="chapter" data-level="14.5" data-path="trees.html"><a href="trees.html#manipulating-trees"><i class="fa fa-check"></i><b>14.5</b> Manipulating trees</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="trees.html"><a href="trees.html#drop-tips"><i class="fa fa-check"></i><b>14.5.1</b> Drop tips</a></li>
+<li class="chapter" data-level="14.5.2" data-path="trees.html"><a href="trees.html#reroot-trees"><i class="fa fa-check"></i><b>14.5.2</b> Reroot trees</a></li>
+<li class="chapter" data-level="14.5.3" data-path="trees.html"><a href="trees.html#get-cophenetic-distances"><i class="fa fa-check"></i><b>14.5.3</b> Get cophenetic distances</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="15" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i><b>15</b> Solutions to the challenges</a>
 <ul>
 <li class="chapter" data-level="15.1" data-path="solutions.html"><a href="solutions.html#challenge-1-1"><i class="fa fa-check"></i><b>15.1</b> Challenge 1</a></li>
@@ -215,6 +232,7 @@ div.csl-indent {
 <li class="chapter" data-level="15.3" data-path="solutions.html"><a href="solutions.html#challenge-3-1"><i class="fa fa-check"></i><b>15.3</b> Challenge 3</a></li>
 <li class="chapter" data-level="15.4" data-path="solutions.html"><a href="solutions.html#challenge-4-1"><i class="fa fa-check"></i><b>15.4</b> Challenge 4</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -261,7 +279,12 @@ div.csl-indent {
 <span id="cb7-8"><a href="linear-regression.html#cb7-8" aria-hidden="true" tabindex="-1"></a>species.to.exclude <span class="ot">&lt;-</span> seedplantstree<span class="sc">$</span>tip.label[<span class="sc">!</span>(seedplantstree<span class="sc">$</span>tip.label <span class="sc">%in%</span> seedplantsdata<span class="sc">$</span>Code)]</span>
 <span id="cb7-9"><a href="linear-regression.html#cb7-9" aria-hidden="true" tabindex="-1"></a>seedplantstree <span class="ot">&lt;-</span> <span class="fu">drop.tip</span>(seedplantstree,species.to.exclude)</span>
 <span id="cb7-10"><a href="linear-regression.html#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove unnecessary object</span></span>
-<span id="cb7-11"><a href="linear-regression.html#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(species.to.exclude)</span></code></pre></div>
+<span id="cb7-11"><a href="linear-regression.html#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(species.to.exclude)</span>
+<span id="cb7-12"><a href="linear-regression.html#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Order the tree to make it nicer when plotting</span></span>
+<span id="cb7-13"><a href="linear-regression.html#cb7-13" aria-hidden="true" tabindex="-1"></a>seedplantstree <span class="ot">&lt;-</span> <span class="fu">ladderize</span>(seedplantstree, <span class="at">right =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-14"><a href="linear-regression.html#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let&#39;s look at the tree</span></span>
+<span id="cb7-15"><a href="linear-regression.html#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(seedplantstree,<span class="at">cex=</span><span class="fl">0.4</span>)</span></code></pre></div>
+<p><img src="pcm-workshop_files/figure-html/Open_seed_plant_data-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Now, we can have a look at the data, and then order the plant trait to be in the same order as the species in the tree.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="linear-regression.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is what the loaded data looks like</span></span>
 <span id="cb8-2"><a href="linear-regression.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(seedplantsdata)</span></code></pre></div>
@@ -272,16 +295,14 @@ div.csl-indent {
 ## 4 ACPE Acer pensylvanicum        665   10 0.44  41.0   3.5 2.22
 ## 5 ACPL   Acer platanoides          0   15 0.51 172.0   4.2 1.99
 ## 6 ACRU        Acer rubrum       3669   25 0.49  20.0   3.4 1.91</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="linear-regression.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Order the tree to make it nicer when plotting</span></span>
-<span id="cb10-2"><a href="linear-regression.html#cb10-2" aria-hidden="true" tabindex="-1"></a>seedplantstree <span class="ot">&lt;-</span> <span class="fu">ladderize</span>(seedplantstree, <span class="at">right =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb10-3"><a href="linear-regression.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Name the rows of the data.frame with the species codes used as tree labels </span></span>
-<span id="cb10-4"><a href="linear-regression.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  and remove the obsolete column with species codes.</span></span>
-<span id="cb10-5"><a href="linear-regression.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(seedplantsdata) <span class="ot">&lt;-</span> seedplantsdata<span class="sc">$</span>Code</span>
-<span id="cb10-6"><a href="linear-regression.html#cb10-6" aria-hidden="true" tabindex="-1"></a>seedplantsdata <span class="ot">&lt;-</span> seedplantsdata[,<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb10-7"><a href="linear-regression.html#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Order the data in the same order as the tip.label of the tree. In the present </span></span>
-<span id="cb10-8"><a href="linear-regression.html#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  example, this was already the case, but it is an important step for </span></span>
-<span id="cb10-9"><a href="linear-regression.html#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  any analysis.</span></span>
-<span id="cb10-10"><a href="linear-regression.html#cb10-10" aria-hidden="true" tabindex="-1"></a>seedplantsdata <span class="ot">&lt;-</span> seedplantsdata[seedplantstree<span class="sc">$</span>tip.label,]</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="linear-regression.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Name the rows of the data.frame with the species codes used as tree labels </span></span>
+<span id="cb10-2"><a href="linear-regression.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  and remove the obsolete column with species codes.</span></span>
+<span id="cb10-3"><a href="linear-regression.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(seedplantsdata) <span class="ot">&lt;-</span> seedplantsdata<span class="sc">$</span>Code</span>
+<span id="cb10-4"><a href="linear-regression.html#cb10-4" aria-hidden="true" tabindex="-1"></a>seedplantsdata <span class="ot">&lt;-</span> seedplantsdata[,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb10-5"><a href="linear-regression.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Order the data in the same order as the tip.label of the tree. In the present </span></span>
+<span id="cb10-6"><a href="linear-regression.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  example, this was already the case, but it is an important step for </span></span>
+<span id="cb10-7"><a href="linear-regression.html#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#  any analysis.</span></span>
+<span id="cb10-8"><a href="linear-regression.html#cb10-8" aria-hidden="true" tabindex="-1"></a>seedplantsdata <span class="ot">&lt;-</span> seedplantsdata[seedplantstree<span class="sc">$</span>tip.label,]</span></code></pre></div>
 <p>Now that the data is ready, let’s fit a linear model and try to explain shade tolerance (Shade) of trees using wood density (Wd). In R, a very simple way to do a regression is to use the function ‘lm’, which stands for linear model. To fit a linear model, you need to tell the <code>lm</code> function which variable is the response variable and which one is the explanatory variable. This is done using formulas in the form <code>Shade ~ Wd</code>. The variable at the left of the tilde (‘~’) is the response variable (<code>Shade</code>) whereas the explanatory variale (1 or more) are at the right of the tilde.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="linear-regression.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a linear model using Ordinary Least Squares (OLS)</span></span>
 <span id="cb11-2"><a href="linear-regression.html#cb11-2" aria-hidden="true" tabindex="-1"></a>shade.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(Shade <span class="sc">~</span> Wd, <span class="at">data =</span> seedplantsdata)</span>
@@ -344,7 +365,7 @@ div.csl-indent {
 
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-paquette2015explaining" class="csl-entry">
 Paquette, Alain, Simon Joly, and Christian Messier. 2015. <span>“Explaining Forest Productivity Using Tree Functional Traits and Phylogenetic Information: Two Sides of the Same Coin over Evolutionary Scale?”</span> <em>Ecology and Evolution</em> 5 (9): 1774–83.
