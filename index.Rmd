@@ -25,15 +25,17 @@ I assume that the readers are "reasonably" familiar with R as well as with linea
 
 The links below might provide additional information of interest.
 
-[Luke Harmon's book - Phylogenetic Comparative Methods](https://lukejharmon.github.io/pcm/)
+Luke Harmon's book - [Phylogenetic Comparative Methods](https://lukejharmon.github.io/pcm/)
 
-[Liam Revell's blog on phylogenetic tools in R](http://blog.phytools.org/)
+Liam Revell's [blog on phylogenetic tools in R](http://blog.phytools.org/)
 
-[Liam Revell and Luke Harmon book on Phylogenetic comparative methods in R](https://press.princeton.edu/books/ebook/9780691219042/phylogenetic-comparative-methods-in-r)
+Liam Revell and Luke Harmon [book on Phylogenetic comparative methods in R](https://press.princeton.edu/books/ebook/9780691219042/phylogenetic-comparative-methods-in-r)
 
-[R packages for phylogenies](https://cran.r-project.org/web/views/Phylogenetics.html)
+The list of [R packages for phylogenies](https://cran.r-project.org/web/views/Phylogenetics.html)
 
 [My tutorials on Phylogenetic Comparative Methods](http://github.com/simjoly/CourseComparativeMethods/)
+
+R package [V.PhyloMaker2](https://doi.org/10.1016/j.pld.2022.05.005) that can generate very large phylogenies for vascular plants and R package [U.PhyloMaker](https://doi.org/10.1016/j.pld.2022.12.007) that can generate large phylogenetic trees for plants and animals
 
 
 ## Source

@@ -268,12 +268,12 @@ div.csl-indent {
 <p>Phylogenetic relationships can be described using a correlation structure. Below, you have phylogenetic tree with branch lengths indicated above the branches.</p>
 <p><img src="pcm-workshop_files/figure-html/phylogenetic%20tree%20example-1.png" width="288" style="display: block; margin: auto auto auto 0;" /></p>
 <p>Now, this tree can be perfectly represented by a variance-covariance matrix.</p>
-<pre><code>##      a    b    c    c    d
+<pre><code>##      a    b    c    d    e
 ## a 1.05 0.90 0.50 0.00 0.00
 ## b 0.90 1.05 0.50 0.00 0.00
 ## c 0.50 0.50 1.05 0.00 0.00
-## c 0.00 0.00 0.00 1.05 0.80
-## d 0.00 0.00 0.00 0.80 1.05</code></pre>
+## d 0.00 0.00 0.00 1.05 0.80
+## e 0.00 0.00 0.00 0.80 1.05</code></pre>
 <p>The diagonal elements of the matrix are the species variances; these numbers represent the total distance from the root of the tree to the tips. It determines how much the tips have evolved from the root. The off-diagonal elements are the covariances between the species. They indicate the proportion of the time that the species have evolved together. This corresponds to the length of the branches that two species share, starting from the root of the tree. For instance, species <span class="math inline">\(a\)</span> and <span class="math inline">\(c\)</span> have shared a common history for 0.5 units of time; hence they have a covariance of 0.5. The greater the covariance, the longer the two species have shared the same evolutionary history.</p>
 <p>If all the variation among species was due to phylogeny and none to selection, then this variance-covariance matrix would represent the expectation of how much all species would be similar to the other species.</p>
 <blockquote>
@@ -281,7 +281,7 @@ div.csl-indent {
 </blockquote>
 <p>The variance-covariance matrix of a phylogenetic tree can be obtained from a tree using the function <code>vcv</code> from the <code>ape</code> package.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="pgls.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># &#39;atree&#39; corresponds to the phylogenetic tree shown above in newick format</span></span>
-<span id="cb16-2"><a href="pgls.html#cb16-2" aria-hidden="true" tabindex="-1"></a>atree <span class="ot">&lt;-</span> <span class="st">&quot;(((a:0.15,b:0.15):0.4,c:0.55):0.5,(c:0.25,d:0.25):0.8);&quot;</span></span>
+<span id="cb16-2"><a href="pgls.html#cb16-2" aria-hidden="true" tabindex="-1"></a>atree <span class="ot">&lt;-</span> <span class="st">&quot;(((a:0.15,b:0.15):0.4,c:0.55):0.5,(d:0.25,e:0.25):0.8);&quot;</span></span>
 <span id="cb16-3"><a href="pgls.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Let&#39;s now read this tree and store it as a phylogenetic tree object in R</span></span>
 <span id="cb16-4"><a href="pgls.html#cb16-4" aria-hidden="true" tabindex="-1"></a>atree <span class="ot">&lt;-</span> <span class="fu">read.tree</span>(<span class="at">text=</span>atree)</span>
 <span id="cb16-5"><a href="pgls.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the tree</span></span>
@@ -291,33 +291,33 @@ div.csl-indent {
 <span id="cb17-2"><a href="pgls.html#cb17-2" aria-hidden="true" tabindex="-1"></a>varcovar <span class="ot">&lt;-</span> <span class="fu">vcv</span>(atree)</span>
 <span id="cb17-3"><a href="pgls.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the variance-covariance matrix</span></span>
 <span id="cb17-4"><a href="pgls.html#cb17-4" aria-hidden="true" tabindex="-1"></a>varcovar</span></code></pre></div>
-<pre><code>##      a    b    c    c    d
+<pre><code>##      a    b    c    d    e
 ## a 1.05 0.90 0.50 0.00 0.00
 ## b 0.90 1.05 0.50 0.00 0.00
 ## c 0.50 0.50 1.05 0.00 0.00
-## c 0.00 0.00 0.00 1.05 0.80
-## d 0.00 0.00 0.00 0.80 1.05</code></pre>
+## d 0.00 0.00 0.00 1.05 0.80
+## e 0.00 0.00 0.00 0.80 1.05</code></pre>
 <p>This is great, but we mentioned above that it is a correlation matric that we need in a GLS to account for the correlation in the residuals. To obtain a correlation matrix from the variance-covariance matrix shown above, you only need to divide the variance-covariance matrix by the length of the tree, or the distance from the root to the tips. It can also be obtained using the R function <code>cov2cor</code>.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="pgls.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the covariance matrix to a correlation matrix</span></span>
 <span id="cb19-2"><a href="pgls.html#cb19-2" aria-hidden="true" tabindex="-1"></a>corrmat <span class="ot">&lt;-</span> <span class="fu">cov2cor</span>(varcovar)</span>
 <span id="cb19-3"><a href="pgls.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the matrix, rounding the numbers to three decimals</span></span>
 <span id="cb19-4"><a href="pgls.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(corrmat,<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>##       a     b     c     c     d
+<pre><code>##       a     b     c     d     e
 ## a 1.000 0.857 0.476 0.000 0.000
 ## b 0.857 1.000 0.476 0.000 0.000
 ## c 0.476 0.476 1.000 0.000 0.000
-## c 0.000 0.000 0.000 1.000 0.762
-## d 0.000 0.000 0.000 0.762 1.000</code></pre>
+## d 0.000 0.000 0.000 1.000 0.762
+## e 0.000 0.000 0.000 0.762 1.000</code></pre>
 <p>Now, the diagonal elements equal to 1, indicating that the species are perfectly correlated to themselves. Note that it is also possible to obtain directly the correlation matrix from the function <code>vcv</code> by using the <code>corr=TRUE</code> option.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="pgls.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtaining a correlation matrix using the &#39;vcv&#39; function</span></span>
 <span id="cb21-2"><a href="pgls.html#cb21-2" aria-hidden="true" tabindex="-1"></a>corrmat <span class="ot">&lt;-</span> <span class="fu">vcv</span>(atree,<span class="at">corr=</span><span class="cn">TRUE</span>)</span>
 <span id="cb21-3"><a href="pgls.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(corrmat,<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>##       a     b     c     c     d
+<pre><code>##       a     b     c     d     e
 ## a 1.000 0.857 0.476 0.000 0.000
 ## b 0.857 1.000 0.476 0.000 0.000
 ## c 0.476 0.476 1.000 0.000 0.000
-## c 0.000 0.000 0.000 1.000 0.762
-## d 0.000 0.000 0.000 0.762 1.000</code></pre>
+## d 0.000 0.000 0.000 1.000 0.762
+## e 0.000 0.000 0.000 0.762 1.000</code></pre>
 <p>Now that we know how to obtain a correlation matrix from a phylogenetic tree, we are ready to run a PGLS.</p>
 </div>
 </div>

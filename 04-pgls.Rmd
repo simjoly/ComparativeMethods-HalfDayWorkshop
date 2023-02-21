@@ -19,7 +19,7 @@ Here, $\textbf{C}$ is a correlation matrix that describes how the residuals are 
 Phylogenetic relationships can be described using a correlation structure. Below, you have phylogenetic tree with branch lengths indicated above the branches.
 
 ```{r "phylogenetic tree example",echo=FALSE, fig.width=3, fig.height=2.5, fig.align='left'}
-atree <- "(((a:0.15,b:0.15):0.4,c:0.55):0.5,(c:0.25,d:0.25):0.8);"
+atree <- "(((a:0.15,b:0.15):0.4,c:0.55):0.5,(d:0.25,e:0.25):0.8);"
 atree <- read.tree(text=atree)
 plot(atree,no.margin=TRUE,label.offset=0.05)
 edgelabels(c(0.5,0.4,0.15,0.15,0.55,0.8,0.25,0.25),adj=c(0.5,-0.5),frame="none",bg="",cex=0.7)
@@ -41,7 +41,7 @@ The variance-covariance matrix of a phylogenetic tree can be obtained from a tre
 
 ```{r "vcv function"}
 # 'atree' corresponds to the phylogenetic tree shown above in newick format
-atree <- "(((a:0.15,b:0.15):0.4,c:0.55):0.5,(c:0.25,d:0.25):0.8);"
+atree <- "(((a:0.15,b:0.15):0.4,c:0.55):0.5,(d:0.25,e:0.25):0.8);"
 # Let's now read this tree and store it as a phylogenetic tree object in R
 atree <- read.tree(text=atree)
 # Show the tree
