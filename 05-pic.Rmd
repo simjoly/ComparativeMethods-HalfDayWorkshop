@@ -55,12 +55,10 @@ Pagel's $\lambda$ model can be used in PGLS using the `corPagel` correlation str
 
 ```{r "corPagel example"}
 # Get the correlation structure
-pagel.corr <- corPagel(0.3, phy=seedplantstree, fixed=FALSE, form=~rownames())
+pagel.corr <- corPagel(0.3, phy=seedplantstree, fixed=FALSE, form=~Code)
 ```
 
->In some version of R, the `pagel.corr` structure seems to be giving problems. If you get an error when fitting it with the `gls` function below, then remove the option `form=~rownames()` from the `corPagel` function. Note that if you do this, you need to be very sure that the order of the tips of the tree (seedplantstree$tip.label) is the same as the row of the seedplantsdata table.
-
-The value given to `corPagel` is the starting value for the $\lambda$ parameter. Also, note that the option `fixed=` is set to `FALSE` This means that the $\lambda$ parameter will be optimized using generalized least squares. If it was set to `TRUE`, then the model would be fitted with the starting parameter, here `0.3`.
+The value given to `corPagel` is the starting value for the $\lambda$ parameter. Also, note that the option `fixed=` is set to `FALSE` This means that the $\lambda$ parameter will be optimized using generalized least squares. If it was set to `TRUE`, then the model would be fitted with the starting parameter, here `0.3`. The `form=~Code` points to the column `Code` of the dataset for ordering the tree in the same order as the dataframe when fitting the function.
 
 Let's now fit the PGLS with this correlation structure.
 

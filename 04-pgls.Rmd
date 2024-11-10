@@ -150,7 +150,7 @@ The one we used above is equivalent to the `corBrownian` structure of `ape`. Thi
 
 ```{r "corBrownian"}
 # Get the correlation structure
-bm.corr <- corBrownian(phy=seedplantstree, form=~rownames())
+bm.corr <- corBrownian(phy=seedplantstree, form=~1)
 # PGLS
 shade.pgls1b <- gls(Shade ~ Wd, data = seedplantsdata, correlation=bm.corr)
 summary(shade.pgls1b)

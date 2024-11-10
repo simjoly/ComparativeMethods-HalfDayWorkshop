@@ -8,11 +8,11 @@ The default method for model fitting with `gls` is restricted maximum likelihood
 ```{r "cor structure comparison"}
 pagel.0 <- gls(Shade ~ Wd, data = seedplantsdata, 
                correlation=corPagel(0,phy=seedplantstree, 
-                                    fixed=TRUE, form=~rownames()), 
+                                    fixed=TRUE, form=~Code), 
                method="REML")
 pagel.fit <- gls(Shade ~ Wd, data = seedplantsdata, 
                  correlation=corPagel(0.8,phy=seedplantstree, 
-                                      fixed=FALSE, form=~rownames()),
+                                      fixed=FALSE, form=~Code),
                  method="REML")
 anova(pagel.0,pagel.fit)
 ```
@@ -23,10 +23,10 @@ Now, if you are interested in testing the fixed parameters in the model, you nee
 
 ```{r "fixed effect comparison"}
 wd <- gls(Shade ~ Wd, data = seedplantsdata,
-          correlation=corBrownian(phy=seedplantstree, form=~rownames()), 
+          correlation=corBrownian(phy=seedplantstree, form=~Code), 
           method="ML")
 null <- gls(Shade ~ 1, data = seedplantsdata,
-            correlation=corBrownian(phy=seedplantstree, form=~rownames()), 
+            correlation=corBrownian(phy=seedplantstree, form=~Code), 
             method="ML")
 anova(wd,null)
 ```
@@ -35,7 +35,7 @@ You can see the model with the wood density variable is better than the model wi
 
 ```{r "Final fitting"}
 wd.final <- gls(Shade ~ Wd, data = seedplantsdata,
-                correlation=corBrownian(phy=seedplantstree, form=~rownames()), 
+                correlation=corBrownian(phy=seedplantstree, form=~Code), 
                 method="REML")
 summary(wd.final)
 ```

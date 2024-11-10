@@ -101,7 +101,7 @@ As expected from a character simlated with Brownian motion, you can see that clo
 
 Another option to represent a continuous parameter is to use the function `table.phylo4d` from the `adephylo` package to represent the trait where its values are represented by sizes of different sizes and colors. It is also possible to plot multiple characters at the same time.
 
-Note that you will have to install the packages `phylobase` and `adephylo` to run these fonction if they are not installed.
+Note that you will have to install the packages `phylobase` and `adephylo` to run these function if they are not installed.
 
 ```{r "Plot continuous parameter - table.phylo4d", message=FALSE}
 library(phylobase)

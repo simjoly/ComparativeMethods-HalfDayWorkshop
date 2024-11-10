@@ -46,9 +46,7 @@ Now, we can have a look at the data, and then order the plant trait to be in the
 # Here is what the loaded data looks like
 head(seedplantsdata)
 # Name the rows of the data.frame with the species codes used as tree labels 
-#  and remove the obsolete column with species codes.
 rownames(seedplantsdata) <- seedplantsdata$Code
-seedplantsdata <- seedplantsdata[,-1]
 # Order the data in the same order as the tip.label of the tree. In the present 
 #  example, this was already the case, but it is an important step for 
 #  any analysis.
