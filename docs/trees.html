@@ -1,130 +1,286 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" xml:lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>14 Introduction to phylogenies in R | Half-day Workshop on Phylogenetic Comparative Methods</title>
-<meta name="author" content="Simon Joly">
-<meta name="description" content="There are lots of packages for phylogenetic analyses in R. I won’t enumerate them all here, but you can have a good idea of the options available by looking at the phylogenetic R vignette...">
-<meta name="generator" content="bookdown 0.41 with bs4_book()">
-<meta property="og:title" content="14 Introduction to phylogenies in R | Half-day Workshop on Phylogenetic Comparative Methods">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://simjoly.github.io/ComparativeMethods-HalfDayWorkshop/trees.html">
-<meta property="og:description" content="There are lots of packages for phylogenetic analyses in R. I won’t enumerate them all here, but you can have a good idea of the options available by looking at the phylogenetic R vignette...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="14 Introduction to phylogenies in R | Half-day Workshop on Phylogenetic Comparative Methods">
-<meta name="twitter:description" content="There are lots of packages for phylogenetic analyses in R. I won’t enumerate them all here, but you can have a good idea of the options available by looking at the phylogenetic R vignette...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.7.0/transition.js"></script><script src="libs/bs3compat-0.7.0/tabs.js"></script><script src="libs/bs3compat-0.7.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>14 Introduction to phylogenies in R | Half-day Workshop on Phylogenetic Comparative Methods</title>
+  <meta name="description" content="This is a book that contains information on a half-day introductoray workshop on Phylogenetic Comparative Methods" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="14 Introduction to phylogenies in R | Half-day Workshop on Phylogenetic Comparative Methods" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a book that contains information on a half-day introductoray workshop on Phylogenetic Comparative Methods" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="14 Introduction to phylogenies in R | Half-day Workshop on Phylogenetic Comparative Methods" />
+  
+  <meta name="twitter:description" content="This is a book that contains information on a half-day introductoray workshop on Phylogenetic Comparative Methods" />
+  
+
+<meta name="author" content="Simon Joly" />
+
+
+<meta name="date" content="2024-11-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="further-readings.html"/>
+<link rel="next" href="solutions.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
 <style type="text/css">
-    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-          margin-bottom: 0em;
-        }
-    .hanging div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }
-  </style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">Half-day Workshop on Phylogenetic Comparative Methods</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
 
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
-<li><a class="" href="before.html"><span class="header-section-number">2</span> Ahead of the workshop</a></li>
-<li><a class="" href="intro.html"><span class="header-section-number">3</span> An introduction to Phylogenetic Comparative Methods</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">4</span> The linear regression model</a></li>
-<li><a class="" href="pgls.html"><span class="header-section-number">5</span> Phylogenetic generalized least squares (PGLS)</a></li>
-<li><a class="" href="pic.html"><span class="header-section-number">6</span> Phylogenetic Independent Contrasts</a></li>
-<li><a class="" href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><span class="header-section-number">7</span> Relaxing the assumption that residuals need to be perfectly phylogenetically correlated</a></li>
-<li><a class="" href="phylogenetic-anova.html"><span class="header-section-number">8</span> Phylogenetic ANOVA</a></li>
-<li><a class="" href="model-testing.html"><span class="header-section-number">9</span> Model testing</a></li>
-<li><a class="" href="when-should-we-use-comparative-methods.html"><span class="header-section-number">10</span> When should we use comparative methods?</a></li>
-<li><a class="" href="a-final-word-the-problem-of-replication.html"><span class="header-section-number">11</span> A final word: the problem of replication</a></li>
-<li><a class="" href="BM-model.html"><span class="header-section-number">12</span> The Brownian Motion (BM) model</a></li>
-<li><a class="" href="further-readings.html"><span class="header-section-number">13</span> Further readings</a></li>
-<li><a class="active" href="trees.html"><span class="header-section-number">14</span> Introduction to phylogenies in R</a></li>
-<li><a class="" href="solutions.html"><span class="header-section-number">15</span> Solutions to the challenges</a></li>
-<li><a class="" href="references.html">References</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PCM workshop</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#useful-resources"><i class="fa fa-check"></i><b>1.1</b> Useful resources</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#source"><i class="fa fa-check"></i><b>1.2</b> Source</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#disclaimer"><i class="fa fa-check"></i><b>1.3</b> Disclaimer</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="before.html"><a href="before.html"><i class="fa fa-check"></i><b>2</b> Ahead of the workshop</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="before.html"><a href="before.html#install-r-and-the-required-packages"><i class="fa fa-check"></i><b>2.1</b> Install R and the required packages</a></li>
+<li class="chapter" data-level="2.2" data-path="before.html"><a href="before.html#download"><i class="fa fa-check"></i><b>2.2</b> Downloading the data</a></li>
+<li class="chapter" data-level="2.3" data-path="before.html"><a href="before.html#get-acquainted-with-phylogenetic-trees-in-r"><i class="fa fa-check"></i><b>2.3</b> Get acquainted with phylogenetic trees in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>3</b> An introduction to Phylogenetic Comparative Methods</a></li>
+<li class="chapter" data-level="4" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>4</b> The linear regression model</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="linear-regression.html"><a href="linear-regression.html#theory"><i class="fa fa-check"></i><b>4.1</b> Theory</a></li>
+<li class="chapter" data-level="4.2" data-path="linear-regression.html"><a href="linear-regression.html#practice"><i class="fa fa-check"></i><b>4.2</b> Practice</a></li>
+<li class="chapter" data-level="4.3" data-path="linear-regression.html"><a href="linear-regression.html#challenge-1"><i class="fa fa-check"></i><b>4.3</b> Challenge 1</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pgls.html"><a href="pgls.html"><i class="fa fa-check"></i><b>5</b> Phylogenetic generalized least squares (PGLS)</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="pgls.html"><a href="pgls.html#theory-1"><i class="fa fa-check"></i><b>5.1</b> Theory</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="pgls.html"><a href="pgls.html#phylogenetic-correlation-structure"><i class="fa fa-check"></i><b>5.1.1</b> Phylogenetic correlation structure</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="pgls.html"><a href="pgls.html#challenge-2"><i class="fa fa-check"></i><b>5.2</b> Challenge 2</a></li>
+<li class="chapter" data-level="5.3" data-path="pgls.html"><a href="pgls.html#practicals"><i class="fa fa-check"></i><b>5.3</b> Practicals</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="pgls.html"><a href="pgls.html#other-correlation-structures"><i class="fa fa-check"></i><b>5.3.1</b> Other correlation structures</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="pgls.html"><a href="pgls.html#challenge-3"><i class="fa fa-check"></i><b>5.4</b> Challenge 3</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="pic.html"><a href="pic.html"><i class="fa fa-check"></i><b>6</b> Phylogenetic Independent Contrasts</a></li>
+<li class="chapter" data-level="7" data-path="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><i class="fa fa-check"></i><b>7</b> Relaxing the assumption that residuals need to be perfectly phylogenetically correlated</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#theory-pagels-correlation-structure"><i class="fa fa-check"></i><b>7.1</b> Theory: Pagel’s correlation structure</a></li>
+<li class="chapter" data-level="7.2" data-path="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#practicals-1"><i class="fa fa-check"></i><b>7.2</b> Practicals</a></li>
+<li class="chapter" data-level="7.3" data-path="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#challenge-4"><i class="fa fa-check"></i><b>7.3</b> Challenge 4</a></li>
+<li class="chapter" data-level="7.4" data-path="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#other-correlation-structures-or-evolutionary-models"><i class="fa fa-check"></i><b>7.4</b> Other correlation structures (or evolutionary models)</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="phylogenetic-anova.html"><a href="phylogenetic-anova.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic ANOVA</a></li>
+<li class="chapter" data-level="9" data-path="model-testing.html"><a href="model-testing.html"><i class="fa fa-check"></i><b>9</b> Model testing</a></li>
+<li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a></li>
+<li class="chapter" data-level="11" data-path="a-final-word-the-problem-of-replication.html"><a href="a-final-word-the-problem-of-replication.html"><i class="fa fa-check"></i><b>11</b> A final word: the problem of replication</a></li>
+<li class="chapter" data-level="12" data-path="BM-model.html"><a href="BM-model.html"><i class="fa fa-check"></i><b>12</b> The Brownian Motion (BM) model</a></li>
+<li class="chapter" data-level="13" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>13</b> Further readings</a></li>
+<li class="chapter" data-level="14" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>14</b> Introduction to phylogenies in R</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="trees.html"><a href="trees.html#importing-and-plotting-trees"><i class="fa fa-check"></i><b>14.1</b> Importing and plotting trees</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="trees.html"><a href="trees.html#simulate-a-tree"><i class="fa fa-check"></i><b>14.1.1</b> Simulate a tree</a></li>
+<li class="chapter" data-level="14.1.2" data-path="trees.html"><a href="trees.html#simulating-characters"><i class="fa fa-check"></i><b>14.1.2</b> Simulating characters</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="trees.html"><a href="trees.html#import-data-into-r"><i class="fa fa-check"></i><b>14.2</b> Import data into R</a></li>
+<li class="chapter" data-level="14.3" data-path="trees.html"><a href="trees.html#plot-trees"><i class="fa fa-check"></i><b>14.3</b> Plot trees</a></li>
+<li class="chapter" data-level="14.4" data-path="trees.html"><a href="trees.html#handling-multiple-trees"><i class="fa fa-check"></i><b>14.4</b> Handling multiple trees</a></li>
+<li class="chapter" data-level="14.5" data-path="trees.html"><a href="trees.html#manipulating-trees"><i class="fa fa-check"></i><b>14.5</b> Manipulating trees</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="trees.html"><a href="trees.html#drop-tips"><i class="fa fa-check"></i><b>14.5.1</b> Drop tips</a></li>
+<li class="chapter" data-level="14.5.2" data-path="trees.html"><a href="trees.html#reroot-trees"><i class="fa fa-check"></i><b>14.5.2</b> Reroot trees</a></li>
+<li class="chapter" data-level="14.5.3" data-path="trees.html"><a href="trees.html#get-cophenetic-distances"><i class="fa fa-check"></i><b>14.5.3</b> Get cophenetic distances</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i><b>15</b> Solutions to the challenges</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="solutions.html"><a href="solutions.html#challenge-1-1"><i class="fa fa-check"></i><b>15.1</b> Challenge 1</a></li>
+<li class="chapter" data-level="15.2" data-path="solutions.html"><a href="solutions.html#challenge-2-1"><i class="fa fa-check"></i><b>15.2</b> Challenge 2</a></li>
+<li class="chapter" data-level="15.3" data-path="solutions.html"><a href="solutions.html#challenge-3-1"><i class="fa fa-check"></i><b>15.3</b> Challenge 3</a></li>
+<li class="chapter" data-level="15.4" data-path="solutions.html"><a href="solutions.html#challenge-4-1"><i class="fa fa-check"></i><b>15.4</b> Challenge 4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
-        <div class="book-extra">
-          
-        </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="trees" class="section level1" number="14">
-<h1>
-<span class="header-section-number">14</span> Introduction to phylogenies in R<a class="anchor" aria-label="anchor" href="#trees"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Half-day Workshop on Phylogenetic Comparative Methods</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="trees" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">14</span> Introduction to phylogenies in R<a href="trees.html#trees" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>There are lots of packages for phylogenetic analyses in R. I won’t enumerate them all here, but you can have a good idea of the options available by looking at the <a href="http://cran.r-project.org/web/views/Phylogenetics.html">phylogenetic R vignette</a> maintainned by Brian O’Meara. It is mostly oriented towards phylogenetic comparative methods, but it is a good start.</p>
 <p>The most basic package for using trees in R is <em>ape</em>, which allows you to read and plot trees.</p>
-<div id="importing-and-plotting-trees" class="section level2" number="14.1">
-<h2>
-<span class="header-section-number">14.1</span> Importing and plotting trees<a class="anchor" aria-label="anchor" href="#importing-and-plotting-trees"><i class="fas fa-link"></i></a>
-</h2>
-<div id="simulate-a-tree" class="section level3" number="14.1.1">
-<h3>
-<span class="header-section-number">14.1.1</span> Simulate a tree<a class="anchor" aria-label="anchor" href="#simulate-a-tree"><i class="fas fa-link"></i></a>
-</h3>
+<div id="importing-and-plotting-trees" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> Importing and plotting trees<a href="trees.html#importing-and-plotting-trees" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="simulate-a-tree" class="section level3 hasAnchor" number="14.1.1">
+<h3><span class="header-section-number">14.1.1</span> Simulate a tree<a href="trees.html#simulate-a-tree" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Throughout these exercises, we will often use simulated trees, which are very useful for pedagogical purposes. Trees can be simulated using several functions, but here is an example to simulate one tree with 15 species.</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/liamrevell/phytools">phytools</a></span><span class="op">)</span></span>
-<span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phytools/man/pbtree.html">pbtree</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">15</span>,nsim<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="pcm-workshop_files/figure-html/Simulate%20Pure-Birth%20Tree-1.png" width="672"></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="trees.html#cb49-1" tabindex="-1"></a><span class="fu">require</span>(phytools)</span>
+<span id="cb49-2"><a href="trees.html#cb49-2" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">pbtree</span>(<span class="at">n=</span><span class="dv">15</span>,<span class="at">nsim=</span><span class="dv">1</span>)</span>
+<span id="cb49-3"><a href="trees.html#cb49-3" tabindex="-1"></a><span class="fu">plot</span>(tree)</span></code></pre></div>
+<p><img src="pcm-workshop_files/figure-html/Simulate%20Pure-Birth%20Tree-1.png" width="672" /></p>
 <p>You save the tree in nexus format to a file. But before you do so, it is a good idea to set the working directory to the same folder where your script is saved. You can do that in RStudio in the menu Session&gt;Set Working Directory&gt;To Source File Location.</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/emmanuelparadis/ape">ape</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/write.nexus.html">write.nexus</a></span><span class="op">(</span><span class="va">tree</span>, file<span class="op">=</span><span class="st">"My_first_tree.tre"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="trees.html#cb50-1" tabindex="-1"></a><span class="fu">require</span>(ape)</span>
+<span id="cb50-2"><a href="trees.html#cb50-2" tabindex="-1"></a><span class="fu">write.nexus</span>(tree, <span class="at">file=</span><span class="st">&quot;My_first_tree.tre&quot;</span>)</span></code></pre></div>
 </div>
-<div id="simulating-characters" class="section level3" number="14.1.2">
-<h3>
-<span class="header-section-number">14.1.2</span> Simulating characters<a class="anchor" aria-label="anchor" href="#simulating-characters"><i class="fas fa-link"></i></a>
-</h3>
+<div id="simulating-characters" class="section level3 hasAnchor" number="14.1.2">
+<h3><span class="header-section-number">14.1.2</span> Simulating characters<a href="trees.html#simulating-characters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Characters can also be easily simulated in R. For instance, you could simulate a character using a Brownian Motion (BM) model using the following code.</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">trait1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phytools/man/fastBM.html">fastBM</a></span><span class="op">(</span><span class="va">tree</span>, sig2<span class="op">=</span><span class="fl">0.01</span>, nsim<span class="op">=</span><span class="fl">1</span>, internal<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co"># To get trait values for tree tips:</span></span>
-<span><span class="va">trait1</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="trees.html#cb51-1" tabindex="-1"></a>trait1 <span class="ot">&lt;-</span> <span class="fu">fastBM</span>(tree, <span class="at">sig2=</span><span class="fl">0.01</span>, <span class="at">nsim=</span><span class="dv">1</span>, <span class="at">internal=</span><span class="cn">FALSE</span>)</span>
+<span id="cb51-2"><a href="trees.html#cb51-2" tabindex="-1"></a><span class="co"># To get trait values for tree tips:</span></span>
+<span id="cb51-3"><a href="trees.html#cb51-3" tabindex="-1"></a>trait1</span></code></pre></div>
 <pre><code>##           t3           t4           t7           t8           t2          t14 
 ## -0.007306853  0.043251831  0.004858391 -0.114795593 -0.043737891  0.113964926 
 ##          t15           t9          t12          t13           t5           t6 
@@ -132,101 +288,81 @@
 ##           t1          t10          t11 
 ## -0.084659118  0.118596501  0.059071786</code></pre>
 <p>Now, let’s save this trait to a file to pretend it is our original data.</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">trait1</span>,ncol<span class="op">=</span><span class="fl">1</span>,dimnames<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">trait1</span><span class="op">)</span>,<span class="st">"trait1"</span><span class="op">)</span><span class="op">)</span>, file<span class="op">=</span><span class="st">"mytrait.csv"</span>, sep<span class="op">=</span><span class="st">";"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="trees.html#cb53-1" tabindex="-1"></a><span class="fu">write.table</span>(<span class="fu">matrix</span>(trait1,<span class="at">ncol=</span><span class="dv">1</span>,<span class="at">dimnames=</span><span class="fu">list</span>(<span class="fu">names</span>(trait1),<span class="st">&quot;trait1&quot;</span>)), <span class="at">file=</span><span class="st">&quot;mytrait.csv&quot;</span>, <span class="at">sep=</span><span class="st">&quot;;&quot;</span>)</span></code></pre></div>
 <p>Now that we have simulated a tree and a character, let’s erase what we have done so far from the R environment and pretend these are our data for the next sections.</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">tree</span>, <span class="va">trait1</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="trees.html#cb54-1" tabindex="-1"></a><span class="fu">rm</span>(tree, trait1)</span></code></pre></div>
 </div>
 </div>
-<div id="import-data-into-r" class="section level2" number="14.2">
-<h2>
-<span class="header-section-number">14.2</span> Import data into R<a class="anchor" aria-label="anchor" href="#import-data-into-r"><i class="fas fa-link"></i></a>
-</h2>
+<div id="import-data-into-r" class="section level2 hasAnchor" number="14.2">
+<h2><span class="header-section-number">14.2</span> Import data into R<a href="trees.html#import-data-into-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Here is how you should import your data into R.</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.nexus.html">read.nexus</a></span><span class="op">(</span>file<span class="op">=</span><span class="st">"My_first_tree.tre"</span><span class="op">)</span></span>
-<span><span class="va">trait1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv2</a></span><span class="op">(</span>file<span class="op">=</span><span class="st">"mytrait.csv"</span>,dec<span class="op">=</span><span class="st">"."</span><span class="op">)</span></span></code></pre></div>
-<p>The tree format in ape contains several information and it is useful to know how to access them. For instance, the tip labels can be accessed using <code>tree$tip.label</code> and the branch lengths using <code>tree$edge.length</code>. Will will see more options in other exercises, but if you want more detailed information on how the objects “phylo” are organized, you can have a look the help file <code><a href="https://rdrr.io/pkg/ape/man/read.tree.html">?read.tree</a></code> or at this <a href="http://ape-package.ird.fr/misc/FormatTreeR_24Oct2012.pdf">document</a> prepared by Emmanuel Paradis, the author of <code>ape</code>.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="trees.html#cb55-1" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">read.nexus</span>(<span class="at">file=</span><span class="st">&quot;My_first_tree.tre&quot;</span>)</span>
+<span id="cb55-2"><a href="trees.html#cb55-2" tabindex="-1"></a>trait1 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="at">file=</span><span class="st">&quot;mytrait.csv&quot;</span>,<span class="at">dec=</span><span class="st">&quot;.&quot;</span>)</span></code></pre></div>
+<p>The tree format in ape contains several information and it is useful to know how to access them. For instance, the tip labels can be accessed using <code>tree$tip.label</code> and the branch lengths using <code>tree$edge.length</code>. Will will see more options in other exercises, but if you want more detailed information on how the objects “phylo” are organized, you can have a look the help file <code>?read.tree</code> or at this <a href="http://ape-package.ird.fr/misc/FormatTreeR_24Oct2012.pdf">document</a> prepared by Emmanuel Paradis, the author of <code>ape</code>.</p>
 </div>
-<div id="plot-trees" class="section level2" number="14.3">
-<h2>
-<span class="header-section-number">14.3</span> Plot trees<a class="anchor" aria-label="anchor" href="#plot-trees"><i class="fas fa-link"></i></a>
-</h2>
-<p>Plotting trees is one of the very interesting aspects of using R. Options are numerous and possibilities large. The most common function is <code>plot.phylo</code> from the ape package that has a lot of different options. I strongly suggest that you take a close look at the different options of the function <code><a href="https://rdrr.io/pkg/ape/man/plot.phylo.html">?plot.phylo</a></code>. Here is a basic example.</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tree</span>, type<span class="op">=</span><span class="st">"c"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/add.scale.bar.html">add.scale.bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="pcm-workshop_files/figure-html/Basic%20tree%20plotting-1.png" width="672"></div>
+<div id="plot-trees" class="section level2 hasAnchor" number="14.3">
+<h2><span class="header-section-number">14.3</span> Plot trees<a href="trees.html#plot-trees" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Plotting trees is one of the very interesting aspects of using R. Options are numerous and possibilities large. The most common function is <code>plot.phylo</code> from the ape package that has a lot of different options. I strongly suggest that you take a close look at the different options of the function <code>?plot.phylo</code>. Here is a basic example.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="trees.html#cb56-1" tabindex="-1"></a><span class="fu">plot</span>(tree, <span class="at">type=</span><span class="st">&quot;c&quot;</span>)</span>
+<span id="cb56-2"><a href="trees.html#cb56-2" tabindex="-1"></a><span class="fu">add.scale.bar</span>()</span></code></pre></div>
+<p><img src="pcm-workshop_files/figure-html/Basic%20tree%20plotting-1.png" width="672" /></p>
 <p>But R is also interesting to plot characters alongside trees. If you have a categorical character, you could use it to color the tips of the phylogeny.</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Generate a random categorical character</span></span>
-<span><span class="va">trait2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>,size<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">tree</span><span class="op">$</span><span class="va">tip.label</span><span class="op">)</span>,replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># Create color palette</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span></span>
-<span><span class="va">ColorPalette1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">trait2</span><span class="op">)</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tree</span>, type<span class="op">=</span><span class="st">"p"</span>, use.edge.length <span class="op">=</span> <span class="cn">TRUE</span>, label.offset<span class="op">=</span><span class="fl">0.2</span>,cex<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/nodelabels.html">tiplabels</a></span><span class="op">(</span>pch<span class="op">=</span><span class="fl">21</span>,bg<span class="op">=</span><span class="va">ColorPalette1</span><span class="op">[</span><span class="va">trait2</span><span class="op">]</span>,col<span class="op">=</span><span class="st">"black"</span>,cex<span class="op">=</span><span class="fl">1</span>,adj<span class="op">=</span><span class="fl">0.6</span><span class="op">)</span></span>
-<span><span class="va">op</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>xpd<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">trait2</span><span class="op">)</span>,col<span class="op">=</span><span class="va">ColorPalette1</span>,</span>
-<span>       pch<span class="op">=</span><span class="fl">20</span>,bty<span class="op">=</span><span class="st">"n"</span>,cex<span class="op">=</span><span class="fl">1</span>,pt.cex<span class="op">=</span><span class="fl">1.5</span>,ncol<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">trait2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="pcm-workshop_files/figure-html/Plot%20categorical%20parameter-1.png" width="672"></div>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span> <span class="co">#reset graphical parameters to defaults</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="trees.html#cb57-1" tabindex="-1"></a><span class="co"># Generate a random categorical character</span></span>
+<span id="cb57-2"><a href="trees.html#cb57-2" tabindex="-1"></a>trait2 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),<span class="at">size=</span><span class="fu">length</span>(tree<span class="sc">$</span>tip.label),<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb57-3"><a href="trees.html#cb57-3" tabindex="-1"></a><span class="co"># Create color palette</span></span>
+<span id="cb57-4"><a href="trees.html#cb57-4" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb57-5"><a href="trees.html#cb57-5" tabindex="-1"></a>ColorPalette1 <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="fu">length</span>(<span class="fu">levels</span>(trait2)), <span class="at">name =</span> <span class="st">&quot;Dark2&quot;</span>)</span>
+<span id="cb57-6"><a href="trees.html#cb57-6" tabindex="-1"></a><span class="fu">plot</span>(tree, <span class="at">type=</span><span class="st">&quot;p&quot;</span>, <span class="at">use.edge.length =</span> <span class="cn">TRUE</span>, <span class="at">label.offset=</span><span class="fl">0.2</span>,<span class="at">cex=</span><span class="dv">1</span>)</span>
+<span id="cb57-7"><a href="trees.html#cb57-7" tabindex="-1"></a><span class="fu">tiplabels</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">bg=</span>ColorPalette1[trait2],<span class="at">col=</span><span class="st">&quot;black&quot;</span>,<span class="at">cex=</span><span class="dv">1</span>,<span class="at">adj=</span><span class="fl">0.6</span>)</span>
+<span id="cb57-8"><a href="trees.html#cb57-8" tabindex="-1"></a>op<span class="ot">&lt;-</span><span class="fu">par</span>(<span class="at">xpd=</span><span class="cn">TRUE</span>)</span>
+<span id="cb57-9"><a href="trees.html#cb57-9" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="at">legend=</span><span class="fu">levels</span>(trait2),<span class="at">col=</span>ColorPalette1,</span>
+<span id="cb57-10"><a href="trees.html#cb57-10" tabindex="-1"></a>       <span class="at">pch=</span><span class="dv">20</span>,<span class="at">bty=</span><span class="st">&quot;n&quot;</span>,<span class="at">cex=</span><span class="dv">1</span>,<span class="at">pt.cex=</span><span class="fl">1.5</span>,<span class="at">ncol=</span><span class="fu">length</span>(<span class="fu">levels</span>(trait2)))</span></code></pre></div>
+<p><img src="pcm-workshop_files/figure-html/Plot%20categorical%20parameter-1.png" width="672" /></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="trees.html#cb58-1" tabindex="-1"></a><span class="fu">par</span>(op) <span class="co">#reset graphical parameters to defaults</span></span></code></pre></div>
 <p>A similar result could be obtained with a continuous variable. Here, we will use the Brownian Motion model, which we will study in a further class, to simulate the continuous character.</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Breakdown continuous trait in categories</span></span>
-<span><span class="va">trait1.cat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">trait1</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,breaks<span class="op">=</span><span class="fl">8</span>,labels<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co"># Create color palette</span></span>
-<span><span class="va">ColorPalette2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">8</span>, name <span class="op">=</span> <span class="st">"Blues"</span><span class="op">)</span></span>
-<span><span class="co"># Plot the tree</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tree</span>, type<span class="op">=</span><span class="st">"p"</span>, use.edge.length <span class="op">=</span> <span class="cn">TRUE</span>, label.offset<span class="op">=</span><span class="fl">0.2</span>,cex<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/nodelabels.html">tiplabels</a></span><span class="op">(</span>pch<span class="op">=</span><span class="fl">21</span>,bg<span class="op">=</span><span class="va">ColorPalette2</span><span class="op">[</span><span class="va">trait1.cat</span><span class="op">]</span>,col<span class="op">=</span><span class="st">"black"</span>,cex<span class="op">=</span><span class="fl">1</span>,adj<span class="op">=</span><span class="fl">0.6</span><span class="op">)</span></span>
-<span><span class="va">op</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>xpd<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">trait1</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,breaks<span class="op">=</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>       col<span class="op">=</span><span class="va">ColorPalette2</span>,pch<span class="op">=</span><span class="fl">20</span>,bty<span class="op">=</span><span class="st">"n"</span>,cex<span class="op">=</span><span class="fl">0.7</span>,pt.cex<span class="op">=</span><span class="fl">1.5</span>,ncol<span class="op">=</span><span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="pcm-workshop_files/figure-html/Plot%20continuous%20parameter-1.png" width="672"></div>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span> <span class="co">#reset graphical parameters to defaults</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="trees.html#cb59-1" tabindex="-1"></a><span class="co"># Breakdown continuous trait in categories</span></span>
+<span id="cb59-2"><a href="trees.html#cb59-2" tabindex="-1"></a>trait1.cat <span class="ot">&lt;-</span> <span class="fu">cut</span>(trait1[,<span class="dv">1</span>],<span class="at">breaks=</span><span class="dv">8</span>,<span class="at">labels=</span><span class="cn">FALSE</span>)</span>
+<span id="cb59-3"><a href="trees.html#cb59-3" tabindex="-1"></a><span class="co"># Create color palette</span></span>
+<span id="cb59-4"><a href="trees.html#cb59-4" tabindex="-1"></a>ColorPalette2 <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">8</span>, <span class="at">name =</span> <span class="st">&quot;Blues&quot;</span>)</span>
+<span id="cb59-5"><a href="trees.html#cb59-5" tabindex="-1"></a><span class="co"># Plot the tree</span></span>
+<span id="cb59-6"><a href="trees.html#cb59-6" tabindex="-1"></a><span class="fu">plot</span>(tree, <span class="at">type=</span><span class="st">&quot;p&quot;</span>, <span class="at">use.edge.length =</span> <span class="cn">TRUE</span>, <span class="at">label.offset=</span><span class="fl">0.2</span>,<span class="at">cex=</span><span class="dv">1</span>)</span>
+<span id="cb59-7"><a href="trees.html#cb59-7" tabindex="-1"></a><span class="fu">tiplabels</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">bg=</span>ColorPalette2[trait1.cat],<span class="at">col=</span><span class="st">&quot;black&quot;</span>,<span class="at">cex=</span><span class="dv">1</span>,<span class="at">adj=</span><span class="fl">0.6</span>)</span>
+<span id="cb59-8"><a href="trees.html#cb59-8" tabindex="-1"></a>op<span class="ot">&lt;-</span><span class="fu">par</span>(<span class="at">xpd=</span><span class="cn">TRUE</span>)</span>
+<span id="cb59-9"><a href="trees.html#cb59-9" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="at">legend=</span><span class="fu">levels</span>(<span class="fu">cut</span>(trait1[,<span class="dv">1</span>],<span class="at">breaks=</span><span class="dv">8</span>)),</span>
+<span id="cb59-10"><a href="trees.html#cb59-10" tabindex="-1"></a>       <span class="at">col=</span>ColorPalette2,<span class="at">pch=</span><span class="dv">20</span>,<span class="at">bty=</span><span class="st">&quot;n&quot;</span>,<span class="at">cex=</span><span class="fl">0.7</span>,<span class="at">pt.cex=</span><span class="fl">1.5</span>,<span class="at">ncol=</span><span class="dv">4</span>)</span></code></pre></div>
+<p><img src="pcm-workshop_files/figure-html/Plot%20continuous%20parameter-1.png" width="672" /></p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="trees.html#cb60-1" tabindex="-1"></a><span class="fu">par</span>(op) <span class="co">#reset graphical parameters to defaults</span></span></code></pre></div>
 <p>As expected from a character simlated with Brownian motion, you can see that closely related species tend to have more similar character values.</p>
 <p>Another option to represent a continuous parameter is to use the function <code>table.phylo4d</code> from the <code>adephylo</code> package to represent the trait where its values are represented by sizes of different sizes and colors. It is also possible to plot multiple characters at the same time.</p>
 <p>Note that you will have to install the packages <code>phylobase</code> and <code>adephylo</code> to run these function if they are not installed.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fmichonneau/phylobase">phylobase</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">adephylo</span><span class="op">)</span></span>
-<span><span class="va">trait3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phytools/man/fastBM.html">fastBM</a></span><span class="op">(</span><span class="va">tree</span>, sig2<span class="op">=</span><span class="fl">0.1</span>, nsim<span class="op">=</span><span class="fl">1</span>, internal<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="co">#simulate a faster evolving trait</span></span>
-<span><span class="va">trait.table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>trait1<span class="op">=</span><span class="va">trait1</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">trait3</span><span class="op">)</span></span>
-<span><span class="va">obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phylobase/man/phylo4d-methods.html">phylo4d</a></span><span class="op">(</span><span class="va">tree</span>, <span class="va">trait.table</span><span class="op">)</span> <span class="co"># build a phylo4d object</span></span>
-<span><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/adephylo/man/table.phylo4d.html">table.phylo4d</a></span><span class="op">(</span><span class="va">obj</span>,cex.label<span class="op">=</span><span class="fl">1</span>,cex.symbol<span class="op">=</span><span class="fl">1</span>,ratio.tree<span class="op">=</span><span class="fl">0.8</span>,grid<span class="op">=</span><span class="cn">FALSE</span>,box<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="pcm-workshop_files/figure-html/Plot%20continuous%20parameter%20-%20table.phylo4d-1.png" width="672"></div>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span> <span class="co">#reset graphical parameters to defaults</span></span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="trees.html#cb61-1" tabindex="-1"></a><span class="fu">library</span>(phylobase)</span>
+<span id="cb61-2"><a href="trees.html#cb61-2" tabindex="-1"></a><span class="fu">library</span>(adephylo)</span>
+<span id="cb61-3"><a href="trees.html#cb61-3" tabindex="-1"></a>trait3 <span class="ot">&lt;-</span> <span class="fu">fastBM</span>(tree, <span class="at">sig2=</span><span class="fl">0.1</span>, <span class="at">nsim=</span><span class="dv">1</span>, <span class="at">internal=</span><span class="cn">FALSE</span>) <span class="co">#simulate a faster evolving trait</span></span>
+<span id="cb61-4"><a href="trees.html#cb61-4" tabindex="-1"></a>trait.table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">trait1=</span>trait1[,<span class="dv">1</span>], trait3)</span>
+<span id="cb61-5"><a href="trees.html#cb61-5" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">phylo4d</span>(tree, trait.table) <span class="co"># build a phylo4d object</span></span>
+<span id="cb61-6"><a href="trees.html#cb61-6" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb61-7"><a href="trees.html#cb61-7" tabindex="-1"></a><span class="fu">table.phylo4d</span>(obj,<span class="at">cex.label=</span><span class="dv">1</span>,<span class="at">cex.symbol=</span><span class="dv">1</span>,<span class="at">ratio.tree=</span><span class="fl">0.8</span>,<span class="at">grid=</span><span class="cn">FALSE</span>,<span class="at">box=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="pcm-workshop_files/figure-html/Plot%20continuous%20parameter%20-%20table.phylo4d-1.png" width="672" /></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="trees.html#cb62-1" tabindex="-1"></a><span class="fu">par</span>(op) <span class="co">#reset graphical parameters to defaults</span></span></code></pre></div>
 <p>You can also represent a traitgram:</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/liamrevell/phytools">phytools</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/phenogram.html">phenogram</a></span><span class="op">(</span><span class="va">tree</span>,<span class="va">trait3</span>,spread.labels<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="pcm-workshop_files/figure-html/traitgram-1.png" width="672"></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="trees.html#cb63-1" tabindex="-1"></a><span class="fu">require</span>(phytools)</span>
+<span id="cb63-2"><a href="trees.html#cb63-2" tabindex="-1"></a><span class="fu">phenogram</span>(tree,trait3,<span class="at">spread.labels=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="pcm-workshop_files/figure-html/traitgram-1.png" width="672" /></p>
 <p>Finally, it is also possible to represent a tree on a 2-dimensional plot, coloring points with the categorical variable.</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/phylomorphospace.html">phylomorphospace</a></span><span class="op">(</span><span class="va">tree</span>,<span class="va">trait.table</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">trait.table</span>,pch<span class="op">=</span><span class="fl">21</span>,bg<span class="op">=</span><span class="va">ColorPalette1</span><span class="op">[</span><span class="va">trait2</span><span class="op">]</span>,col<span class="op">=</span><span class="st">"black"</span>,cex<span class="op">=</span><span class="fl">1.2</span>,adj<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>,legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">trait2</span><span class="op">)</span>,</span>
-<span>       col<span class="op">=</span><span class="va">ColorPalette1</span>,pch<span class="op">=</span><span class="fl">20</span>,bty<span class="op">=</span><span class="st">"n"</span>,cex<span class="op">=</span><span class="fl">1</span>,pt.cex<span class="op">=</span><span class="fl">1.5</span>,ncol<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">trait2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="pcm-workshop_files/figure-html/Phylomorphospace-1.png" width="672"></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="trees.html#cb64-1" tabindex="-1"></a><span class="fu">phylomorphospace</span>(tree,trait.table)</span>
+<span id="cb64-2"><a href="trees.html#cb64-2" tabindex="-1"></a><span class="fu">points</span>(trait.table,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">bg=</span>ColorPalette1[trait2],<span class="at">col=</span><span class="st">&quot;black&quot;</span>,<span class="at">cex=</span><span class="fl">1.2</span>,<span class="at">adj=</span><span class="dv">1</span>)</span>
+<span id="cb64-3"><a href="trees.html#cb64-3" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>,<span class="at">legend=</span><span class="fu">levels</span>(trait2),</span>
+<span id="cb64-4"><a href="trees.html#cb64-4" tabindex="-1"></a>       <span class="at">col=</span>ColorPalette1,<span class="at">pch=</span><span class="dv">20</span>,<span class="at">bty=</span><span class="st">&quot;n&quot;</span>,<span class="at">cex=</span><span class="dv">1</span>,<span class="at">pt.cex=</span><span class="fl">1.5</span>,<span class="at">ncol=</span><span class="fu">length</span>(<span class="fu">levels</span>(trait2)))</span></code></pre></div>
+<p><img src="pcm-workshop_files/figure-html/Phylomorphospace-1.png" width="672" /></p>
 </div>
-<div id="handling-multiple-trees" class="section level2" number="14.4">
-<h2>
-<span class="header-section-number">14.4</span> Handling multiple trees<a class="anchor" aria-label="anchor" href="#handling-multiple-trees"><i class="fas fa-link"></i></a>
-</h2>
+<div id="handling-multiple-trees" class="section level2 hasAnchor" number="14.4">
+<h2><span class="header-section-number">14.4</span> Handling multiple trees<a href="trees.html#handling-multiple-trees" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In several cases, it is important to know how to handle multiple trees in R. These are normally stored in a <code>multiPhylo</code> object. Let’s see an example.</p>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">trees</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phytools/man/pbtree.html">pbtree</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">15</span>,nsim<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="va">trees</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="trees.html#cb65-1" tabindex="-1"></a>trees <span class="ot">&lt;-</span> <span class="fu">pbtree</span>(<span class="at">n=</span><span class="dv">15</span>,<span class="at">nsim=</span><span class="dv">10</span>)</span>
+<span id="cb65-2"><a href="trees.html#cb65-2" tabindex="-1"></a>trees</span></code></pre></div>
 <pre><code>## 10 phylogenetic trees</code></pre>
 <p>You can see that the object is not the same as a phylo object. For instance, if you use the code <code>plot(trees)</code>, you will be prompted to hit enter to pass from one tree to the other. To access to individual trees, you need to use the following technique.</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">trees</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="trees.html#cb67-1" tabindex="-1"></a>trees[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## 
 ## Phylogenetic tree with 15 tips and 14 internal nodes.
 ## 
@@ -234,37 +370,25 @@
 ##   t3, t4, t5, t14, t15, t8, ...
 ## 
 ## Rooted; includes branch lengths.</code></pre>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">trees</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="pcm-workshop_files/figure-html/multiPhylo%20manipulation-1.png" width="672"></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="trees.html#cb69-1" tabindex="-1"></a><span class="fu">plot</span>(trees[[<span class="dv">1</span>]])</span></code></pre></div>
+<p><img src="pcm-workshop_files/figure-html/multiPhylo%20manipulation-1.png" width="672" /></p>
 </div>
-<div id="manipulating-trees" class="section level2" number="14.5">
-<h2>
-<span class="header-section-number">14.5</span> Manipulating trees<a class="anchor" aria-label="anchor" href="#manipulating-trees"><i class="fas fa-link"></i></a>
-</h2>
+<div id="manipulating-trees" class="section level2 hasAnchor" number="14.5">
+<h2><span class="header-section-number">14.5</span> Manipulating trees<a href="trees.html#manipulating-trees" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>There are several manipulations that can be made to trees. Here are a few examples.</p>
-<div id="drop-tips" class="section level3" number="14.5.1">
-<h3>
-<span class="header-section-number">14.5.1</span> Drop tips<a class="anchor" aria-label="anchor" href="#drop-tips"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/drop.tip.html">drop.tip</a></span><span class="op">(</span><span class="va">tree</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"t1"</span>,<span class="st">"t2"</span>,<span class="st">"t3"</span>,<span class="st">"t4"</span>,<span class="st">"t5"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="pcm-workshop_files/figure-html/Drop%20tips-1.png" width="672"></div>
+<div id="drop-tips" class="section level3 hasAnchor" number="14.5.1">
+<h3><span class="header-section-number">14.5.1</span> Drop tips<a href="trees.html#drop-tips" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="trees.html#cb70-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">drop.tip</span>(tree,<span class="fu">c</span>(<span class="st">&quot;t1&quot;</span>,<span class="st">&quot;t2&quot;</span>,<span class="st">&quot;t3&quot;</span>,<span class="st">&quot;t4&quot;</span>,<span class="st">&quot;t5&quot;</span>)))</span></code></pre></div>
+<p><img src="pcm-workshop_files/figure-html/Drop%20tips-1.png" width="672" /></p>
 </div>
-<div id="reroot-trees" class="section level3" number="14.5.2">
-<h3>
-<span class="header-section-number">14.5.2</span> Reroot trees<a class="anchor" aria-label="anchor" href="#reroot-trees"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/root.html">root</a></span><span class="op">(</span><span class="va">tree</span>,<span class="st">"t1"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="pcm-workshop_files/figure-html/Reroot%20trees-1.png" width="672"></div>
+<div id="reroot-trees" class="section level3 hasAnchor" number="14.5.2">
+<h3><span class="header-section-number">14.5.2</span> Reroot trees<a href="trees.html#reroot-trees" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="trees.html#cb71-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">root</span>(tree,<span class="st">&quot;t1&quot;</span>))</span></code></pre></div>
+<p><img src="pcm-workshop_files/figure-html/Reroot%20trees-1.png" width="672" /></p>
 </div>
-<div id="get-cophenetic-distances" class="section level3" number="14.5.3">
-<h3>
-<span class="header-section-number">14.5.3</span> Get cophenetic distances<a class="anchor" aria-label="anchor" href="#get-cophenetic-distances"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/cophenetic.phylo.html">cophenetic.phylo</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span></span></code></pre></div>
+<div id="get-cophenetic-distances" class="section level3 hasAnchor" number="14.5.3">
+<h3><span class="header-section-number">14.5.3</span> Get cophenetic distances<a href="trees.html#get-cophenetic-distances" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="trees.html#cb72-1" tabindex="-1"></a><span class="fu">cophenetic.phylo</span>(tree)</span></code></pre></div>
 <pre><code>##            t3        t4        t7        t8       t2        t14        t15
 ## t3  0.0000000 0.7285289 3.4533793 3.4533793 3.453379 4.29496600 4.29496600
 ## t4  0.7285289 0.0000000 3.4533793 3.4533793 3.453379 4.29496600 4.29496600
@@ -317,54 +441,68 @@
 </div>
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="further-readings.html"><span class="header-section-number">13</span> Further readings</a></div>
-<div class="next"><a href="solutions.html"><span class="header-section-number">15</span> Solutions to the challenges</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#trees"><span class="header-section-number">14</span> Introduction to phylogenies in R</a></li>
-<li>
-<a class="nav-link" href="#importing-and-plotting-trees"><span class="header-section-number">14.1</span> Importing and plotting trees</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#simulate-a-tree"><span class="header-section-number">14.1.1</span> Simulate a tree</a></li>
-<li><a class="nav-link" href="#simulating-characters"><span class="header-section-number">14.1.2</span> Simulating characters</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#import-data-into-r"><span class="header-section-number">14.2</span> Import data into R</a></li>
-<li><a class="nav-link" href="#plot-trees"><span class="header-section-number">14.3</span> Plot trees</a></li>
-<li><a class="nav-link" href="#handling-multiple-trees"><span class="header-section-number">14.4</span> Handling multiple trees</a></li>
-<li>
-<a class="nav-link" href="#manipulating-trees"><span class="header-section-number">14.5</span> Manipulating trees</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#drop-tips"><span class="header-section-number">14.5.1</span> Drop tips</a></li>
-<li><a class="nav-link" href="#reroot-trees"><span class="header-section-number">14.5.2</span> Reroot trees</a></li>
-<li><a class="nav-link" href="#get-cophenetic-distances"><span class="header-section-number">14.5.3</span> Get cophenetic distances</a></li>
-</ul>
-</li>
-</ul>
+            </section>
 
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
-</div>
-    </nav>
-</div>
-
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Half-day Workshop on Phylogenetic Comparative Methods</strong>" was written by Simon Joly. It was last built on 2024-11-09.</p>
+          </div>
+        </div>
+      </div>
+<a href="further-readings.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
   </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-trees.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["pcm-workshop.pdf", "pcm-workshop.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
 
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -376,22 +514,7 @@
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
 </script>
 </body>
+
 </html>
