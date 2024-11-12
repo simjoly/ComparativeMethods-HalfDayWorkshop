@@ -23,7 +23,7 @@
 <meta name="author" content="Simon Joly" />
 
 
-<meta name="date" content="2024-11-09" />
+<meta name="date" content="2024-11-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -209,7 +209,10 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="8" data-path="phylogenetic-anova.html"><a href="phylogenetic-anova.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic ANOVA</a></li>
 <li class="chapter" data-level="9" data-path="model-testing.html"><a href="model-testing.html"><i class="fa fa-check"></i><b>9</b> Model testing</a></li>
-<li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a></li>
+<li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html#common-misconceptions"><i class="fa fa-check"></i><b>10.1</b> Common misconceptions</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="a-final-word-the-problem-of-replication.html"><a href="a-final-word-the-problem-of-replication.html"><i class="fa fa-check"></i><b>11</b> A final word: the problem of replication</a></li>
 <li class="chapter" data-level="12" data-path="BM-model.html"><a href="BM-model.html"><i class="fa fa-check"></i><b>12</b> The Brownian Motion (BM) model</a></li>
 <li class="chapter" data-level="13" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>13</b> Further readings</a></li>
@@ -262,35 +265,35 @@ div.csl-indent {
 <h1><span class="header-section-number">9</span> Model testing<a href="model-testing.html#model-testing" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>You might be interested in comparing different models, which is a common approach to modelisation in biology. However, there is a slight twist that you need to be aware of with PGLS.</p>
 <p>The default method for model fitting with <code>gls</code> is restricted maximum likelihood estimation (REML), obtained by <code>method="REML"</code>. This is different than standard maximum likelihood estimation (ML), which can be obtained with <code>method="ML"</code>. The difference between these is complex, but suffice to say that they differ in the way the variance parameters are estimated. REML provides less biased parameter estimates and is the preferred method to report the parameter coefficients in a publication. It is also the method of choice if you want to compare models with different correlation (or variance) structures <span class="citation">(<a href="#ref-zuur2009mixed">Zuur et al. 2009</a>)</span>. For example, if you want to test whether a PGLS model with an optimized Pagel’s <span class="math inline">\(\lambda\)</span> fits the data better than a model with no phylogenetic correlation (that is, with Pagel <span class="math inline">\(\lambda=0\)</span>):</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="model-testing.html#cb43-1" tabindex="-1"></a>pagel<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> Wd, <span class="at">data =</span> seedplantsdata, </span>
-<span id="cb43-2"><a href="model-testing.html#cb43-2" tabindex="-1"></a>               <span class="at">correlation=</span><span class="fu">corPagel</span>(<span class="dv">0</span>,<span class="at">phy=</span>seedplantstree, </span>
-<span id="cb43-3"><a href="model-testing.html#cb43-3" tabindex="-1"></a>                                    <span class="at">fixed=</span><span class="cn">TRUE</span>, <span class="at">form=</span><span class="sc">~</span>Code), </span>
-<span id="cb43-4"><a href="model-testing.html#cb43-4" tabindex="-1"></a>               <span class="at">method=</span><span class="st">&quot;REML&quot;</span>)</span>
-<span id="cb43-5"><a href="model-testing.html#cb43-5" tabindex="-1"></a>pagel.fit <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> Wd, <span class="at">data =</span> seedplantsdata, </span>
-<span id="cb43-6"><a href="model-testing.html#cb43-6" tabindex="-1"></a>                 <span class="at">correlation=</span><span class="fu">corPagel</span>(<span class="fl">0.8</span>,<span class="at">phy=</span>seedplantstree, </span>
-<span id="cb43-7"><a href="model-testing.html#cb43-7" tabindex="-1"></a>                                      <span class="at">fixed=</span><span class="cn">FALSE</span>, <span class="at">form=</span><span class="sc">~</span>Code),</span>
-<span id="cb43-8"><a href="model-testing.html#cb43-8" tabindex="-1"></a>                 <span class="at">method=</span><span class="st">&quot;REML&quot;</span>)</span>
-<span id="cb43-9"><a href="model-testing.html#cb43-9" tabindex="-1"></a><span class="fu">anova</span>(pagel<span class="fl">.0</span>,pagel.fit)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="model-testing.html#cb41-1" tabindex="-1"></a>pagel<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> Wd, <span class="at">data =</span> seedplantsdata, </span>
+<span id="cb41-2"><a href="model-testing.html#cb41-2" tabindex="-1"></a>               <span class="at">correlation=</span><span class="fu">corPagel</span>(<span class="dv">0</span>,<span class="at">phy=</span>seedplantstree, </span>
+<span id="cb41-3"><a href="model-testing.html#cb41-3" tabindex="-1"></a>                                    <span class="at">fixed=</span><span class="cn">TRUE</span>, <span class="at">form=</span><span class="sc">~</span>Code), </span>
+<span id="cb41-4"><a href="model-testing.html#cb41-4" tabindex="-1"></a>               <span class="at">method=</span><span class="st">&quot;REML&quot;</span>)</span>
+<span id="cb41-5"><a href="model-testing.html#cb41-5" tabindex="-1"></a>pagel.fit <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> Wd, <span class="at">data =</span> seedplantsdata, </span>
+<span id="cb41-6"><a href="model-testing.html#cb41-6" tabindex="-1"></a>                 <span class="at">correlation=</span><span class="fu">corPagel</span>(<span class="fl">0.8</span>,<span class="at">phy=</span>seedplantstree, </span>
+<span id="cb41-7"><a href="model-testing.html#cb41-7" tabindex="-1"></a>                                      <span class="at">fixed=</span><span class="cn">FALSE</span>, <span class="at">form=</span><span class="sc">~</span>Code),</span>
+<span id="cb41-8"><a href="model-testing.html#cb41-8" tabindex="-1"></a>                 <span class="at">method=</span><span class="st">&quot;REML&quot;</span>)</span>
+<span id="cb41-9"><a href="model-testing.html#cb41-9" tabindex="-1"></a><span class="fu">anova</span>(pagel<span class="fl">.0</span>,pagel.fit)</span></code></pre></div>
 <pre><code>##           Model df      AIC     BIC    logLik   Test  L.Ratio p-value
 ## pagel.0       1  3 180.4720 186.494 -87.23602                        
 ## pagel.fit     2  4 163.3967 171.426 -77.69833 1 vs 2 19.07537  &lt;.0001</code></pre>
-<p>You can use the AIC or BIC to compare the model, or the likelihood ratio test. You can see here that the PGLS model with a fitted Pagel <span class="math inline">\(\lambda\)</span> has a better fit than the one with a <span class="math inline">\(\lambda=0\)</span> (smaller AIC). By the way, this is also a test of whether a PGLS model is better than a standard regression model as a corPagel structure with <span class="math inline">\(\lambda=0\)</span> is a standard model (= no phylogenetic correlation).</p>
+<p>You can use the AIC or BIC to compare the model, or the likelihood ratio test. You can see here that the PGLS model with a fitted Pagel <span class="math inline">\(\lambda\)</span> has a better fit than the one with a <span class="math inline">\(\lambda=0\)</span> (smaller AIC). By the way, this is also a test of whether a PGLS model is better than a standard regression model as a corPagel structure with <span class="math inline">\(\lambda=0\)</span> is a standard model (= no phylogenetic correlation). In this case, the model with the corPagel structure has a clearly better fit than the model without a phylogenetic structure.</p>
 <p>Now, if you are interested in testing the fixed parameters in the model, you need to use maximum likelihood fitting <span class="citation">(<a href="#ref-zuur2009mixed">Zuur et al. 2009</a>)</span>. For instance, if you want to use a likelihood ratio test to test the model with wood density as independent variable versus a null model with just the intercept, you can do the following.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="model-testing.html#cb45-1" tabindex="-1"></a>wd <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> Wd, <span class="at">data =</span> seedplantsdata,</span>
-<span id="cb45-2"><a href="model-testing.html#cb45-2" tabindex="-1"></a>          <span class="at">correlation=</span><span class="fu">corBrownian</span>(<span class="at">phy=</span>seedplantstree, <span class="at">form=</span><span class="sc">~</span>Code), </span>
-<span id="cb45-3"><a href="model-testing.html#cb45-3" tabindex="-1"></a>          <span class="at">method=</span><span class="st">&quot;ML&quot;</span>)</span>
-<span id="cb45-4"><a href="model-testing.html#cb45-4" tabindex="-1"></a>null <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> seedplantsdata,</span>
-<span id="cb45-5"><a href="model-testing.html#cb45-5" tabindex="-1"></a>            <span class="at">correlation=</span><span class="fu">corBrownian</span>(<span class="at">phy=</span>seedplantstree, <span class="at">form=</span><span class="sc">~</span>Code), </span>
-<span id="cb45-6"><a href="model-testing.html#cb45-6" tabindex="-1"></a>            <span class="at">method=</span><span class="st">&quot;ML&quot;</span>)</span>
-<span id="cb45-7"><a href="model-testing.html#cb45-7" tabindex="-1"></a><span class="fu">anova</span>(wd,null)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="model-testing.html#cb43-1" tabindex="-1"></a>wd <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> Wd, <span class="at">data =</span> seedplantsdata,</span>
+<span id="cb43-2"><a href="model-testing.html#cb43-2" tabindex="-1"></a>          <span class="at">correlation=</span><span class="fu">corBrownian</span>(<span class="at">phy=</span>seedplantstree, <span class="at">form=</span><span class="sc">~</span>Code), </span>
+<span id="cb43-3"><a href="model-testing.html#cb43-3" tabindex="-1"></a>          <span class="at">method=</span><span class="st">&quot;ML&quot;</span>)</span>
+<span id="cb43-4"><a href="model-testing.html#cb43-4" tabindex="-1"></a>null <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> seedplantsdata,</span>
+<span id="cb43-5"><a href="model-testing.html#cb43-5" tabindex="-1"></a>            <span class="at">correlation=</span><span class="fu">corBrownian</span>(<span class="at">phy=</span>seedplantstree, <span class="at">form=</span><span class="sc">~</span>Code), </span>
+<span id="cb43-6"><a href="model-testing.html#cb43-6" tabindex="-1"></a>            <span class="at">method=</span><span class="st">&quot;ML&quot;</span>)</span>
+<span id="cb43-7"><a href="model-testing.html#cb43-7" tabindex="-1"></a><span class="fu">anova</span>(wd,null)</span></code></pre></div>
 <pre><code>##      Model df      AIC      BIC    logLik   Test  L.Ratio p-value
 ## wd       1  3 222.0088 228.1380 -108.0044                        
 ## null     2  2 226.4988 230.5848 -111.2494 1 vs 2 6.489907  0.0108</code></pre>
 <p>You can see the model with the wood density variable is better than the model with only the intercept. However, as mentioned above, because the REML fitting provides better parameter estimates, you would have to refit the model using REML to present the results.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="model-testing.html#cb47-1" tabindex="-1"></a>wd.final <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> Wd, <span class="at">data =</span> seedplantsdata,</span>
-<span id="cb47-2"><a href="model-testing.html#cb47-2" tabindex="-1"></a>                <span class="at">correlation=</span><span class="fu">corBrownian</span>(<span class="at">phy=</span>seedplantstree, <span class="at">form=</span><span class="sc">~</span>Code), </span>
-<span id="cb47-3"><a href="model-testing.html#cb47-3" tabindex="-1"></a>                <span class="at">method=</span><span class="st">&quot;REML&quot;</span>)</span>
-<span id="cb47-4"><a href="model-testing.html#cb47-4" tabindex="-1"></a><span class="fu">summary</span>(wd.final)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="model-testing.html#cb45-1" tabindex="-1"></a>wd.final <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> Wd, <span class="at">data =</span> seedplantsdata,</span>
+<span id="cb45-2"><a href="model-testing.html#cb45-2" tabindex="-1"></a>                <span class="at">correlation=</span><span class="fu">corBrownian</span>(<span class="at">phy=</span>seedplantstree, <span class="at">form=</span><span class="sc">~</span>Code), </span>
+<span id="cb45-3"><a href="model-testing.html#cb45-3" tabindex="-1"></a>                <span class="at">method=</span><span class="st">&quot;REML&quot;</span>)</span>
+<span id="cb45-4"><a href="model-testing.html#cb45-4" tabindex="-1"></a><span class="fu">summary</span>(wd.final)</span></code></pre></div>
 <pre><code>## Generalized least squares fit by REML
 ##   Model: Shade ~ Wd 
 ##   Data: seedplantsdata 

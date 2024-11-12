@@ -17,7 +17,7 @@ pagel.fit <- gls(Shade ~ Wd, data = seedplantsdata,
 anova(pagel.0,pagel.fit)
 ```
 
-You can use the AIC or BIC to compare the model, or the likelihood ratio test. You can see here that the PGLS model with a fitted Pagel $\lambda$ has a better fit than the one with a $\lambda=0$ (smaller AIC). By the way, this is also a test of whether a PGLS model is better than a standard regression model as a corPagel structure with $\lambda=0$ is a standard model (= no phylogenetic correlation).
+You can use the AIC or BIC to compare the model, or the likelihood ratio test. You can see here that the PGLS model with a fitted Pagel $\lambda$ has a better fit than the one with a $\lambda=0$ (smaller AIC). By the way, this is also a test of whether a PGLS model is better than a standard regression model as a corPagel structure with $\lambda=0$ is a standard model (= no phylogenetic correlation). In this case, the model with the corPagel structure has a clearly better fit than the model without a phylogenetic structure.
 
 Now, if you are interested in testing the fixed parameters in the model, you need to use maximum likelihood fitting [@zuur2009mixed]. For instance, if you want to use a likelihood ratio test to test the model with wood density as independent variable versus a null model with just the intercept, you can do the following.
 
@@ -44,11 +44,15 @@ summary(wd.final)
 
 # When should we use comparative methods?
 
-Comparative methods should always be used when working with datasets that comprise multiple species. A good advice though is to use a method that allows the residuals of the model not to be all phylogenetically correlated, as when using the PGLS with the corPagel structure or using the Phylogenetic Mixed Model. Previous studies have shown that using such comparative methods results in more precise and accurate fixed effect estimation, lower type I error, and greater statistical power [@revell2010phylogenetic]. Therefore, it is always advantageous to use these methods.
+Comparative methods ***should always*** be used when working with datasets that comprise multiple species. A good advice though is to use a method that allows the residuals of the model not to be all phylogenetically correlated, as when using the PGLS with the corPagel structure or using the Phylogenetic Mixed Model. Previous studies have shown that using such comparative methods results in more precise and accurate fixed effect estimation, lower type I error, and greater statistical power [@revell2010phylogenetic]. Therefore, it is always advantageous to use these methods.
+
+## Common misconceptions
 
 A common mistake is to use PGLS is to test for phylogenetic signal in $Y$ or $X$ using either Pagel's $\lambda$ or Blomberg's $K$, and if there is phylogenetic signal use a PGLS to analyse the data and if not use a standard regression. This is a **big mistake**. As we saw earlier, PGLS corrects for phylogenetic correlation in the residuals and not in the variables. Therefore, the presence of phylogenetic signal in the variables does not necessarily mean that the residuals are phylogenetically correlated. And the opposite is also true: the variables may not be phylogenetically correlated but the residuals could be!
 
 Another common misconception of comparative methods is that it removes all variation in the data related to the phylogeny and that this could affect the interpretation of the variable of interest. This was true of old methods like phylogenetic autoregression that first removed the phylogenetic signal from the data before analysing them. These approaches were indeed problematic. But the methods presented here to not suffer from these problems. They account for the phylogenetic structure and quantify it, but it does not removes variation from the model.
+
+Another worry is that you might loose power when using phylogenetic comparative methods. If the method of using pairs of species results in the loss of information because species are dropped from the analysis, PGLS methods do not drop any information. And if PGLS sometimes **appropriately** result in less significant results, the opposite may also be true! The phylogenetic correlations can also hide true correlations in the data and using PGLS can actually results in significant results when OLS were not significant. This is exactly what we observed with the relationship between shade tolerance and wood density at chapter \@ref(pgls).
 
 
 # A final word: the problem of replication

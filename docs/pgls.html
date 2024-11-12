@@ -23,7 +23,7 @@
 <meta name="author" content="Simon Joly" />
 
 
-<meta name="date" content="2024-11-09" />
+<meta name="date" content="2024-11-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -209,7 +209,10 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="8" data-path="phylogenetic-anova.html"><a href="phylogenetic-anova.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic ANOVA</a></li>
 <li class="chapter" data-level="9" data-path="model-testing.html"><a href="model-testing.html"><i class="fa fa-check"></i><b>9</b> Model testing</a></li>
-<li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a></li>
+<li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html#common-misconceptions"><i class="fa fa-check"></i><b>10.1</b> Common misconceptions</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="a-final-word-the-problem-of-replication.html"><a href="a-final-word-the-problem-of-replication.html"><i class="fa fa-check"></i><b>11</b> A final word: the problem of replication</a></li>
 <li class="chapter" data-level="12" data-path="BM-model.html"><a href="BM-model.html"><i class="fa fa-check"></i><b>12</b> The Brownian Motion (BM) model</a></li>
 <li class="chapter" data-level="13" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>13</b> Further readings</a></li>
@@ -704,13 +707,10 @@ div.csl-indent {
 <p>In the previous PGLS, we have used the corSymm structure to pass the phylogenetic correlation structure to the gls. This is perfectly fine, but there are more simple ways. Julien Dutheil has developped phylogenetic structures to be used especially in PGLS.</p>
 <p>The one we used above is equivalent to the <code>corBrownian</code> structure of <code>ape</code>. This approach is easier and you just have to pass the tree to the correlation structure. Here is the same example using the <code>corBrownian</code> structure.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="pgls.html#cb29-1" tabindex="-1"></a><span class="co"># Get the correlation structure</span></span>
-<span id="cb29-2"><a href="pgls.html#cb29-2" tabindex="-1"></a>bm.corr <span class="ot">&lt;-</span> <span class="fu">corBrownian</span>(<span class="at">phy=</span>seedplantstree, <span class="at">form=</span><span class="sc">~</span><span class="dv">1</span>)</span>
+<span id="cb29-2"><a href="pgls.html#cb29-2" tabindex="-1"></a>bm.corr <span class="ot">&lt;-</span> <span class="fu">corBrownian</span>(<span class="at">phy=</span>seedplantstree, <span class="at">form=</span><span class="sc">~</span>Code)</span>
 <span id="cb29-3"><a href="pgls.html#cb29-3" tabindex="-1"></a><span class="co"># PGLS</span></span>
-<span id="cb29-4"><a href="pgls.html#cb29-4" tabindex="-1"></a>shade.pgls1b <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> Wd, <span class="at">data =</span> seedplantsdata, <span class="at">correlation=</span>bm.corr)</span></code></pre></div>
-<pre><code>## Warning in Initialize.corPhyl(X[[i]], ...): No covariate specified, species
-## will be taken as ordered in the data frame. To avoid this message, specify a
-## covariate containing the species names with the &#39;form&#39; argument.</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="pgls.html#cb31-1" tabindex="-1"></a><span class="fu">summary</span>(shade.pgls1b)</span></code></pre></div>
+<span id="cb29-4"><a href="pgls.html#cb29-4" tabindex="-1"></a>shade.pgls1b <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> Wd, <span class="at">data =</span> seedplantsdata, <span class="at">correlation=</span>bm.corr)</span>
+<span id="cb29-5"><a href="pgls.html#cb29-5" tabindex="-1"></a><span class="fu">summary</span>(shade.pgls1b)</span></code></pre></div>
 <pre><code>## Generalized least squares fit by REML
 ##   Model: Shade ~ Wd 
 ##   Data: seedplantsdata 
@@ -718,7 +718,7 @@ div.csl-indent {
 ##   214.3762 220.3982 -104.1881
 ## 
 ## Correlation Structure: corBrownian
-##  Formula: ~1 
+##  Formula: ~Code 
 ##  Parameter estimate(s):
 ## numeric(0)
 ## 

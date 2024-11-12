@@ -23,7 +23,7 @@
 <meta name="author" content="Simon Joly" />
 
 
-<meta name="date" content="2024-11-09" />
+<meta name="date" content="2024-11-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -209,7 +209,10 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="8" data-path="phylogenetic-anova.html"><a href="phylogenetic-anova.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic ANOVA</a></li>
 <li class="chapter" data-level="9" data-path="model-testing.html"><a href="model-testing.html"><i class="fa fa-check"></i><b>9</b> Model testing</a></li>
-<li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a></li>
+<li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html#common-misconceptions"><i class="fa fa-check"></i><b>10.1</b> Common misconceptions</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="a-final-word-the-problem-of-replication.html"><a href="a-final-word-the-problem-of-replication.html"><i class="fa fa-check"></i><b>11</b> A final word: the problem of replication</a></li>
 <li class="chapter" data-level="12" data-path="BM-model.html"><a href="BM-model.html"><i class="fa fa-check"></i><b>12</b> The Brownian Motion (BM) model</a></li>
 <li class="chapter" data-level="13" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>13</b> Further readings</a></li>
@@ -267,20 +270,20 @@ div.csl-indent {
 <div id="simulate-a-tree" class="section level3 hasAnchor" number="14.1.1">
 <h3><span class="header-section-number">14.1.1</span> Simulate a tree<a href="trees.html#simulate-a-tree" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Throughout these exercises, we will often use simulated trees, which are very useful for pedagogical purposes. Trees can be simulated using several functions, but here is an example to simulate one tree with 15 species.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="trees.html#cb49-1" tabindex="-1"></a><span class="fu">require</span>(phytools)</span>
-<span id="cb49-2"><a href="trees.html#cb49-2" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">pbtree</span>(<span class="at">n=</span><span class="dv">15</span>,<span class="at">nsim=</span><span class="dv">1</span>)</span>
-<span id="cb49-3"><a href="trees.html#cb49-3" tabindex="-1"></a><span class="fu">plot</span>(tree)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="trees.html#cb47-1" tabindex="-1"></a><span class="fu">require</span>(phytools)</span>
+<span id="cb47-2"><a href="trees.html#cb47-2" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">pbtree</span>(<span class="at">n=</span><span class="dv">15</span>,<span class="at">nsim=</span><span class="dv">1</span>)</span>
+<span id="cb47-3"><a href="trees.html#cb47-3" tabindex="-1"></a><span class="fu">plot</span>(tree)</span></code></pre></div>
 <p><img src="pcm-workshop_files/figure-html/Simulate%20Pure-Birth%20Tree-1.png" width="672" /></p>
 <p>You save the tree in nexus format to a file. But before you do so, it is a good idea to set the working directory to the same folder where your script is saved. You can do that in RStudio in the menu Session&gt;Set Working Directory&gt;To Source File Location.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="trees.html#cb50-1" tabindex="-1"></a><span class="fu">require</span>(ape)</span>
-<span id="cb50-2"><a href="trees.html#cb50-2" tabindex="-1"></a><span class="fu">write.nexus</span>(tree, <span class="at">file=</span><span class="st">&quot;My_first_tree.tre&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="trees.html#cb48-1" tabindex="-1"></a><span class="fu">require</span>(ape)</span>
+<span id="cb48-2"><a href="trees.html#cb48-2" tabindex="-1"></a><span class="fu">write.nexus</span>(tree, <span class="at">file=</span><span class="st">&quot;My_first_tree.tre&quot;</span>)</span></code></pre></div>
 </div>
 <div id="simulating-characters" class="section level3 hasAnchor" number="14.1.2">
 <h3><span class="header-section-number">14.1.2</span> Simulating characters<a href="trees.html#simulating-characters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Characters can also be easily simulated in R. For instance, you could simulate a character using a Brownian Motion (BM) model using the following code.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="trees.html#cb51-1" tabindex="-1"></a>trait1 <span class="ot">&lt;-</span> <span class="fu">fastBM</span>(tree, <span class="at">sig2=</span><span class="fl">0.01</span>, <span class="at">nsim=</span><span class="dv">1</span>, <span class="at">internal=</span><span class="cn">FALSE</span>)</span>
-<span id="cb51-2"><a href="trees.html#cb51-2" tabindex="-1"></a><span class="co"># To get trait values for tree tips:</span></span>
-<span id="cb51-3"><a href="trees.html#cb51-3" tabindex="-1"></a>trait1</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="trees.html#cb49-1" tabindex="-1"></a>trait1 <span class="ot">&lt;-</span> <span class="fu">fastBM</span>(tree, <span class="at">sig2=</span><span class="fl">0.01</span>, <span class="at">nsim=</span><span class="dv">1</span>, <span class="at">internal=</span><span class="cn">FALSE</span>)</span>
+<span id="cb49-2"><a href="trees.html#cb49-2" tabindex="-1"></a><span class="co"># To get trait values for tree tips:</span></span>
+<span id="cb49-3"><a href="trees.html#cb49-3" tabindex="-1"></a>trait1</span></code></pre></div>
 <pre><code>##           t3           t4           t7           t8           t2          t14 
 ## -0.007306853  0.043251831  0.004858391 -0.114795593 -0.043737891  0.113964926 
 ##          t15           t9          t12          t13           t5           t6 
@@ -288,81 +291,81 @@ div.csl-indent {
 ##           t1          t10          t11 
 ## -0.084659118  0.118596501  0.059071786</code></pre>
 <p>Now, let’s save this trait to a file to pretend it is our original data.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="trees.html#cb53-1" tabindex="-1"></a><span class="fu">write.table</span>(<span class="fu">matrix</span>(trait1,<span class="at">ncol=</span><span class="dv">1</span>,<span class="at">dimnames=</span><span class="fu">list</span>(<span class="fu">names</span>(trait1),<span class="st">&quot;trait1&quot;</span>)), <span class="at">file=</span><span class="st">&quot;mytrait.csv&quot;</span>, <span class="at">sep=</span><span class="st">&quot;;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="trees.html#cb51-1" tabindex="-1"></a><span class="fu">write.table</span>(<span class="fu">matrix</span>(trait1,<span class="at">ncol=</span><span class="dv">1</span>,<span class="at">dimnames=</span><span class="fu">list</span>(<span class="fu">names</span>(trait1),<span class="st">&quot;trait1&quot;</span>)), <span class="at">file=</span><span class="st">&quot;mytrait.csv&quot;</span>, <span class="at">sep=</span><span class="st">&quot;;&quot;</span>)</span></code></pre></div>
 <p>Now that we have simulated a tree and a character, let’s erase what we have done so far from the R environment and pretend these are our data for the next sections.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="trees.html#cb54-1" tabindex="-1"></a><span class="fu">rm</span>(tree, trait1)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="trees.html#cb52-1" tabindex="-1"></a><span class="fu">rm</span>(tree, trait1)</span></code></pre></div>
 </div>
 </div>
 <div id="import-data-into-r" class="section level2 hasAnchor" number="14.2">
 <h2><span class="header-section-number">14.2</span> Import data into R<a href="trees.html#import-data-into-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Here is how you should import your data into R.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="trees.html#cb55-1" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">read.nexus</span>(<span class="at">file=</span><span class="st">&quot;My_first_tree.tre&quot;</span>)</span>
-<span id="cb55-2"><a href="trees.html#cb55-2" tabindex="-1"></a>trait1 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="at">file=</span><span class="st">&quot;mytrait.csv&quot;</span>,<span class="at">dec=</span><span class="st">&quot;.&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="trees.html#cb53-1" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">read.nexus</span>(<span class="at">file=</span><span class="st">&quot;My_first_tree.tre&quot;</span>)</span>
+<span id="cb53-2"><a href="trees.html#cb53-2" tabindex="-1"></a>trait1 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="at">file=</span><span class="st">&quot;mytrait.csv&quot;</span>,<span class="at">dec=</span><span class="st">&quot;.&quot;</span>)</span></code></pre></div>
 <p>The tree format in ape contains several information and it is useful to know how to access them. For instance, the tip labels can be accessed using <code>tree$tip.label</code> and the branch lengths using <code>tree$edge.length</code>. Will will see more options in other exercises, but if you want more detailed information on how the objects “phylo” are organized, you can have a look the help file <code>?read.tree</code> or at this <a href="http://ape-package.ird.fr/misc/FormatTreeR_24Oct2012.pdf">document</a> prepared by Emmanuel Paradis, the author of <code>ape</code>.</p>
 </div>
 <div id="plot-trees" class="section level2 hasAnchor" number="14.3">
 <h2><span class="header-section-number">14.3</span> Plot trees<a href="trees.html#plot-trees" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Plotting trees is one of the very interesting aspects of using R. Options are numerous and possibilities large. The most common function is <code>plot.phylo</code> from the ape package that has a lot of different options. I strongly suggest that you take a close look at the different options of the function <code>?plot.phylo</code>. Here is a basic example.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="trees.html#cb56-1" tabindex="-1"></a><span class="fu">plot</span>(tree, <span class="at">type=</span><span class="st">&quot;c&quot;</span>)</span>
-<span id="cb56-2"><a href="trees.html#cb56-2" tabindex="-1"></a><span class="fu">add.scale.bar</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="trees.html#cb54-1" tabindex="-1"></a><span class="fu">plot</span>(tree, <span class="at">type=</span><span class="st">&quot;c&quot;</span>)</span>
+<span id="cb54-2"><a href="trees.html#cb54-2" tabindex="-1"></a><span class="fu">add.scale.bar</span>()</span></code></pre></div>
 <p><img src="pcm-workshop_files/figure-html/Basic%20tree%20plotting-1.png" width="672" /></p>
 <p>But R is also interesting to plot characters alongside trees. If you have a categorical character, you could use it to color the tips of the phylogeny.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="trees.html#cb57-1" tabindex="-1"></a><span class="co"># Generate a random categorical character</span></span>
-<span id="cb57-2"><a href="trees.html#cb57-2" tabindex="-1"></a>trait2 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),<span class="at">size=</span><span class="fu">length</span>(tree<span class="sc">$</span>tip.label),<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
-<span id="cb57-3"><a href="trees.html#cb57-3" tabindex="-1"></a><span class="co"># Create color palette</span></span>
-<span id="cb57-4"><a href="trees.html#cb57-4" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb57-5"><a href="trees.html#cb57-5" tabindex="-1"></a>ColorPalette1 <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="fu">length</span>(<span class="fu">levels</span>(trait2)), <span class="at">name =</span> <span class="st">&quot;Dark2&quot;</span>)</span>
-<span id="cb57-6"><a href="trees.html#cb57-6" tabindex="-1"></a><span class="fu">plot</span>(tree, <span class="at">type=</span><span class="st">&quot;p&quot;</span>, <span class="at">use.edge.length =</span> <span class="cn">TRUE</span>, <span class="at">label.offset=</span><span class="fl">0.2</span>,<span class="at">cex=</span><span class="dv">1</span>)</span>
-<span id="cb57-7"><a href="trees.html#cb57-7" tabindex="-1"></a><span class="fu">tiplabels</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">bg=</span>ColorPalette1[trait2],<span class="at">col=</span><span class="st">&quot;black&quot;</span>,<span class="at">cex=</span><span class="dv">1</span>,<span class="at">adj=</span><span class="fl">0.6</span>)</span>
-<span id="cb57-8"><a href="trees.html#cb57-8" tabindex="-1"></a>op<span class="ot">&lt;-</span><span class="fu">par</span>(<span class="at">xpd=</span><span class="cn">TRUE</span>)</span>
-<span id="cb57-9"><a href="trees.html#cb57-9" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="at">legend=</span><span class="fu">levels</span>(trait2),<span class="at">col=</span>ColorPalette1,</span>
-<span id="cb57-10"><a href="trees.html#cb57-10" tabindex="-1"></a>       <span class="at">pch=</span><span class="dv">20</span>,<span class="at">bty=</span><span class="st">&quot;n&quot;</span>,<span class="at">cex=</span><span class="dv">1</span>,<span class="at">pt.cex=</span><span class="fl">1.5</span>,<span class="at">ncol=</span><span class="fu">length</span>(<span class="fu">levels</span>(trait2)))</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="trees.html#cb55-1" tabindex="-1"></a><span class="co"># Generate a random categorical character</span></span>
+<span id="cb55-2"><a href="trees.html#cb55-2" tabindex="-1"></a>trait2 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),<span class="at">size=</span><span class="fu">length</span>(tree<span class="sc">$</span>tip.label),<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb55-3"><a href="trees.html#cb55-3" tabindex="-1"></a><span class="co"># Create color palette</span></span>
+<span id="cb55-4"><a href="trees.html#cb55-4" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb55-5"><a href="trees.html#cb55-5" tabindex="-1"></a>ColorPalette1 <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="fu">length</span>(<span class="fu">levels</span>(trait2)), <span class="at">name =</span> <span class="st">&quot;Dark2&quot;</span>)</span>
+<span id="cb55-6"><a href="trees.html#cb55-6" tabindex="-1"></a><span class="fu">plot</span>(tree, <span class="at">type=</span><span class="st">&quot;p&quot;</span>, <span class="at">use.edge.length =</span> <span class="cn">TRUE</span>, <span class="at">label.offset=</span><span class="fl">0.2</span>,<span class="at">cex=</span><span class="dv">1</span>)</span>
+<span id="cb55-7"><a href="trees.html#cb55-7" tabindex="-1"></a><span class="fu">tiplabels</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">bg=</span>ColorPalette1[trait2],<span class="at">col=</span><span class="st">&quot;black&quot;</span>,<span class="at">cex=</span><span class="dv">1</span>,<span class="at">adj=</span><span class="fl">0.6</span>)</span>
+<span id="cb55-8"><a href="trees.html#cb55-8" tabindex="-1"></a>op<span class="ot">&lt;-</span><span class="fu">par</span>(<span class="at">xpd=</span><span class="cn">TRUE</span>)</span>
+<span id="cb55-9"><a href="trees.html#cb55-9" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="at">legend=</span><span class="fu">levels</span>(trait2),<span class="at">col=</span>ColorPalette1,</span>
+<span id="cb55-10"><a href="trees.html#cb55-10" tabindex="-1"></a>       <span class="at">pch=</span><span class="dv">20</span>,<span class="at">bty=</span><span class="st">&quot;n&quot;</span>,<span class="at">cex=</span><span class="dv">1</span>,<span class="at">pt.cex=</span><span class="fl">1.5</span>,<span class="at">ncol=</span><span class="fu">length</span>(<span class="fu">levels</span>(trait2)))</span></code></pre></div>
 <p><img src="pcm-workshop_files/figure-html/Plot%20categorical%20parameter-1.png" width="672" /></p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="trees.html#cb58-1" tabindex="-1"></a><span class="fu">par</span>(op) <span class="co">#reset graphical parameters to defaults</span></span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="trees.html#cb56-1" tabindex="-1"></a><span class="fu">par</span>(op) <span class="co">#reset graphical parameters to defaults</span></span></code></pre></div>
 <p>A similar result could be obtained with a continuous variable. Here, we will use the Brownian Motion model, which we will study in a further class, to simulate the continuous character.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="trees.html#cb59-1" tabindex="-1"></a><span class="co"># Breakdown continuous trait in categories</span></span>
-<span id="cb59-2"><a href="trees.html#cb59-2" tabindex="-1"></a>trait1.cat <span class="ot">&lt;-</span> <span class="fu">cut</span>(trait1[,<span class="dv">1</span>],<span class="at">breaks=</span><span class="dv">8</span>,<span class="at">labels=</span><span class="cn">FALSE</span>)</span>
-<span id="cb59-3"><a href="trees.html#cb59-3" tabindex="-1"></a><span class="co"># Create color palette</span></span>
-<span id="cb59-4"><a href="trees.html#cb59-4" tabindex="-1"></a>ColorPalette2 <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">8</span>, <span class="at">name =</span> <span class="st">&quot;Blues&quot;</span>)</span>
-<span id="cb59-5"><a href="trees.html#cb59-5" tabindex="-1"></a><span class="co"># Plot the tree</span></span>
-<span id="cb59-6"><a href="trees.html#cb59-6" tabindex="-1"></a><span class="fu">plot</span>(tree, <span class="at">type=</span><span class="st">&quot;p&quot;</span>, <span class="at">use.edge.length =</span> <span class="cn">TRUE</span>, <span class="at">label.offset=</span><span class="fl">0.2</span>,<span class="at">cex=</span><span class="dv">1</span>)</span>
-<span id="cb59-7"><a href="trees.html#cb59-7" tabindex="-1"></a><span class="fu">tiplabels</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">bg=</span>ColorPalette2[trait1.cat],<span class="at">col=</span><span class="st">&quot;black&quot;</span>,<span class="at">cex=</span><span class="dv">1</span>,<span class="at">adj=</span><span class="fl">0.6</span>)</span>
-<span id="cb59-8"><a href="trees.html#cb59-8" tabindex="-1"></a>op<span class="ot">&lt;-</span><span class="fu">par</span>(<span class="at">xpd=</span><span class="cn">TRUE</span>)</span>
-<span id="cb59-9"><a href="trees.html#cb59-9" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="at">legend=</span><span class="fu">levels</span>(<span class="fu">cut</span>(trait1[,<span class="dv">1</span>],<span class="at">breaks=</span><span class="dv">8</span>)),</span>
-<span id="cb59-10"><a href="trees.html#cb59-10" tabindex="-1"></a>       <span class="at">col=</span>ColorPalette2,<span class="at">pch=</span><span class="dv">20</span>,<span class="at">bty=</span><span class="st">&quot;n&quot;</span>,<span class="at">cex=</span><span class="fl">0.7</span>,<span class="at">pt.cex=</span><span class="fl">1.5</span>,<span class="at">ncol=</span><span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="trees.html#cb57-1" tabindex="-1"></a><span class="co"># Breakdown continuous trait in categories</span></span>
+<span id="cb57-2"><a href="trees.html#cb57-2" tabindex="-1"></a>trait1.cat <span class="ot">&lt;-</span> <span class="fu">cut</span>(trait1[,<span class="dv">1</span>],<span class="at">breaks=</span><span class="dv">8</span>,<span class="at">labels=</span><span class="cn">FALSE</span>)</span>
+<span id="cb57-3"><a href="trees.html#cb57-3" tabindex="-1"></a><span class="co"># Create color palette</span></span>
+<span id="cb57-4"><a href="trees.html#cb57-4" tabindex="-1"></a>ColorPalette2 <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">8</span>, <span class="at">name =</span> <span class="st">&quot;Blues&quot;</span>)</span>
+<span id="cb57-5"><a href="trees.html#cb57-5" tabindex="-1"></a><span class="co"># Plot the tree</span></span>
+<span id="cb57-6"><a href="trees.html#cb57-6" tabindex="-1"></a><span class="fu">plot</span>(tree, <span class="at">type=</span><span class="st">&quot;p&quot;</span>, <span class="at">use.edge.length =</span> <span class="cn">TRUE</span>, <span class="at">label.offset=</span><span class="fl">0.2</span>,<span class="at">cex=</span><span class="dv">1</span>)</span>
+<span id="cb57-7"><a href="trees.html#cb57-7" tabindex="-1"></a><span class="fu">tiplabels</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">bg=</span>ColorPalette2[trait1.cat],<span class="at">col=</span><span class="st">&quot;black&quot;</span>,<span class="at">cex=</span><span class="dv">1</span>,<span class="at">adj=</span><span class="fl">0.6</span>)</span>
+<span id="cb57-8"><a href="trees.html#cb57-8" tabindex="-1"></a>op<span class="ot">&lt;-</span><span class="fu">par</span>(<span class="at">xpd=</span><span class="cn">TRUE</span>)</span>
+<span id="cb57-9"><a href="trees.html#cb57-9" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="at">legend=</span><span class="fu">levels</span>(<span class="fu">cut</span>(trait1[,<span class="dv">1</span>],<span class="at">breaks=</span><span class="dv">8</span>)),</span>
+<span id="cb57-10"><a href="trees.html#cb57-10" tabindex="-1"></a>       <span class="at">col=</span>ColorPalette2,<span class="at">pch=</span><span class="dv">20</span>,<span class="at">bty=</span><span class="st">&quot;n&quot;</span>,<span class="at">cex=</span><span class="fl">0.7</span>,<span class="at">pt.cex=</span><span class="fl">1.5</span>,<span class="at">ncol=</span><span class="dv">4</span>)</span></code></pre></div>
 <p><img src="pcm-workshop_files/figure-html/Plot%20continuous%20parameter-1.png" width="672" /></p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="trees.html#cb60-1" tabindex="-1"></a><span class="fu">par</span>(op) <span class="co">#reset graphical parameters to defaults</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="trees.html#cb58-1" tabindex="-1"></a><span class="fu">par</span>(op) <span class="co">#reset graphical parameters to defaults</span></span></code></pre></div>
 <p>As expected from a character simlated with Brownian motion, you can see that closely related species tend to have more similar character values.</p>
 <p>Another option to represent a continuous parameter is to use the function <code>table.phylo4d</code> from the <code>adephylo</code> package to represent the trait where its values are represented by sizes of different sizes and colors. It is also possible to plot multiple characters at the same time.</p>
 <p>Note that you will have to install the packages <code>phylobase</code> and <code>adephylo</code> to run these function if they are not installed.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="trees.html#cb61-1" tabindex="-1"></a><span class="fu">library</span>(phylobase)</span>
-<span id="cb61-2"><a href="trees.html#cb61-2" tabindex="-1"></a><span class="fu">library</span>(adephylo)</span>
-<span id="cb61-3"><a href="trees.html#cb61-3" tabindex="-1"></a>trait3 <span class="ot">&lt;-</span> <span class="fu">fastBM</span>(tree, <span class="at">sig2=</span><span class="fl">0.1</span>, <span class="at">nsim=</span><span class="dv">1</span>, <span class="at">internal=</span><span class="cn">FALSE</span>) <span class="co">#simulate a faster evolving trait</span></span>
-<span id="cb61-4"><a href="trees.html#cb61-4" tabindex="-1"></a>trait.table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">trait1=</span>trait1[,<span class="dv">1</span>], trait3)</span>
-<span id="cb61-5"><a href="trees.html#cb61-5" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">phylo4d</span>(tree, trait.table) <span class="co"># build a phylo4d object</span></span>
-<span id="cb61-6"><a href="trees.html#cb61-6" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb61-7"><a href="trees.html#cb61-7" tabindex="-1"></a><span class="fu">table.phylo4d</span>(obj,<span class="at">cex.label=</span><span class="dv">1</span>,<span class="at">cex.symbol=</span><span class="dv">1</span>,<span class="at">ratio.tree=</span><span class="fl">0.8</span>,<span class="at">grid=</span><span class="cn">FALSE</span>,<span class="at">box=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="trees.html#cb59-1" tabindex="-1"></a><span class="fu">library</span>(phylobase)</span>
+<span id="cb59-2"><a href="trees.html#cb59-2" tabindex="-1"></a><span class="fu">library</span>(adephylo)</span>
+<span id="cb59-3"><a href="trees.html#cb59-3" tabindex="-1"></a>trait3 <span class="ot">&lt;-</span> <span class="fu">fastBM</span>(tree, <span class="at">sig2=</span><span class="fl">0.1</span>, <span class="at">nsim=</span><span class="dv">1</span>, <span class="at">internal=</span><span class="cn">FALSE</span>) <span class="co">#simulate a faster evolving trait</span></span>
+<span id="cb59-4"><a href="trees.html#cb59-4" tabindex="-1"></a>trait.table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">trait1=</span>trait1[,<span class="dv">1</span>], trait3)</span>
+<span id="cb59-5"><a href="trees.html#cb59-5" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">phylo4d</span>(tree, trait.table) <span class="co"># build a phylo4d object</span></span>
+<span id="cb59-6"><a href="trees.html#cb59-6" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb59-7"><a href="trees.html#cb59-7" tabindex="-1"></a><span class="fu">table.phylo4d</span>(obj,<span class="at">cex.label=</span><span class="dv">1</span>,<span class="at">cex.symbol=</span><span class="dv">1</span>,<span class="at">ratio.tree=</span><span class="fl">0.8</span>,<span class="at">grid=</span><span class="cn">FALSE</span>,<span class="at">box=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="pcm-workshop_files/figure-html/Plot%20continuous%20parameter%20-%20table.phylo4d-1.png" width="672" /></p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="trees.html#cb62-1" tabindex="-1"></a><span class="fu">par</span>(op) <span class="co">#reset graphical parameters to defaults</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="trees.html#cb60-1" tabindex="-1"></a><span class="fu">par</span>(op) <span class="co">#reset graphical parameters to defaults</span></span></code></pre></div>
 <p>You can also represent a traitgram:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="trees.html#cb63-1" tabindex="-1"></a><span class="fu">require</span>(phytools)</span>
-<span id="cb63-2"><a href="trees.html#cb63-2" tabindex="-1"></a><span class="fu">phenogram</span>(tree,trait3,<span class="at">spread.labels=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="trees.html#cb61-1" tabindex="-1"></a><span class="fu">require</span>(phytools)</span>
+<span id="cb61-2"><a href="trees.html#cb61-2" tabindex="-1"></a><span class="fu">phenogram</span>(tree,trait3,<span class="at">spread.labels=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="pcm-workshop_files/figure-html/traitgram-1.png" width="672" /></p>
 <p>Finally, it is also possible to represent a tree on a 2-dimensional plot, coloring points with the categorical variable.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="trees.html#cb64-1" tabindex="-1"></a><span class="fu">phylomorphospace</span>(tree,trait.table)</span>
-<span id="cb64-2"><a href="trees.html#cb64-2" tabindex="-1"></a><span class="fu">points</span>(trait.table,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">bg=</span>ColorPalette1[trait2],<span class="at">col=</span><span class="st">&quot;black&quot;</span>,<span class="at">cex=</span><span class="fl">1.2</span>,<span class="at">adj=</span><span class="dv">1</span>)</span>
-<span id="cb64-3"><a href="trees.html#cb64-3" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>,<span class="at">legend=</span><span class="fu">levels</span>(trait2),</span>
-<span id="cb64-4"><a href="trees.html#cb64-4" tabindex="-1"></a>       <span class="at">col=</span>ColorPalette1,<span class="at">pch=</span><span class="dv">20</span>,<span class="at">bty=</span><span class="st">&quot;n&quot;</span>,<span class="at">cex=</span><span class="dv">1</span>,<span class="at">pt.cex=</span><span class="fl">1.5</span>,<span class="at">ncol=</span><span class="fu">length</span>(<span class="fu">levels</span>(trait2)))</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="trees.html#cb62-1" tabindex="-1"></a><span class="fu">phylomorphospace</span>(tree,trait.table)</span>
+<span id="cb62-2"><a href="trees.html#cb62-2" tabindex="-1"></a><span class="fu">points</span>(trait.table,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">bg=</span>ColorPalette1[trait2],<span class="at">col=</span><span class="st">&quot;black&quot;</span>,<span class="at">cex=</span><span class="fl">1.2</span>,<span class="at">adj=</span><span class="dv">1</span>)</span>
+<span id="cb62-3"><a href="trees.html#cb62-3" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>,<span class="at">legend=</span><span class="fu">levels</span>(trait2),</span>
+<span id="cb62-4"><a href="trees.html#cb62-4" tabindex="-1"></a>       <span class="at">col=</span>ColorPalette1,<span class="at">pch=</span><span class="dv">20</span>,<span class="at">bty=</span><span class="st">&quot;n&quot;</span>,<span class="at">cex=</span><span class="dv">1</span>,<span class="at">pt.cex=</span><span class="fl">1.5</span>,<span class="at">ncol=</span><span class="fu">length</span>(<span class="fu">levels</span>(trait2)))</span></code></pre></div>
 <p><img src="pcm-workshop_files/figure-html/Phylomorphospace-1.png" width="672" /></p>
 </div>
 <div id="handling-multiple-trees" class="section level2 hasAnchor" number="14.4">
 <h2><span class="header-section-number">14.4</span> Handling multiple trees<a href="trees.html#handling-multiple-trees" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In several cases, it is important to know how to handle multiple trees in R. These are normally stored in a <code>multiPhylo</code> object. Let’s see an example.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="trees.html#cb65-1" tabindex="-1"></a>trees <span class="ot">&lt;-</span> <span class="fu">pbtree</span>(<span class="at">n=</span><span class="dv">15</span>,<span class="at">nsim=</span><span class="dv">10</span>)</span>
-<span id="cb65-2"><a href="trees.html#cb65-2" tabindex="-1"></a>trees</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="trees.html#cb63-1" tabindex="-1"></a>trees <span class="ot">&lt;-</span> <span class="fu">pbtree</span>(<span class="at">n=</span><span class="dv">15</span>,<span class="at">nsim=</span><span class="dv">10</span>)</span>
+<span id="cb63-2"><a href="trees.html#cb63-2" tabindex="-1"></a>trees</span></code></pre></div>
 <pre><code>## 10 phylogenetic trees</code></pre>
 <p>You can see that the object is not the same as a phylo object. For instance, if you use the code <code>plot(trees)</code>, you will be prompted to hit enter to pass from one tree to the other. To access to individual trees, you need to use the following technique.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="trees.html#cb67-1" tabindex="-1"></a>trees[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="trees.html#cb65-1" tabindex="-1"></a>trees[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## 
 ## Phylogenetic tree with 15 tips and 14 internal nodes.
 ## 
@@ -370,7 +373,7 @@ div.csl-indent {
 ##   t3, t4, t5, t14, t15, t8, ...
 ## 
 ## Rooted; includes branch lengths.</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="trees.html#cb69-1" tabindex="-1"></a><span class="fu">plot</span>(trees[[<span class="dv">1</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="trees.html#cb67-1" tabindex="-1"></a><span class="fu">plot</span>(trees[[<span class="dv">1</span>]])</span></code></pre></div>
 <p><img src="pcm-workshop_files/figure-html/multiPhylo%20manipulation-1.png" width="672" /></p>
 </div>
 <div id="manipulating-trees" class="section level2 hasAnchor" number="14.5">
@@ -378,17 +381,17 @@ div.csl-indent {
 <p>There are several manipulations that can be made to trees. Here are a few examples.</p>
 <div id="drop-tips" class="section level3 hasAnchor" number="14.5.1">
 <h3><span class="header-section-number">14.5.1</span> Drop tips<a href="trees.html#drop-tips" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="trees.html#cb70-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">drop.tip</span>(tree,<span class="fu">c</span>(<span class="st">&quot;t1&quot;</span>,<span class="st">&quot;t2&quot;</span>,<span class="st">&quot;t3&quot;</span>,<span class="st">&quot;t4&quot;</span>,<span class="st">&quot;t5&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="trees.html#cb68-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">drop.tip</span>(tree,<span class="fu">c</span>(<span class="st">&quot;t1&quot;</span>,<span class="st">&quot;t2&quot;</span>,<span class="st">&quot;t3&quot;</span>,<span class="st">&quot;t4&quot;</span>,<span class="st">&quot;t5&quot;</span>)))</span></code></pre></div>
 <p><img src="pcm-workshop_files/figure-html/Drop%20tips-1.png" width="672" /></p>
 </div>
 <div id="reroot-trees" class="section level3 hasAnchor" number="14.5.2">
 <h3><span class="header-section-number">14.5.2</span> Reroot trees<a href="trees.html#reroot-trees" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="trees.html#cb71-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">root</span>(tree,<span class="st">&quot;t1&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="trees.html#cb69-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">root</span>(tree,<span class="st">&quot;t1&quot;</span>))</span></code></pre></div>
 <p><img src="pcm-workshop_files/figure-html/Reroot%20trees-1.png" width="672" /></p>
 </div>
 <div id="get-cophenetic-distances" class="section level3 hasAnchor" number="14.5.3">
 <h3><span class="header-section-number">14.5.3</span> Get cophenetic distances<a href="trees.html#get-cophenetic-distances" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="trees.html#cb72-1" tabindex="-1"></a><span class="fu">cophenetic.phylo</span>(tree)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="trees.html#cb70-1" tabindex="-1"></a><span class="fu">cophenetic.phylo</span>(tree)</span></code></pre></div>
 <pre><code>##            t3        t4        t7        t8       t2        t14        t15
 ## t3  0.0000000 0.7285289 3.4533793 3.4533793 3.453379 4.29496600 4.29496600
 ## t4  0.7285289 0.0000000 3.4533793 3.4533793 3.453379 4.29496600 4.29496600

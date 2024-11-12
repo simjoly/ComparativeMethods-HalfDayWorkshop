@@ -23,7 +23,7 @@
 <meta name="author" content="Simon Joly" />
 
 
-<meta name="date" content="2024-11-09" />
+<meta name="date" content="2024-11-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -209,7 +209,10 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="8" data-path="phylogenetic-anova.html"><a href="phylogenetic-anova.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic ANOVA</a></li>
 <li class="chapter" data-level="9" data-path="model-testing.html"><a href="model-testing.html"><i class="fa fa-check"></i><b>9</b> Model testing</a></li>
-<li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a></li>
+<li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html#common-misconceptions"><i class="fa fa-check"></i><b>10.1</b> Common misconceptions</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="a-final-word-the-problem-of-replication.html"><a href="a-final-word-the-problem-of-replication.html"><i class="fa fa-check"></i><b>11</b> A final word: the problem of replication</a></li>
 <li class="chapter" data-level="12" data-path="BM-model.html"><a href="BM-model.html"><i class="fa fa-check"></i><b>12</b> The Brownian Motion (BM) model</a></li>
 <li class="chapter" data-level="13" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>13</b> Further readings</a></li>
@@ -260,9 +263,13 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="when-should-we-use-comparative-methods" class="section level1 hasAnchor" number="10">
 <h1><span class="header-section-number">10</span> When should we use comparative methods?<a href="when-should-we-use-comparative-methods.html#when-should-we-use-comparative-methods" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Comparative methods should always be used when working with datasets that comprise multiple species. A good advice though is to use a method that allows the residuals of the model not to be all phylogenetically correlated, as when using the PGLS with the corPagel structure or using the Phylogenetic Mixed Model. Previous studies have shown that using such comparative methods results in more precise and accurate fixed effect estimation, lower type I error, and greater statistical power <span class="citation">(<a href="#ref-revell2010phylogenetic">Revell 2010</a>)</span>. Therefore, it is always advantageous to use these methods.</p>
+<p>Comparative methods <strong><em>should always</em></strong> be used when working with datasets that comprise multiple species. A good advice though is to use a method that allows the residuals of the model not to be all phylogenetically correlated, as when using the PGLS with the corPagel structure or using the Phylogenetic Mixed Model. Previous studies have shown that using such comparative methods results in more precise and accurate fixed effect estimation, lower type I error, and greater statistical power <span class="citation">(<a href="#ref-revell2010phylogenetic">Revell 2010</a>)</span>. Therefore, it is always advantageous to use these methods.</p>
+<div id="common-misconceptions" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Common misconceptions<a href="when-should-we-use-comparative-methods.html#common-misconceptions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A common mistake is to use PGLS is to test for phylogenetic signal in <span class="math inline">\(Y\)</span> or <span class="math inline">\(X\)</span> using either Pagel’s <span class="math inline">\(\lambda\)</span> or Blomberg’s <span class="math inline">\(K\)</span>, and if there is phylogenetic signal use a PGLS to analyse the data and if not use a standard regression. This is a <strong>big mistake</strong>. As we saw earlier, PGLS corrects for phylogenetic correlation in the residuals and not in the variables. Therefore, the presence of phylogenetic signal in the variables does not necessarily mean that the residuals are phylogenetically correlated. And the opposite is also true: the variables may not be phylogenetically correlated but the residuals could be!</p>
 <p>Another common misconception of comparative methods is that it removes all variation in the data related to the phylogeny and that this could affect the interpretation of the variable of interest. This was true of old methods like phylogenetic autoregression that first removed the phylogenetic signal from the data before analysing them. These approaches were indeed problematic. But the methods presented here to not suffer from these problems. They account for the phylogenetic structure and quantify it, but it does not removes variation from the model.</p>
+<p>Another worry is that you might loose power when using phylogenetic comparative methods. If the method of using pairs of species results in the loss of information because species are dropped from the analysis, PGLS methods do not drop any information. And if PGLS sometimes <strong>appropriately</strong> result in less significant results, the opposite may also be true! The phylogenetic correlations can also hide true correlations in the data and using PGLS can actually results in significant results when OLS were not significant. This is exactly what we observed with the relationship between shade tolerance and wood density at chapter <a href="pgls.html#pgls">5</a>.</p>
+</div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">

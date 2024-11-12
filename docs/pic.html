@@ -23,7 +23,7 @@
 <meta name="author" content="Simon Joly" />
 
 
-<meta name="date" content="2024-11-09" />
+<meta name="date" content="2024-11-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -209,7 +209,10 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="8" data-path="phylogenetic-anova.html"><a href="phylogenetic-anova.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic ANOVA</a></li>
 <li class="chapter" data-level="9" data-path="model-testing.html"><a href="model-testing.html"><i class="fa fa-check"></i><b>9</b> Model testing</a></li>
-<li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a></li>
+<li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html#common-misconceptions"><i class="fa fa-check"></i><b>10.1</b> Common misconceptions</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="a-final-word-the-problem-of-replication.html"><a href="a-final-word-the-problem-of-replication.html"><i class="fa fa-check"></i><b>11</b> A final word: the problem of replication</a></li>
 <li class="chapter" data-level="12" data-path="BM-model.html"><a href="BM-model.html"><i class="fa fa-check"></i><b>12</b> The Brownian Motion (BM) model</a></li>
 <li class="chapter" data-level="13" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>13</b> Further readings</a></li>
@@ -262,14 +265,14 @@ div.csl-indent {
 <h1><span class="header-section-number">6</span> Phylogenetic Independent Contrasts<a href="pic.html#pic" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Let’s make a digression to look at Phylogenetic Independent Contrasts (PIC). PIC were the first comparative approach proposed to deal with phylogenetic non independence <span class="citation">(<a href="#ref-felsenstein1985phylogenies">Felsenstein 1985</a>)</span>. Although they are less flexible than PGLS, they give the same results. Let’s see how they can be used.</p>
 <p>Phylogenetic independent contrast are estimated one trait at a time. They essentially transform the observed trait in contrasts that are not correlated with the phylogeny. This can be done in R using the <code>pic</code> function of the <code>ape</code> package.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="pic.html#cb33-1" tabindex="-1"></a><span class="co"># Estimate PIC for shade tolerance </span></span>
-<span id="cb33-2"><a href="pic.html#cb33-2" tabindex="-1"></a>Shade.pic <span class="ot">&lt;-</span> <span class="fu">pic</span>(seedplantsdata<span class="sc">$</span>Shade, <span class="at">phy=</span>seedplantstree)</span>
-<span id="cb33-3"><a href="pic.html#cb33-3" tabindex="-1"></a><span class="co"># Estimate PIC for Wood density </span></span>
-<span id="cb33-4"><a href="pic.html#cb33-4" tabindex="-1"></a>Wd.pic <span class="ot">&lt;-</span> <span class="fu">pic</span>(seedplantsdata<span class="sc">$</span>Wd, <span class="at">phy=</span>seedplantstree)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="pic.html#cb31-1" tabindex="-1"></a><span class="co"># Estimate PIC for shade tolerance </span></span>
+<span id="cb31-2"><a href="pic.html#cb31-2" tabindex="-1"></a>Shade.pic <span class="ot">&lt;-</span> <span class="fu">pic</span>(seedplantsdata<span class="sc">$</span>Shade, <span class="at">phy=</span>seedplantstree)</span>
+<span id="cb31-3"><a href="pic.html#cb31-3" tabindex="-1"></a><span class="co"># Estimate PIC for Wood density </span></span>
+<span id="cb31-4"><a href="pic.html#cb31-4" tabindex="-1"></a>Wd.pic <span class="ot">&lt;-</span> <span class="fu">pic</span>(seedplantsdata<span class="sc">$</span>Wd, <span class="at">phy=</span>seedplantstree)</span></code></pre></div>
 <p>Once this is done, the only thing to do is to fit a regression between these contrast. Note that it is important that the intercept is fixed to 0 in the model. This is done by adding <code>- 1</code> to the right of the formula.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="pic.html#cb34-1" tabindex="-1"></a><span class="co"># Estimate PIC for shade tolerance</span></span>
-<span id="cb34-2"><a href="pic.html#cb34-2" tabindex="-1"></a>pic.results <span class="ot">&lt;-</span> <span class="fu">lm</span>(Shade.pic <span class="sc">~</span> Wd.pic <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb34-3"><a href="pic.html#cb34-3" tabindex="-1"></a><span class="fu">summary</span>(pic.results)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="pic.html#cb32-1" tabindex="-1"></a><span class="co"># Estimate PIC for shade tolerance</span></span>
+<span id="cb32-2"><a href="pic.html#cb32-2" tabindex="-1"></a>pic.results <span class="ot">&lt;-</span> <span class="fu">lm</span>(Shade.pic <span class="sc">~</span> Wd.pic <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb32-3"><a href="pic.html#cb32-3" tabindex="-1"></a><span class="fu">summary</span>(pic.results)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Shade.pic ~ Wd.pic - 1)
