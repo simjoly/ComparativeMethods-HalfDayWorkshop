@@ -46,7 +46,42 @@ summary(wd.final)
 
 # When should we use comparative methods?
 
-Comparative methods ***should always*** be used when working with datasets that comprise multiple species. A good advice though is to use a method that allows the residuals of the model not to be all phylogenetically correlated, as when using the PGLS with the corPagel structure or using the Phylogenetic Mixed Model. Previous studies have shown that using such comparative methods results in more precise and accurate fixed effect estimation, lower type I error, and greater statistical power [@revell2010phylogenetic]. Therefore, it is always advantageous to use these methods.
+Comparative methods ***should always*** be considered when working with datasets that comprise multiple species. A good advice though is to use a method that allows the residuals of the model not to be all phylogenetically correlated, as when using the PGLS with the corPagel structure or using the Phylogenetic Mixed Model. Previous studies have shown that using such comparative methods results in more precise and accurate fixed effect estimation, lower type I error, and greater statistical power [@revell2010phylogenetic]. Therefore, it is always advantageous to use these methods.
+
+
+## Challenge: how often is OLS misleading?
+
+You can test with simulations how often OLS can provide false conclusions.
+
+Using the code below, enter a random seed number (you could you your birth day and month).
+
+The code has a loop where it simulates the **independent** evolution by Brownian motion of two character on the Quebec tree phylogeny, and then tests the relationship between them with OLS and PGLS. You can adjust the number of simulations. It then indicates how often the results were significant. In theory, since the characters were simulated independently, the proportion of significant results should be below 5% for the method to have proper type I error (false postives).  
+
+```{r why-simulation, eval=FALSE}
+# Libraries
+library(phytools)
+
+# Parameters
+nb.simulations=100
+set.seed(1503) # change this!
+
+# Simulations
+pvalues <- t(replicate(nb.simulations, {
+  x <- fastBM(seedplantstree)
+  y <- fastBM(seedplantstree)
+  dat <- data.frame(x, y, sp = names(x))
+  c(OLS = summary(lm(y ~ x))$coef[2, 4],
+    PGLS = summary(gls(y ~ x, data = dat,
+            correlation = corBrownian(phy = seedplantstree, form = ~sp)))$tTable[2, 4])
+}))
+
+# Proportion of significant results
+colSums(pvalues < 0.05)/nb.simulations
+```
+
+How many of your simulations resulted in significant results with each method?
+
+With many simulations on this tree, OLS will be misleading about 50% of the time, whereas the type I error of PGLS will be correct (> 4%).
 
 ## Common misconceptions
 

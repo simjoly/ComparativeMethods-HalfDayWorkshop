@@ -208,11 +208,15 @@ div.csl-indent {
 <li class="chapter" data-level="7.3" data-path="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#challenge-4"><i class="fa fa-check"></i><b>7.3</b> Challenge 4</a></li>
 <li class="chapter" data-level="7.4" data-path="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html"><a href="relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated.html#other-correlation-structures-or-evolutionary-models"><i class="fa fa-check"></i><b>7.4</b> Other correlation structures (or evolutionary models)</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="phylogenetic-anova.html"><a href="phylogenetic-anova.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic ANOVA</a></li>
+<li class="chapter" data-level="8" data-path="phylogenetic-anova.html"><a href="phylogenetic-anova.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic ANOVA</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="phylogenetic-anova.html"><a href="phylogenetic-anova.html#do-carnivores-have-larger-home-ranges-than-ungulates"><i class="fa fa-check"></i><b>8.1</b> Do carnivores have larger home ranges than ungulates?</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="model-testing.html"><a href="model-testing.html"><i class="fa fa-check"></i><b>9</b> Model testing</a></li>
 <li class="chapter" data-level="10" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html"><i class="fa fa-check"></i><b>10</b> When should we use comparative methods?</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html#common-misconceptions"><i class="fa fa-check"></i><b>10.1</b> Common misconceptions</a></li>
+<li class="chapter" data-level="10.1" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html#challenge-how-often-is-ols-misleading"><i class="fa fa-check"></i><b>10.1</b> Challenge: how often is OLS misleading?</a></li>
+<li class="chapter" data-level="10.2" data-path="when-should-we-use-comparative-methods.html"><a href="when-should-we-use-comparative-methods.html#common-misconceptions"><i class="fa fa-check"></i><b>10.2</b> Common misconceptions</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="a-final-word-the-problem-of-replication.html"><a href="a-final-word-the-problem-of-replication.html"><i class="fa fa-check"></i><b>11</b> A final word: the problem of replication</a></li>
 <li class="chapter" data-level="12" data-path="BM-model.html"><a href="BM-model.html"><i class="fa fa-check"></i><b>12</b> The Brownian Motion (BM) model</a></li>
@@ -264,52 +268,109 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="phylogenetic-anova" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">8</span> Phylogenetic ANOVA<a href="phylogenetic-anova.html#phylogenetic-anova" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>So far, we have only analysed continuous quantitative characters. But it is also possible to perform an ANOVA with PGLS.</p>
-<p>The great thing with PGLS as implemented with the <code>gls</code> function is that it can easily be adapted to testing many different types of models. To give just one example here, it is easy to implement a phylogenetic ANOVA in R. Indeed, you just need to give <code>gls</code> a categorical trait as independent variable.</p>
-<p>Because there is no categorical variable in the plant functional trait dataset, we will create one by dividing the wood density category in two categories, light and dense wood.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="phylogenetic-anova.html#cb37-1" tabindex="-1"></a><span class="co"># Make categorical variable</span></span>
-<span id="cb37-2"><a href="phylogenetic-anova.html#cb37-2" tabindex="-1"></a>seedplantsdata<span class="sc">$</span>Wd.cat<span class="ot">&lt;-</span><span class="fu">cut</span>(seedplantsdata<span class="sc">$</span>Wd,<span class="at">breaks=</span><span class="dv">2</span>,<span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;light&quot;</span>,<span class="st">&quot;dense&quot;</span>))</span>
-<span id="cb37-3"><a href="phylogenetic-anova.html#cb37-3" tabindex="-1"></a><span class="co"># Look at the result</span></span>
-<span id="cb37-4"><a href="phylogenetic-anova.html#cb37-4" tabindex="-1"></a>seedplantsdata<span class="sc">$</span>Wd.cat</span></code></pre></div>
-<pre><code>##  [1] light light dense light dense dense dense light light light light dense
-## [13] dense light light dense dense dense dense dense dense dense light dense
-## [25] light dense light light dense dense light light light light light light
-## [37] light light light light light light light light light dense dense dense
-## [49] dense light light light light light light light dense
-## Levels: light dense</code></pre>
-<p>We can now fit a phylogenetic ANOVA.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="phylogenetic-anova.html#cb39-1" tabindex="-1"></a><span class="co"># Phylogenetic ANOVA</span></span>
-<span id="cb39-2"><a href="phylogenetic-anova.html#cb39-2" tabindex="-1"></a>shade.pgls3 <span class="ot">&lt;-</span> <span class="fu">gls</span>(Shade <span class="sc">~</span> Wd.cat, <span class="at">data =</span> seedplantsdata, <span class="at">correlation=</span>pagel.corr)</span>
-<span id="cb39-3"><a href="phylogenetic-anova.html#cb39-3" tabindex="-1"></a><span class="fu">summary</span>(shade.pgls3)</span></code></pre></div>
+<p>So far, we have only analysed continuous quantitative characters. But it is also possible to analyse categorical characters with PGLS abd perform an ANOVA or an ANCOVA.</p>
+<div id="do-carnivores-have-larger-home-ranges-than-ungulates" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Do carnivores have larger home ranges than ungulates?<a href="phylogenetic-anova.html#do-carnivores-have-larger-home-ranges-than-ungulates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This is one of the classic examples of the comparative method <span class="citation">(<a href="#ref-garland1993phylogenetic">Garland et al. 1993</a>)</span>. The dataset contains body mass (kg) and home range area (km<sup>2</sup>) for 49 mammal species: 19 Carnivora and 30 ungulates. It is the dataset of Garland et al. (1992), and it is also distributed in the R package <code>phytools</code> (<code>data(mammal.data)</code> and <code>data(mammal.tree)</code>).</p>
+<p><a href="https://simjoly.github.io/ComparativeMethods-HalfDayWorkshop/data/mammal_homerange.csv">mammal_homerange.csv</a></p>
+<p><a href="https://simjoly.github.io/ComparativeMethods-HalfDayWorkshop/data/mammal_homerange.tre">mammal_homerange.tre</a></p>
+<p>Let’s prepare the data for analysis.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="phylogenetic-anova.html#cb38-1" tabindex="-1"></a><span class="co"># load required libraries</span></span>
+<span id="cb38-2"><a href="phylogenetic-anova.html#cb38-2" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
+<span id="cb38-3"><a href="phylogenetic-anova.html#cb38-3" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
+<span id="cb38-4"><a href="phylogenetic-anova.html#cb38-4" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="phylogenetic-anova.html#cb38-5" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb38-6"><a href="phylogenetic-anova.html#cb38-6" tabindex="-1"></a>mammals <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/mammal_homerange.csv&quot;</span>)</span>
+<span id="cb38-7"><a href="phylogenetic-anova.html#cb38-7" tabindex="-1"></a>mammaltree <span class="ot">&lt;-</span> <span class="fu">read.tree</span>(<span class="st">&quot;./data/mammal_homerange.tre&quot;</span>)</span>
+<span id="cb38-8"><a href="phylogenetic-anova.html#cb38-8" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="phylogenetic-anova.html#cb38-9" tabindex="-1"></a><span class="co"># Transform clade to factor for analysis</span></span>
+<span id="cb38-10"><a href="phylogenetic-anova.html#cb38-10" tabindex="-1"></a>mammals<span class="sc">$</span>clade <span class="ot">&lt;-</span> <span class="fu">factor</span>(mammals<span class="sc">$</span>clade)</span>
+<span id="cb38-11"><a href="phylogenetic-anova.html#cb38-11" tabindex="-1"></a></span>
+<span id="cb38-12"><a href="phylogenetic-anova.html#cb38-12" tabindex="-1"></a><span class="co"># Compute log10 values for analysis</span></span>
+<span id="cb38-13"><a href="phylogenetic-anova.html#cb38-13" tabindex="-1"></a>mammals<span class="sc">$</span>logMass <span class="ot">&lt;-</span> <span class="fu">log10</span>(mammals<span class="sc">$</span>bodyMass_kg)</span>
+<span id="cb38-14"><a href="phylogenetic-anova.html#cb38-14" tabindex="-1"></a>mammals<span class="sc">$</span>logHR <span class="ot">&lt;-</span> <span class="fu">log10</span>(mammals<span class="sc">$</span>homeRange_km2)</span>
+<span id="cb38-15"><a href="phylogenetic-anova.html#cb38-15" tabindex="-1"></a></span>
+<span id="cb38-16"><a href="phylogenetic-anova.html#cb38-16" tabindex="-1"></a><span class="co"># Add rownames and order table following the tip labels of the tree</span></span>
+<span id="cb38-17"><a href="phylogenetic-anova.html#cb38-17" tabindex="-1"></a><span class="fu">rownames</span>(mammals) <span class="ot">&lt;-</span> mammals<span class="sc">$</span>species</span>
+<span id="cb38-18"><a href="phylogenetic-anova.html#cb38-18" tabindex="-1"></a>mammals <span class="ot">&lt;-</span> mammals[mammaltree<span class="sc">$</span>tip.label, ]</span></code></pre></div>
+<p>The question is simple: for a given body size, do carnivores, which eat prey at low densities, need larger home ranges than herbivores?</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="phylogenetic-anova.html#cb39-1" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#7570b3&quot;</span>,<span class="st">&quot;#d95f02&quot;</span>)</span>
+<span id="cb39-2"><a href="phylogenetic-anova.html#cb39-2" tabindex="-1"></a><span class="fu">plot</span>(logHR <span class="sc">~</span> logMass, <span class="at">data =</span> mammals, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> cols[mammals<span class="sc">$</span>clade],</span>
+<span id="cb39-3"><a href="phylogenetic-anova.html#cb39-3" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;log10 body mass (kg)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;log10 home range (km2)&quot;</span>)</span>
+<span id="cb39-4"><a href="phylogenetic-anova.html#cb39-4" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(mammals<span class="sc">$</span>clade), <span class="at">pt.bg =</span> cols, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<p><img src="pcm-workshop_files/figure-html/why-mammal-plot-1.png" width="672" style="display: block; margin: auto;" /></p>
+<blockquote>
+<p><strong>Before going further:</strong> how would you analyse these data? What would you conclude?</p>
+</blockquote>
+<p>A standard analysis of covariance (ANCOVA) provides the answer:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="phylogenetic-anova.html#cb40-1" tabindex="-1"></a>hr.ols <span class="ot">&lt;-</span> <span class="fu">gls</span>(logHR <span class="sc">~</span> logMass <span class="sc">+</span> clade, <span class="at">data =</span> mammals)</span>
+<span id="cb40-2"><a href="phylogenetic-anova.html#cb40-2" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(hr.ols)<span class="sc">$</span>tTable, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##                  Value Std.Error t-value p-value
+## (Intercept)    -0.1055    0.2466 -0.4278  0.6708
+## logMass         0.9970    0.1448  6.8851  0.0000
+## cladeUngulates -1.0224    0.2088 -4.8959  0.0000</code></pre>
+<p>The model tells us that body mass is significantly (p-value = 0) positively correlated to home ranges with a slope of 1, as expected. The model also shows that ungulates have home ranges about 10 times smaller (-1.02 on the log<sub>10</sub> scale) than carnivores of the same size, and the difference is highly significant (p-value = 0).</p>
+<p>However, we’ve been ignoring the phylogeny so far. Now let’s look at where the species are on the phylogeny.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="phylogenetic-anova.html#cb42-1" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb42-2"><a href="phylogenetic-anova.html#cb42-2" tabindex="-1"></a><span class="fu">plot</span>(mammaltree, <span class="at">cex =</span> <span class="fl">0.6</span>, <span class="at">label.offset =</span> <span class="dv">2</span>)</span>
+<span id="cb42-3"><a href="phylogenetic-anova.html#cb42-3" tabindex="-1"></a><span class="fu">tiplabels</span>(<span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> cols[mammals<span class="sc">$</span>clade], <span class="at">cex =</span> <span class="fl">1.2</span>)</span></code></pre></div>
+<p><img src="pcm-workshop_files/figure-html/why-mammal-tree-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="phylogenetic-anova.html#cb43-1" tabindex="-1"></a><span class="fu">par</span>(op)</span></code></pre></div>
+<p>You can see that the carnivores and the ungulates form distinct clades. Whatever made carnivores and ungulates different, it could have happened only once on the branches separating the two clades. From an evolutionary point of view, there is only one comparison here, even if there are 49 species.</p>
+<p>Let’s fit the same model while accounting for the phylogeny.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="phylogenetic-anova.html#cb44-1" tabindex="-1"></a>hr.lambda <span class="ot">&lt;-</span> <span class="fu">gls</span>(logHR <span class="sc">~</span> logMass <span class="sc">+</span> clade, <span class="at">data =</span> mammals,</span>
+<span id="cb44-2"><a href="phylogenetic-anova.html#cb44-2" tabindex="-1"></a>                 <span class="at">correlation =</span> <span class="fu">corPagel</span>(<span class="fl">0.5</span>, <span class="at">phy =</span> mammaltree, <span class="at">form =</span> <span class="sc">~</span>species))</span>
+<span id="cb44-3"><a href="phylogenetic-anova.html#cb44-3" tabindex="-1"></a><span class="fu">summary</span>(hr.lambda)</span></code></pre></div>
 <pre><code>## Generalized least squares fit by REML
-##   Model: Shade ~ Wd.cat 
-##   Data: seedplantsdata 
+##   Model: logHR ~ logMass + clade 
+##   Data: mammals 
 ##        AIC      BIC    logLik
-##   166.7352 174.7646 -79.36762
+##   92.07111 101.2143 -41.03556
 ## 
 ## Correlation Structure: corPagel
-##  Formula: ~Code 
+##  Formula: ~species 
 ##  Parameter estimate(s):
 ##    lambda 
-## 0.9439646 
+## 0.8163428 
 ## 
 ## Coefficients:
-##                 Value Std.Error  t-value p-value
-## (Intercept) 2.6826723 1.3844404 1.937730  0.0578
-## Wd.catdense 0.6179855 0.2526902 2.445626  0.0177
+##                     Value Std.Error   t-value p-value
+## (Intercept)    -0.5594746 0.5193291 -1.077303  0.2870
+## logMass         1.2756936 0.1670281  7.637601  0.0000
+## cladeUngulates -1.5396769 0.6485326 -2.374093  0.0218
 ## 
 ##  Correlation: 
-##             (Intr)
-## Wd.catdense -0.037
+##                (Intr) logMss
+## logMass        -0.446       
+## cladeUngulates -0.515 -0.285
 ## 
 ## Standardized residuals:
-##         Min          Q1         Med          Q3         Max 
-## -0.69257567 -0.48677930 -0.04143001  0.33640615  0.95379525 
+##        Min         Q1        Med         Q3        Max 
+## -1.5638392 -0.2810501  0.2055344  0.9632602  1.5671751 
 ## 
-## Residual standard error: 2.429586 
-## Degrees of freedom: 57 total; 55 residual</code></pre>
-<p>You can see that the wood density, even when transformed in a categorical variable, has a significant effect on shade tolerance.</p>
+## Residual standard error: 0.8243364 
+## Degrees of freedom: 49 total; 46 residual</code></pre>
+<p>Under Pagel model, the clade difference is greater than with the ordinary least squares, but the results is less significant (p-value = 0.022). The lambda estimate (<span class="math inline">\(\lambda\)</span> = 0.8163428) suggests that the residuales are quite strongly phylogenetically correlated. Its standard error is about three times larger than in the OLS model, because the model knows that the 49 species are not 49 independent observations of the effect of diet. This analysis supports the idea that ungulates have lower home ranges than carnivores, but that there is not a strong support for this conclusion.</p>
+<p>There is a second, less obvious problem. Look at the allometric slope when the clade is <em>not</em> included in the model:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="phylogenetic-anova.html#cb46-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(<span class="fu">gls</span>(logHR <span class="sc">~</span> logMass, <span class="at">data =</span> mammals))<span class="sc">$</span>tTable, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##              Value Std.Error t-value p-value
+## (Intercept) 0.0109    0.2994  0.0363  0.9712
+## logMass     0.6071    0.1476  4.1141  0.0002</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="phylogenetic-anova.html#cb48-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(<span class="fu">gls</span>(logHR <span class="sc">~</span> logMass, <span class="at">data =</span> mammals,</span>
+<span id="cb48-2"><a href="phylogenetic-anova.html#cb48-2" tabindex="-1"></a>          <span class="at">correlation =</span> <span class="fu">corPagel</span>(<span class="fl">0.5</span>, <span class="at">phy =</span> mammaltree, <span class="at">form =</span> <span class="sc">~</span>species)))<span class="sc">$</span>tTable, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##               Value Std.Error t-value p-value
+## (Intercept) -1.3387    0.5304 -2.5240   0.015
+## logMass      1.2252    0.1736  7.0581   0.000</code></pre>
+<p>The OLS slope is about half the PGLS slope. Carnivores are, on average, smaller than ungulates but have larger home ranges. When the two clades are pooled, this single deep difference flattens the slope. However, incorporating the phylogenty largely corrects for this even if the clade in not in the model because it provides the phylogenetic structure of the data.</p>
+<p><strong>Take-home messages:</strong> (1) a significant result with many species can rest on a single evolutionary event; (2) the phylogeny affects not only <span class="math inline">\(p\)</span>-values but also parameter estimates; (3) even with PGLS, a difference between two clades remains a comparison with one evolutionary replicate (see chapter <a href="a-final-word-the-problem-of-replication.html#a-final-word-the-problem-of-replication">11</a>).</p>
 
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-garland1993phylogenetic" class="csl-entry">
+Garland, Jr., Theodore, Allan W. Dickerman, Christine M. Janis, and Jason A. Jones. 1993. <span>“Phylogenetic Analysis of Covariance by Computer Simulation.”</span> <em>Systematic Biology</em> 42 (3): 265–92. <a href="https://doi.org/10.1093/sysbio/42.3.265">https://doi.org/10.1093/sysbio/42.3.265</a>.
+</div>
 </div>
             </section>
 

@@ -379,7 +379,22 @@ Now, we can have a look at the data, and then order the plant trait to be in the
 \end{Highlighting}
 \end{Shaded}
 
-Now that the data is ready, let's fit a linear model and try to explain shade tolerance (Shade) of trees using wood density (Wd). In R, a very simple way to do a regression is to use the function `lm', which stands for linear model. To fit a linear model, you need to tell the \texttt{lm} function which variable is the response variable and which one is the explanatory variable. This is done using formulas in the form \texttt{Shade\ \textasciitilde{}\ Wd}. The variable at the left of the tilde (`\textasciitilde{}') is the response variable (\texttt{Shade}) whereas the explanatory variale (1 or more) are at the right of the tilde.
+Now that the data is ready, we'll look at some correlations among variables of the dataset. We'll first look at the relationship between shade tolerance (Shade) of trees using wood density (Wd). In general, species with shade tolerance normally grow slower and should have greater wood density. Let's look at the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Here is what the loaded data looks like}
+\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{Shade, }\AttributeTok{x=}\NormalTok{Wd),}\AttributeTok{data=}\NormalTok{seedplantsdata) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/shade tolerance plot-1.pdf}}
+
+You can see that there might be a small trend for a positive correlation, but it is not very clear. Let's fit a linear model to explicitely test the correlation between shade tolerance (Shade) and wood density (Wd).
+
+In R, a very simple way to do a regression is to use the function `lm', which stands for linear model. To fit a linear model, you need to tell the \texttt{lm} function which variable is the response variable and which one is the explanatory variable. This is done using formulas in the form \texttt{Shade\ \textasciitilde{}\ Wd}. The variable at the left of the tilde (`\textasciitilde{}') is the response variable (\texttt{Shade}) whereas the explanatory variale (1 or more) are at the right of the tilde.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -505,10 +520,8 @@ The variance-covariance matrix of a phylogenetic tree can be obtained from a tre
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# \textquotesingle{}atree\textquotesingle{} corresponds to the phylogenetic tree shown above in newick format}
-\NormalTok{atree }\OtherTok{\textless{}{-}} \StringTok{"(((a:0.15,b:0.15):0.4,c:0.55):0.5,(d:0.25,e:0.25):0.8);"}
-\CommentTok{\# Let\textquotesingle{}s now read this tree and store it as a phylogenetic tree object in R}
-\NormalTok{atree }\OtherTok{\textless{}{-}} \FunctionTok{read.tree}\NormalTok{(}\AttributeTok{text=}\NormalTok{atree)}
+\CommentTok{\# Read the tree \textquotesingle{}atree\textquotesingle{} corresponds to the phylogenetic tree shown above in newick format}
+\NormalTok{atree }\OtherTok{\textless{}{-}} \FunctionTok{read.tree}\NormalTok{(}\AttributeTok{file=}\StringTok{"./data/atree.tre"}\NormalTok{)}
 \CommentTok{\# Show the tree}
 \FunctionTok{plot}\NormalTok{(atree)}
 \end{Highlighting}
@@ -988,9 +1001,9 @@ If you compare with the ordinary least squares optimization, the residuals are m
 
 \subsection{Other correlation structures}\label{other-correlation-structures}
 
-In the previous PGLS, we have used the corSymm structure to pass the phylogenetic correlation structure to the gls. This is perfectly fine, but there are more simple ways. Julien Dutheil has developped phylogenetic structures to be used especially in PGLS.
+In the previous PGLS, we have used the corSymm structure to pass the phylogenetic correlation structure to the gls. This is perfectly fine, but there are more simple ways when we work with phylogenies. Julien Dutheil has developped phylogenetic structures to be used especially in PGLS.
 
-The one we used above is equivalent to the \texttt{corBrownian} structure of \texttt{ape}. This approach is easier and you just have to pass the tree to the correlation structure. Here is the same example using the \texttt{corBrownian} structure.
+For example, instead of calculating the correlation matrix and using corSymm, we can we used the \texttt{corBrownian} structure of \texttt{ape}. This approach is easier and you just have to pass the tree to the correlation structure. Here is the same example using the \texttt{corBrownian} structure. When you do this, you have to indicate to the \texttt{corBrownian} structure which column in the dataset contains the names of the species found in the tree. This is done with the \texttt{form=\textasciitilde{}Code} option, which indicates that the column \texttt{Code} will contain this information.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1171,71 +1184,170 @@ The correlation structures available in the package \texttt{ape} offer other alt
 
 \chapter{Phylogenetic ANOVA}\label{phylogenetic-anova}
 
-So far, we have only analysed continuous quantitative characters. But it is also possible to perform an ANOVA with PGLS.
+So far, we have only analysed continuous quantitative characters. But it is also possible to analyse categorical characters with PGLS abd perform an ANOVA or an ANCOVA.
 
-The great thing with PGLS as implemented with the \texttt{gls} function is that it can easily be adapted to testing many different types of models. To give just one example here, it is easy to implement a phylogenetic ANOVA in R. Indeed, you just need to give \texttt{gls} a categorical trait as independent variable.
+\section{Do carnivores have larger home ranges than ungulates?}\label{do-carnivores-have-larger-home-ranges-than-ungulates}
 
-Because there is no categorical variable in the plant functional trait dataset, we will create one by dividing the wood density category in two categories, light and dense wood.
+This is one of the classic examples of the comparative method \citep{garland1993phylogenetic}. The dataset contains body mass (kg) and home range area (km\textsuperscript{2}) for 49 mammal species: 19 Carnivora and 30 ungulates. It is the dataset of Garland et al.~(1992), and it is also distributed in the R package \texttt{phytools} (\texttt{data(mammal.data)} and \texttt{data(mammal.tree)}).
+
+\href{https://simjoly.github.io/ComparativeMethods-HalfDayWorkshop/data/mammal_homerange.csv}{mammal\_homerange.csv}
+
+\href{https://simjoly.github.io/ComparativeMethods-HalfDayWorkshop/data/mammal_homerange.tre}{mammal\_homerange.tre}
+
+Let's prepare the data for analysis.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Make categorical variable}
-\NormalTok{seedplantsdata}\SpecialCharTok{$}\NormalTok{Wd.cat}\OtherTok{\textless{}{-}}\FunctionTok{cut}\NormalTok{(seedplantsdata}\SpecialCharTok{$}\NormalTok{Wd,}\AttributeTok{breaks=}\DecValTok{2}\NormalTok{,}\AttributeTok{labels=}\FunctionTok{c}\NormalTok{(}\StringTok{"light"}\NormalTok{,}\StringTok{"dense"}\NormalTok{))}
-\CommentTok{\# Look at the result}
-\NormalTok{seedplantsdata}\SpecialCharTok{$}\NormalTok{Wd.cat}
+\CommentTok{\# load required libraries}
+\FunctionTok{library}\NormalTok{(nlme)}
+\FunctionTok{library}\NormalTok{(ape)}
+
+\CommentTok{\# Load data}
+\NormalTok{mammals }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./data/mammal\_homerange.csv"}\NormalTok{)}
+\NormalTok{mammaltree }\OtherTok{\textless{}{-}} \FunctionTok{read.tree}\NormalTok{(}\StringTok{"./data/mammal\_homerange.tre"}\NormalTok{)}
+
+\CommentTok{\# Transform clade to factor for analysis}
+\NormalTok{mammals}\SpecialCharTok{$}\NormalTok{clade }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(mammals}\SpecialCharTok{$}\NormalTok{clade)}
+
+\CommentTok{\# Compute log10 values for analysis}
+\NormalTok{mammals}\SpecialCharTok{$}\NormalTok{logMass }\OtherTok{\textless{}{-}} \FunctionTok{log10}\NormalTok{(mammals}\SpecialCharTok{$}\NormalTok{bodyMass\_kg)}
+\NormalTok{mammals}\SpecialCharTok{$}\NormalTok{logHR }\OtherTok{\textless{}{-}} \FunctionTok{log10}\NormalTok{(mammals}\SpecialCharTok{$}\NormalTok{homeRange\_km2)}
+
+\CommentTok{\# Add rownames and order table following the tip labels of the tree}
+\FunctionTok{rownames}\NormalTok{(mammals) }\OtherTok{\textless{}{-}}\NormalTok{ mammals}\SpecialCharTok{$}\NormalTok{species}
+\NormalTok{mammals }\OtherTok{\textless{}{-}}\NormalTok{ mammals[mammaltree}\SpecialCharTok{$}\NormalTok{tip.label, ]}
+\end{Highlighting}
+\end{Shaded}
+
+The question is simple: for a given body size, do carnivores, which eat prey at low densities, need larger home ranges than herbivores?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cols }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"\#7570b3"}\NormalTok{,}\StringTok{"\#d95f02"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(logHR }\SpecialCharTok{\textasciitilde{}}\NormalTok{ logMass, }\AttributeTok{data =}\NormalTok{ mammals, }\AttributeTok{pch =} \DecValTok{21}\NormalTok{, }\AttributeTok{bg =}\NormalTok{ cols[mammals}\SpecialCharTok{$}\NormalTok{clade],}
+     \AttributeTok{xlab =} \StringTok{"log10 body mass (kg)"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"log10 home range (km2)"}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{levels}\NormalTok{(mammals}\SpecialCharTok{$}\NormalTok{clade), }\AttributeTok{pt.bg =}\NormalTok{ cols, }\AttributeTok{pch =} \DecValTok{21}\NormalTok{, }\AttributeTok{bty =} \StringTok{"n"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{pcm-workshop_files/figure-latex/why-mammal-plot-1} \end{center}
+
+\begin{quote}
+\textbf{Before going further:} how would you analyse these data? What would you conclude?
+\end{quote}
+
+A standard analysis of covariance (ANCOVA) provides the answer:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hr.ols }\OtherTok{\textless{}{-}} \FunctionTok{gls}\NormalTok{(logHR }\SpecialCharTok{\textasciitilde{}}\NormalTok{ logMass }\SpecialCharTok{+}\NormalTok{ clade, }\AttributeTok{data =}\NormalTok{ mammals)}
+\FunctionTok{round}\NormalTok{(}\FunctionTok{summary}\NormalTok{(hr.ols)}\SpecialCharTok{$}\NormalTok{tTable, }\DecValTok{4}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] light light dense light dense dense dense light light light light dense
-## [13] dense light light dense dense dense dense dense dense dense light dense
-## [25] light dense light light dense dense light light light light light light
-## [37] light light light light light light light light light dense dense dense
-## [49] dense light light light light light light light dense
-## Levels: light dense
+##                  Value Std.Error t-value p-value
+## (Intercept)    -0.1055    0.2466 -0.4278  0.6708
+## logMass         0.9970    0.1448  6.8851  0.0000
+## cladeUngulates -1.0224    0.2088 -4.8959  0.0000
 \end{verbatim}
 
-We can now fit a phylogenetic ANOVA.
+The model tells us that body mass is significantly (p-value = 0) positively correlated to home ranges with a slope of 1, as expected. The model also shows that ungulates have home ranges about 10 times smaller (-1.02 on the log\textsubscript{10} scale) than carnivores of the same size, and the difference is highly significant (p-value = 0).
+
+However, we've been ignoring the phylogeny so far. Now let's look at where the species are on the phylogeny.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Phylogenetic ANOVA}
-\NormalTok{shade.pgls3 }\OtherTok{\textless{}{-}} \FunctionTok{gls}\NormalTok{(Shade }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Wd.cat, }\AttributeTok{data =}\NormalTok{ seedplantsdata, }\AttributeTok{correlation=}\NormalTok{pagel.corr)}
-\FunctionTok{summary}\NormalTok{(shade.pgls3)}
+\NormalTok{op }\OtherTok{\textless{}{-}} \FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(mammaltree, }\AttributeTok{cex =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{label.offset =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{tiplabels}\NormalTok{(}\AttributeTok{pch =} \DecValTok{21}\NormalTok{, }\AttributeTok{bg =}\NormalTok{ cols[mammals}\SpecialCharTok{$}\NormalTok{clade], }\AttributeTok{cex =} \FloatTok{1.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{pcm-workshop_files/figure-latex/why-mammal-tree-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(op)}
+\end{Highlighting}
+\end{Shaded}
+
+You can see that the carnivores and the ungulates form distinct clades. Whatever made carnivores and ungulates different, it could have happened only once on the branches separating the two clades. From an evolutionary point of view, there is only one comparison here, even if there are 49 species.
+
+Let's fit the same model while accounting for the phylogeny.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hr.lambda }\OtherTok{\textless{}{-}} \FunctionTok{gls}\NormalTok{(logHR }\SpecialCharTok{\textasciitilde{}}\NormalTok{ logMass }\SpecialCharTok{+}\NormalTok{ clade, }\AttributeTok{data =}\NormalTok{ mammals,}
+                 \AttributeTok{correlation =} \FunctionTok{corPagel}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\AttributeTok{phy =}\NormalTok{ mammaltree, }\AttributeTok{form =} \SpecialCharTok{\textasciitilde{}}\NormalTok{species))}
+\FunctionTok{summary}\NormalTok{(hr.lambda)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Generalized least squares fit by REML
-##   Model: Shade ~ Wd.cat 
-##   Data: seedplantsdata 
+##   Model: logHR ~ logMass + clade 
+##   Data: mammals 
 ##        AIC      BIC    logLik
-##   166.7352 174.7646 -79.36762
+##   92.07111 101.2143 -41.03556
 ## 
 ## Correlation Structure: corPagel
-##  Formula: ~Code 
+##  Formula: ~species 
 ##  Parameter estimate(s):
 ##    lambda 
-## 0.9439646 
+## 0.8163428 
 ## 
 ## Coefficients:
-##                 Value Std.Error  t-value p-value
-## (Intercept) 2.6826723 1.3844404 1.937730  0.0578
-## Wd.catdense 0.6179855 0.2526902 2.445626  0.0177
+##                     Value Std.Error   t-value p-value
+## (Intercept)    -0.5594746 0.5193291 -1.077303  0.2870
+## logMass         1.2756936 0.1670281  7.637601  0.0000
+## cladeUngulates -1.5396769 0.6485326 -2.374093  0.0218
 ## 
 ##  Correlation: 
-##             (Intr)
-## Wd.catdense -0.037
+##                (Intr) logMss
+## logMass        -0.446       
+## cladeUngulates -0.515 -0.285
 ## 
 ## Standardized residuals:
-##         Min          Q1         Med          Q3         Max 
-## -0.69257567 -0.48677930 -0.04143001  0.33640615  0.95379525 
+##        Min         Q1        Med         Q3        Max 
+## -1.5638392 -0.2810501  0.2055344  0.9632602  1.5671751 
 ## 
-## Residual standard error: 2.429586 
-## Degrees of freedom: 57 total; 55 residual
+## Residual standard error: 0.8243364 
+## Degrees of freedom: 49 total; 46 residual
 \end{verbatim}
 
-You can see that the wood density, even when transformed in a categorical variable, has a significant effect on shade tolerance.
+Under Pagel model, the clade difference is greater than with the ordinary least squares, but the results is less significant (p-value = 0.022). The lambda estimate (\(\lambda\) = 0.8163428) suggests that the residuales are quite strongly phylogenetically correlated. Its standard error is about three times larger than in the OLS model, because the model knows that the 49 species are not 49 independent observations of the effect of diet. This analysis supports the idea that ungulates have lower home ranges than carnivores, but that there is not a strong support for this conclusion.
+
+There is a second, less obvious problem. Look at the allometric slope when the clade is \emph{not} included in the model:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\FunctionTok{summary}\NormalTok{(}\FunctionTok{gls}\NormalTok{(logHR }\SpecialCharTok{\textasciitilde{}}\NormalTok{ logMass, }\AttributeTok{data =}\NormalTok{ mammals))}\SpecialCharTok{$}\NormalTok{tTable, }\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              Value Std.Error t-value p-value
+## (Intercept) 0.0109    0.2994  0.0363  0.9712
+## logMass     0.6071    0.1476  4.1141  0.0002
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\FunctionTok{summary}\NormalTok{(}\FunctionTok{gls}\NormalTok{(logHR }\SpecialCharTok{\textasciitilde{}}\NormalTok{ logMass, }\AttributeTok{data =}\NormalTok{ mammals,}
+          \AttributeTok{correlation =} \FunctionTok{corPagel}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\AttributeTok{phy =}\NormalTok{ mammaltree, }\AttributeTok{form =} \SpecialCharTok{\textasciitilde{}}\NormalTok{species)))}\SpecialCharTok{$}\NormalTok{tTable, }\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               Value Std.Error t-value p-value
+## (Intercept) -1.3387    0.5304 -2.5240   0.015
+## logMass      1.2252    0.1736  7.0581   0.000
+\end{verbatim}
+
+The OLS slope is about half the PGLS slope. Carnivores are, on average, smaller than ungulates but have larger home ranges. When the two clades are pooled, this single deep difference flattens the slope. However, incorporating the phylogenty largely corrects for this even if the clade in not in the model because it provides the phylogenetic structure of the data.
+
+\textbf{Take-home messages:} (1) a significant result with many species can rest on a single evolutionary event; (2) the phylogeny affects not only \(p\)-values but also parameter estimates; (3) even with PGLS, a difference between two clades remains a comparison with one evolutionary replicate (see chapter \ref{a-final-word-the-problem-of-replication}).
 
 \chapter{Model testing}\label{model-testing}
 
@@ -1331,7 +1443,43 @@ You can see the model with the wood density variable is better than the model wi
 
 \chapter{When should we use comparative methods?}\label{when-should-we-use-comparative-methods}
 
-Comparative methods \textbf{\emph{should always}} be used when working with datasets that comprise multiple species. A good advice though is to use a method that allows the residuals of the model not to be all phylogenetically correlated, as when using the PGLS with the corPagel structure or using the Phylogenetic Mixed Model. Previous studies have shown that using such comparative methods results in more precise and accurate fixed effect estimation, lower type I error, and greater statistical power \citep{revell2010phylogenetic}. Therefore, it is always advantageous to use these methods.
+Comparative methods \textbf{\emph{should always}} be considered when working with datasets that comprise multiple species. A good advice though is to use a method that allows the residuals of the model not to be all phylogenetically correlated, as when using the PGLS with the corPagel structure or using the Phylogenetic Mixed Model. Previous studies have shown that using such comparative methods results in more precise and accurate fixed effect estimation, lower type I error, and greater statistical power \citep{revell2010phylogenetic}. Therefore, it is always advantageous to use these methods.
+
+\section{Challenge: how often is OLS misleading?}\label{challenge-how-often-is-ols-misleading}
+
+You can test with simulations how often OLS can provide false conclusions.
+
+Using the code below, enter a random seed number (you could you your birth day and month).
+
+The code has a loop where it simulates the \textbf{independent} evolution by Brownian motion of two character on the Quebec tree phylogeny, and then tests the relationship between them with OLS and PGLS. You can adjust the number of simulations. It then indicates how often the results were significant. In theory, since the characters were simulated independently, the proportion of significant results should be below 5\% for the method to have proper type I error (false postives).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Libraries}
+\FunctionTok{library}\NormalTok{(phytools)}
+
+\CommentTok{\# Parameters}
+\NormalTok{nb.simulations}\OtherTok{=}\DecValTok{100}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1503}\NormalTok{) }\CommentTok{\# change this!}
+
+\CommentTok{\# Simulations}
+\NormalTok{pvalues }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(}\FunctionTok{replicate}\NormalTok{(nb.simulations, \{}
+\NormalTok{  x }\OtherTok{\textless{}{-}} \FunctionTok{fastBM}\NormalTok{(seedplantstree)}
+\NormalTok{  y }\OtherTok{\textless{}{-}} \FunctionTok{fastBM}\NormalTok{(seedplantstree)}
+\NormalTok{  dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(x, y, }\AttributeTok{sp =} \FunctionTok{names}\NormalTok{(x))}
+  \FunctionTok{c}\NormalTok{(}\AttributeTok{OLS =} \FunctionTok{summary}\NormalTok{(}\FunctionTok{lm}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x))}\SpecialCharTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{],}
+    \AttributeTok{PGLS =} \FunctionTok{summary}\NormalTok{(}\FunctionTok{gls}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x, }\AttributeTok{data =}\NormalTok{ dat,}
+            \AttributeTok{correlation =} \FunctionTok{corBrownian}\NormalTok{(}\AttributeTok{phy =}\NormalTok{ seedplantstree, }\AttributeTok{form =} \SpecialCharTok{\textasciitilde{}}\NormalTok{sp)))}\SpecialCharTok{$}\NormalTok{tTable[}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{])}
+\NormalTok{\}))}
+
+\CommentTok{\# Proportion of significant results}
+\FunctionTok{colSums}\NormalTok{(pvalues }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{)}\SpecialCharTok{/}\NormalTok{nb.simulations}
+\end{Highlighting}
+\end{Shaded}
+
+How many of your simulations resulted in significant results with each method?
+
+With many simulations on this tree, OLS will be misleading about 50\% of the time, whereas the type I error of PGLS will be correct (\textgreater{} 4\%).
 
 \section{Common misconceptions}\label{common-misconceptions}
 

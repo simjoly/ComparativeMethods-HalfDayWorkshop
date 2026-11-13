@@ -53,7 +53,18 @@ rownames(seedplantsdata) <- seedplantsdata$Code
 seedplantsdata <- seedplantsdata[seedplantstree$tip.label,]
 ```
 
-Now that the data is ready, let's fit a linear model and try to explain shade tolerance (Shade) of trees using wood density (Wd). In R, a very simple way to do a regression is to use the function 'lm', which stands for linear model. To fit a linear model, you need to tell the `lm` function which variable is the response variable and which one is the explanatory variable. This is done using formulas in the form `Shade ~ Wd`. The variable at the left of the tilde ('~') is the response variable (`Shade`) whereas the explanatory variale (1 or more) are at the right of the tilde.
+Now that the data is ready, we'll look at some correlations among variables of the dataset. We'll first look at the relationship between shade tolerance (Shade) of trees using wood density (Wd). In general, species with shade tolerance normally grow slower and should have greater wood density. Let's look at the data.
+
+```{r "shade tolerance plot"}
+# Here is what the loaded data looks like
+ggplot(aes(y=Shade, x=Wd),data=seedplantsdata) +
+  geom_point() + 
+  theme_minimal()
+```
+
+You can see that there might be a small trend for a positive correlation, but it is not very clear. Let's fit a linear model to explicitely test the correlation between shade tolerance (Shade) and wood density (Wd). 
+
+In R, a very simple way to do a regression is to use the function 'lm', which stands for linear model. To fit a linear model, you need to tell the `lm` function which variable is the response variable and which one is the explanatory variable. This is done using formulas in the form `Shade ~ Wd`. The variable at the left of the tilde ('~') is the response variable (`Shade`) whereas the explanatory variale (1 or more) are at the right of the tilde.
 
 ```{r "Example: non independence", warning=FALSE}
 # Fit a linear model using Ordinary Least Squares (OLS)

@@ -26,8 +26,10 @@ practicals-1
 challenge-4
 other-correlation-structures-or-evolutionary-models
 phylogenetic-anova
+do-carnivores-have-larger-home-ranges-than-ungulates
 model-testing
 when-should-we-use-comparative-methods
+challenge-how-often-is-ols-misleading
 common-misconceptions
 a-final-word-the-problem-of-replication
 BM-model

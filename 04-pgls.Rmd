@@ -40,10 +40,8 @@ If all the variation among species was due to phylogeny and none to selection, t
 The variance-covariance matrix of a phylogenetic tree can be obtained from a tree using the function `vcv` from the `ape` package.
 
 ```{r "vcv function"}
-# 'atree' corresponds to the phylogenetic tree shown above in newick format
-atree <- "(((a:0.15,b:0.15):0.4,c:0.55):0.5,(d:0.25,e:0.25):0.8);"
-# Let's now read this tree and store it as a phylogenetic tree object in R
-atree <- read.tree(text=atree)
+# Read the tree 'atree' corresponds to the phylogenetic tree shown above in newick format
+atree <- read.tree(file="./data/atree.tre")
 # Show the tree
 plot(atree)
 # Extract the variance-covariance matrix
@@ -144,9 +142,9 @@ If you compare with the ordinary least squares optimization, the residuals are m
 
 ### Other correlation structures
 
-In the previous PGLS, we have used the corSymm structure to pass the phylogenetic correlation structure to the gls. This is perfectly fine, but there are more simple ways. Julien Dutheil has developped phylogenetic structures to be used especially in PGLS.
+In the previous PGLS, we have used the corSymm structure to pass the phylogenetic correlation structure to the gls. This is perfectly fine, but there are more simple ways when we work with phylogenies. Julien Dutheil has developped phylogenetic structures to be used especially in PGLS.
 
-The one we used above is equivalent to the `corBrownian` structure of `ape`. This approach is easier and you just have to pass the tree to the correlation structure. Here is the same example using the `corBrownian` structure.
+For example, instead of calculating the correlation matrix and using corSymm, we can we used the `corBrownian` structure of `ape`. This approach is easier and you just have to pass the tree to the correlation structure. Here is the same example using the `corBrownian` structure. When you do this, you have to indicate to the `corBrownian` structure which column in the dataset contains the names of the species found in the tree. This is done with the `form=~Code` option, which indicates that the column `Code` will contain this information.
 
 ```{r "corBrownian"}
 # Get the correlation structure
