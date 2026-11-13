@@ -1,10 +1,11 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
 ]{book}
+\usepackage{xcolor}
 \usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -35,7 +36,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -88,21 +88,24 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 % Set default figure placement to htbp
-\makeatletter
 \def\fps@figure{htbp}
 \makeatother
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
 \usepackage{booktabs}
 \usepackage{amsthm}
 \makeatletter
@@ -125,11 +128,6 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\usepackage[]{natbib}
-\bibliographystyle{apalike}
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
@@ -141,7 +139,7 @@
 
 \title{Half-day Workshop on Phylogenetic Comparative Methods}
 \author{Simon Joly}
-\date{2024-11-11}
+\date{2026-11-13}
 
 \begin{document}
 \maketitle
@@ -500,7 +498,7 @@ The diagonal elements of the matrix are the species variances; these numbers rep
 If all the variation among species was due to phylogeny and none to selection, then this variance-covariance matrix would represent the expectation of how much all species would be similar to the other species.
 
 \begin{quote}
-Note that all the tips are equidistant from the root. When trees have this property, they are said to be \textbf{\emph{ultrametric}}. Most phylogenetic comparative methods require the trees to be ultrametric, although there are sometimes ways to relax this assumption. If you do not have an ultrametric tree, it is possible to make it ultrametric using the function \texttt{chronopl} of the \texttt{ape} package. But ideally, it is better to use a phylogenetic method that directly reconstruct ultrametric trees.
+Note that all the tips are equidistant from the root. When trees have this property, they are said to be \textbf{\emph{ultrametric}}. Many phylogenetic comparative methods assume that the trees to are ultrametric, or do not use terminal branch length information. However, is is often possible to relax this assumption, such as by using the \texttt{varFixed} option in \texttt{gls()}. If you do not have an ultrametric tree, it is possible to make it ultrametric using the function \texttt{chronopl} of the \texttt{ape} package. But ideally, it is better to use a phylogenetic method that directly reconstruct ultrametric trees.
 \end{quote}
 
 The variance-covariance matrix of a phylogenetic tree can be obtained from a tree using the function \texttt{vcv} from the \texttt{ape} package.
@@ -516,7 +514,7 @@ The variance-covariance matrix of a phylogenetic tree can be obtained from a tre
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{pcm-workshop_files/figure-latex/vcv function-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/vcv function-1.pdf}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -977,7 +975,7 @@ Now, let's have a look at the residuals of the model. To extract residuals corre
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{pcm-workshop_files/figure-latex/pgls residual fit-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/pgls residual fit-1.pdf}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1086,7 +1084,9 @@ Once this is done, the only thing to do is to fit a regression between these con
 ## F-statistic: 6.633 on 1 and 55 DF,  p-value: 0.01273
 \end{verbatim}
 
-You can see that the slope estimate, \texttt{4.361}, it identical to the slope estimate obtained with PGLS. Same thing for the p-value. The main retriction with PIC is that you are limited in always comparing two variables. Much more flexibility is possible with PGLS.
+You can see that the slope estimate, \texttt{4.361}, it identical to the slope estimate obtained with PGLS. Same thing for the p-value.
+
+PIC is, however, somewhat limited as it cannot handle categorical variables and is less flexible than PGLS (see the chapter on `Relaxing the assumption that residuals need to be perfectly phylogenetically correlated').
 
 \chapter{Relaxing the assumption that residuals need to be perfectly phylogenetically correlated}\label{relaxing-the-assumption-that-residuals-need-to-be-perfectly-phylogenetically-correlated}
 
@@ -1159,7 +1159,7 @@ Let's now fit the PGLS with this correlation structure.
 ## Degrees of freedom: 57 total; 55 residual
 \end{verbatim}
 
-You can see that gls has estimated the \(\lambda\) parameter, which is 0.958 here. Because the estimated \(\lambda\) is very close to 1, we can conclude that residuals of the model were strongly phylogenetically correlated. This, in turns, thus confirms the importance of using a PGLS with this model. If the \(\lambda\) estimated would have been close to 0, it would have suggested that the PGLS is not necessary. Note, however, that using this approach assures you to never obtained a biased statistical result. Actually, I \textbf{strongly recommend} that you always use this correlation structure in your statistical analyses.
+You can see that gls has estimated the \(\lambda\) parameter, which is 0.958 here. Because the estimated \(\lambda\) is very close to 1, we can conclude that residuals of the model were strongly phylogenetically correlated. This, in turns, thus confirms the importance of using a PGLS with this model. If the \(\lambda\) estimated would have been close to 0, it would have suggested that the PGLS may not be necessary. Note, however, that using this approach provides a much better chance of getting a more accurate statistical result. Actually, I \textbf{strongly recommend} that you always use this correlation structure in your statistical analyses including many species.
 
 \section{Challenge 4}\label{challenge-4}
 
@@ -1265,6 +1265,10 @@ The default method for model fitting with \texttt{gls} is restricted maximum lik
 
 You can use the AIC or BIC to compare the model, or the likelihood ratio test. You can see here that the PGLS model with a fitted Pagel \(\lambda\) has a better fit than the one with a \(\lambda=0\) (smaller AIC). By the way, this is also a test of whether a PGLS model is better than a standard regression model as a corPagel structure with \(\lambda=0\) is a standard model (= no phylogenetic correlation). In this case, the model with the corPagel structure has a clearly better fit than the model without a phylogenetic structure.
 
+\begin{quote}
+Note that when testing no phylogenetic structure (\(\lambda=0\)), the fact that the value tested is at the boundary of the parameter space make the AIC and likelihood ratio test conservative about detecting phylogenetic signal in the residuals. The likelihood ratio test could be corrected by halving its p-value.
+\end{quote}
+
 Now, if you are interested in testing the fixed parameters in the model, you need to use maximum likelihood fitting \citep{zuur2009mixed}. For instance, if you want to use a likelihood ratio test to test the model with wood density as independent variable versus a null model with just the intercept, you can do the following.
 
 \begin{Shaded}
@@ -1361,7 +1365,7 @@ Mathematicians have constructed a stochastic process that is intended to approxi
 
 When applied to phylogenies, the Brownian motion model is kind of applied indepenpenty to each branch of the phylogeny. That allows to model the amount of change that occured along a given branch. If the variance of the Brownian motion model is \(\sigma^2\) per unit of time \(t\), then the net change along a branch of time \(t\) is drawn from a normal distribution with mean \(0\) and variance \(\sigma^2t\). This model can also be represented mathematically the following way, such as the amount of change for character \(X\) over the infinitesimal time in the interval between time \(t\) and \(t+dt\) is:
 
-\[dX(t)=\sigma^2 dB(t),\]
+\[dX(t)=\sigma dB(t),\]
 
 where \(dB(t)\) is the gaussian distribution. Importantly, this model assumes that:
 
@@ -1371,7 +1375,7 @@ where \(dB(t)\) is the gaussian distribution. Importantly, this model assumes th
 \item
   Evolution occuring in each branch of the phylogeny is independent of that occuring in other branches.
 \item
-  Evolution is completely random (i.e., no selection).
+  Evolution is random.
 \end{enumerate}
 
 The parameter \(\sigma^2\) in the model gives the variance, or in other word the speed of evolution. The higher the variance, the faster the character will evolve. Here are two examples of simulated characters on a tree of 200 species with \(\sigma^2=0.5\) and \(\sigma^2=4\).
@@ -1380,7 +1384,7 @@ The parameter \(\sigma^2\) in the model gives the variance, or in other word the
 
 A more thorough introduction to the Brownian Motion model can be found in chapter 23 of Joe Felsenstein's book \citep{felsenstein2004inferring}.
 
-The Brownian motion model is often said to model neutral drift, although a good fit to this model does not necessarily means that the data evolved via random drifts as other processes can also result in BM-like patterns \citep{hansen1996translating}.
+The Brownian motion model is often said to model neutral drift, although a good fit to this model does not necessarily means that the data evolved via random drifts as other processes can also result in BM-like patterns, including some involving selection \citep{hansen1996translating}.
 
 Note also that the model is stochastic. That is, even if two closely related species are more likely to share similar character states than a distant one, this is only true on average. For any given simulated character, closely related species can sometimes be more different than to a distant species. Look at the following figure, that shows three traits simulated under the Brownian motion.
 
@@ -1430,7 +1434,7 @@ Throughout these exercises, we will often use simulated trees, which are very us
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{pcm-workshop_files/figure-latex/Simulate Pure-Birth Tree-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/Simulate Pure-Birth Tree-1.pdf}}
 
 You save the tree in nexus format to a file. But before you do so, it is a good idea to set the working directory to the same folder where your script is saved. You can do that in RStudio in the menu Session\textgreater Set Working Directory\textgreater To Source File Location.
 
@@ -1502,7 +1506,7 @@ Plotting trees is one of the very interesting aspects of using R. Options are nu
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{pcm-workshop_files/figure-latex/Basic tree plotting-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/Basic tree plotting-1.pdf}}
 
 But R is also interesting to plot characters alongside trees. If you have a categorical character, you could use it to color the tips of the phylogeny.
 
@@ -1521,7 +1525,7 @@ But R is also interesting to plot characters alongside trees. If you have a cate
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{pcm-workshop_files/figure-latex/Plot categorical parameter-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/Plot categorical parameter-1.pdf}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1546,7 +1550,7 @@ A similar result could be obtained with a continuous variable. Here, we will use
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{pcm-workshop_files/figure-latex/Plot continuous parameter-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/Plot continuous parameter-1.pdf}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1572,7 +1576,7 @@ Note that you will have to install the packages \texttt{phylobase} and \texttt{a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{pcm-workshop_files/figure-latex/Plot continuous parameter - table.phylo4d-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/Plot continuous parameter - table.phylo4d-1.pdf}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1589,7 +1593,7 @@ You can also represent a traitgram:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{pcm-workshop_files/figure-latex/traitgram-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/traitgram-1.pdf}}
 
 Finally, it is also possible to represent a tree on a 2-dimensional plot, coloring points with the categorical variable.
 
@@ -1602,7 +1606,7 @@ Finally, it is also possible to represent a tree on a 2-dimensional plot, colori
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{pcm-workshop_files/figure-latex/Phylomorphospace-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/Phylomorphospace-1.pdf}}
 
 \section{Handling multiple trees}\label{handling-multiple-trees}
 
@@ -1634,7 +1638,7 @@ You can see that the object is not the same as a phylo object. For instance, if 
 ## Tip labels:
 ##   t3, t4, t5, t14, t15, t8, ...
 ## 
-## Rooted; includes branch lengths.
+## Rooted; includes branch length(s).
 \end{verbatim}
 
 \begin{Shaded}
@@ -1643,7 +1647,7 @@ You can see that the object is not the same as a phylo object. For instance, if 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{pcm-workshop_files/figure-latex/multiPhylo manipulation-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/multiPhylo manipulation-1.pdf}}
 
 \section{Manipulating trees}\label{manipulating-trees}
 
@@ -1657,7 +1661,7 @@ There are several manipulations that can be made to trees. Here are a few exampl
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{pcm-workshop_files/figure-latex/Drop tips-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/Drop tips-1.pdf}}
 
 \subsection{Reroot trees}\label{reroot-trees}
 
@@ -1667,7 +1671,7 @@ There are several manipulations that can be made to trees. Here are a few exampl
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{pcm-workshop_files/figure-latex/Reroot trees-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/Reroot trees-1.pdf}}
 
 \subsection{Get cophenetic distances}\label{get-cophenetic-distances}
 
@@ -1778,7 +1782,7 @@ In the \texttt{seedplantsdata} data frame, there were many different traits. Try
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{pcm-workshop_files/figure-latex/Challenge 1 - solution-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/Challenge 1 - solution-1.pdf}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1940,7 +1944,7 @@ Fit a PGLS model to see whether the seed mass (\texttt{Sm}) explains shade toler
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{pcm-workshop_files/figure-latex/Challenge 3 - solution-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{pcm-workshop_files/figure-latex/Challenge 3 - solution-1.pdf}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1991,6 +1995,6 @@ Try to fit a PGLS with a Pagel correlation structure when regressing Shade toler
 ## Degrees of freedom: 57 total; 55 residual
 \end{verbatim}
 
-  \bibliography{book.bib}
+\bibliography{book.bib}
 
 \end{document}

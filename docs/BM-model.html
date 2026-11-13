@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12 The Brownian Motion (BM) model | Half-day Workshop on Phylogenetic Comparative Methods</title>
   <meta name="description" content="This is a book that contains information on a half-day introductoray workshop on Phylogenetic Comparative Methods" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12 The Brownian Motion (BM) model | Half-day Workshop on Phylogenetic Comparative Methods" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Simon Joly" />
 
 
-<meta name="date" content="2024-11-11" />
+<meta name="date" content="2026-11-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -59,8 +59,9 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -70,7 +71,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -266,16 +267,16 @@ div.csl-indent {
 <p>When we want to account for the non-independence of species due to their evolutionary histories in statistical analyses, a model of evolution is necessarily implied. Indeed, we assume that traits evolved through time (along the phylogeny) and that closely related species are more likely to be more similar on average at a given trait than distantly related species. In evolutionary biologogy, the more basic model (often used as a null model in many analyses) is the Brownian motion model. This model of evolution is named after Robert Brown, a celeb botanist that published an important Flora of Australia in 1810. He was also the first to distinguish gymnosperms from angiosperms. His discovery of the Brownian motion is due to the observation that small particules in solution have the tendency to move in any direction, an observation first made while observing <em>Clarkia</em> pollen under a microscope. The explanation would come later, in terms of random molecular impacts.</p>
 <p>Mathematicians have constructed a stochastic process that is intended to approximate the Brownian motion. In this model, each step is independent from the others and can go in any direction. The mean displacement is zero and the variance is uniform across the parameter space. The displacements can be summed, which means that the variances of the independent displacements can be added up. If <span class="math inline">\(\sigma^2\)</span> is the variance of a single displacement, the variance after time <span class="math inline">\(t\)</span> will be <span class="math inline">\(\sigma^2t\)</span>. When the number of steps is large, as in a phylogenetic context, the result is normally distributed.</p>
 <p>When applied to phylogenies, the Brownian motion model is kind of applied indepenpenty to each branch of the phylogeny. That allows to model the amount of change that occured along a given branch. If the variance of the Brownian motion model is <span class="math inline">\(\sigma^2\)</span> per unit of time <span class="math inline">\(t\)</span>, then the net change along a branch of time <span class="math inline">\(t\)</span> is drawn from a normal distribution with mean <span class="math inline">\(0\)</span> and variance <span class="math inline">\(\sigma^2t\)</span>. This model can also be represented mathematically the following way, such as the amount of change for character <span class="math inline">\(X\)</span> over the infinitesimal time in the interval between time <span class="math inline">\(t\)</span> and <span class="math inline">\(t+dt\)</span> is:</p>
-<p><span class="math display">\[dX(t)=\sigma^2 dB(t),\]</span></p>
+<p><span class="math display">\[dX(t)=\sigma dB(t),\]</span></p>
 <p>where <span class="math inline">\(dB(t)\)</span> is the gaussian distribution. Importantly, this model assumes that:</p>
 <ol style="list-style-type: decimal">
 <li>Evolution occuring in each branch of the phylogeny is independent of that occuring in other branches.</li>
-<li>Evolution is completely random (i.e., no selection).</li>
+<li>Evolution is random.</li>
 </ol>
 <p>The parameter <span class="math inline">\(\sigma^2\)</span> in the model gives the variance, or in other word the speed of evolution. The higher the variance, the faster the character will evolve. Here are two examples of simulated characters on a tree of 200 species with <span class="math inline">\(\sigma^2=0.5\)</span> and <span class="math inline">\(\sigma^2=4\)</span>.</p>
 <p><img src="pcm-workshop_files/figure-html/BM_Model_SigmaExample-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>A more thorough introduction to the Brownian Motion model can be found in chapter 23 of Joe Felsenstein’s book <span class="citation">(<a href="#ref-felsenstein2004inferring">Felsenstein and Felenstein 2004</a>)</span>.</p>
-<p>The Brownian motion model is often said to model neutral drift, although a good fit to this model does not necessarily means that the data evolved via random drifts as other processes can also result in BM-like patterns <span class="citation">(<a href="#ref-hansen1996translating">Hansen and Martins 1996</a>)</span>.</p>
+<p>The Brownian motion model is often said to model neutral drift, although a good fit to this model does not necessarily means that the data evolved via random drifts as other processes can also result in BM-like patterns, including some involving selection <span class="citation">(<a href="#ref-hansen1996translating">Hansen and Martins 1996</a>)</span>.</p>
 <p>Note also that the model is stochastic. That is, even if two closely related species are more likely to share similar character states than a distant one, this is only true on average. For any given simulated character, closely related species can sometimes be more different than to a distant species. Look at the following figure, that shows three traits simulated under the Brownian motion.</p>
 <p><img src="pcm-workshop_files/figure-html/PlotContinuousParameter_tablephylo4d-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
@@ -308,42 +309,42 @@ Hansen, Thomas F, and Emilia P Martins. 1996. <span>“Translating Between Micro
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/08-bm-model.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["pcm-workshop.pdf", "pcm-workshop.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rstudio/bookdown-demo/edit/master/08-bm-model.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["pcm-workshop.pdf", "pcm-workshop.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>

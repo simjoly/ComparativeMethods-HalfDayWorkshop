@@ -6,12 +6,12 @@ Mathematicians have constructed a stochastic process that is intended to approxi
 
 When applied to phylogenies, the Brownian motion model is kind of applied indepenpenty to each branch of the phylogeny. That allows to model the amount of change that occured along a given branch. If the variance of the Brownian motion model is $\sigma^2$ per unit of time $t$, then the net change along a branch of time $t$ is drawn from a normal distribution with mean $0$ and variance $\sigma^2t$. This model can also be represented mathematically the following way, such as the amount of change for character $X$ over the infinitesimal time in the interval between time $t$ and $t+dt$ is:
 
-$$dX(t)=\sigma^2 dB(t),$$
+$$dX(t)=\sigma dB(t),$$
 
 where $dB(t)$ is the gaussian distribution. Importantly, this model assumes that:
 
 1. Evolution occuring in each branch of the phylogeny is independent of that occuring in other branches.
-2. Evolution is completely random (i.e., no selection).
+2. Evolution is random.
 
 The parameter $\sigma^2$ in the model gives the variance, or in other word the speed of evolution. The higher the variance, the faster the character will evolve. Here are two examples of simulated characters on a tree of 200 species with $\sigma^2=0.5$ and $\sigma^2=4$.
 
@@ -29,7 +29,7 @@ rm(data,x,y)
 
 A more thorough introduction to the Brownian Motion model can be found in chapter 23 of Joe Felsenstein's book [@felsenstein2004inferring].
 
-The Brownian motion model is often said to model neutral drift, although a good fit to this model does not necessarily means that the data evolved via random drifts as other processes can also result in BM-like patterns [@hansen1996translating].
+The Brownian motion model is often said to model neutral drift, although a good fit to this model does not necessarily means that the data evolved via random drifts as other processes can also result in BM-like patterns, including some involving selection [@hansen1996translating].
 
 Note also that the model is stochastic. That is, even if two closely related species are more likely to share similar character states than a distant one, this is only true on average. For any given simulated character, closely related species can sometimes be more different than to a distant species. Look at the following figure, that shows three traits simulated under the Brownian motion.
 

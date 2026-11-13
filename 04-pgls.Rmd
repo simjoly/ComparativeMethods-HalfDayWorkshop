@@ -35,7 +35,7 @@ The diagonal elements of the matrix are the species variances; these numbers rep
 
 If all the variation among species was due to phylogeny and none to selection, then this variance-covariance matrix would represent the expectation of how much all species would be similar to the other species.
 
-> Note that all the tips are equidistant from the root. When trees have this property, they are said to be ***ultrametric***. Most phylogenetic comparative methods require the trees to be ultrametric, although there are sometimes ways to relax this assumption. If you do not have an ultrametric tree, it is possible to make it ultrametric using the function `chronopl` of the `ape` package. But ideally, it is better to use a phylogenetic method that directly reconstruct ultrametric trees.
+> Note that all the tips are equidistant from the root. When trees have this property, they are said to be ***ultrametric***. Many phylogenetic comparative methods assume that the trees to  are ultrametric, or do not use terminal branch length information. However, is is often possible to relax this assumption, such as by using the `varFixed` option in `gls()`. If you do not have an ultrametric tree, it is possible to make it ultrametric using the function `chronopl` of the `ape` package. But ideally, it is better to use a phylogenetic method that directly reconstruct ultrametric trees.
 
 The variance-covariance matrix of a phylogenetic tree can be obtained from a tree using the function `vcv` from the `ape` package.
 

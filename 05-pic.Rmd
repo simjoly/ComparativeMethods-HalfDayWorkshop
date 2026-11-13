@@ -20,7 +20,9 @@ pic.results <- lm(Shade.pic ~ Wd.pic - 1)
 summary(pic.results)
 ```
 
-You can see that the slope estimate, `4.361`, it identical to the slope estimate obtained with PGLS. Same thing for the p-value. The main retriction with PIC is that you are limited in always comparing two variables. Much more flexibility is possible with PGLS.
+You can see that the slope estimate, `4.361`, it identical to the slope estimate obtained with PGLS. Same thing for the p-value. 
+
+PIC is, however, somewhat limited as it cannot handle categorical variables and is less flexible than PGLS (see the chapter on 'Relaxing the assumption that residuals need to be perfectly phylogenetically correlated').
 
 
 # Relaxing the assumption that residuals need to be perfectly phylogenetically correlated
@@ -68,7 +70,7 @@ shade.pgls2 <- gls(Shade ~ Wd, data = seedplantsdata, correlation=pagel.corr)
 summary(shade.pgls2)
 ```
 
-You can see that gls has estimated the $\lambda$ parameter, which is 0.958 here. Because the estimated $\lambda$ is very close to 1, we can conclude that residuals of the model were strongly phylogenetically correlated. This, in turns, thus confirms the importance of using a PGLS with this model. If the $\lambda$ estimated would have been close to 0, it would have suggested that the PGLS is not necessary. Note, however, that using this approach assures you to never obtained a biased statistical result. Actually, I **strongly recommend** that you always use this correlation structure in your statistical analyses.
+You can see that gls has estimated the $\lambda$ parameter, which is 0.958 here. Because the estimated $\lambda$ is very close to 1, we can conclude that residuals of the model were strongly phylogenetically correlated. This, in turns, thus confirms the importance of using a PGLS with this model. If the $\lambda$ estimated would have been close to 0, it would have suggested that the PGLS may not be necessary. Note, however, that using this approach provides a much better chance of getting a more accurate statistical result. Actually, I **strongly recommend** that you always use this correlation structure in your statistical analyses including many species.
 
 
 ## Challenge 4
